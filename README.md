@@ -11,7 +11,17 @@ Currently very much a WIP.
 @ArtemisConfiguration(
     requires={ThrusterPush.class, TimeDilationFuel.class},
     optional=Velocity.class,
+    excludes=Dummy.class,
     managers=TagManager.class,
     systems=BroadcasterSystem.class)
 public final class TimeDilationSystem extends EntityProcessingSystem
 ```
+
+## Missing features:
+- Injecting the Aspect inside the constructor.
+- Prepending to existing _initialize()_ under ECJ.
+- Add support for Managers.
+- Separate profiling annotation for injecting logging/profiling into _begin()_ and _end()_.
+
+## What works
+- Injecting referenced systems, managers and components as fields.
