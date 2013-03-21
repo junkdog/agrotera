@@ -6,6 +6,15 @@ Relies on [artemis-odb](https://github.com/junkdog/artemis-odb) to function prop
 
 Currently very much a WIP.
 
+## Installation
+__eclipse.ini__
+```
+# where lombok.jar refers to lombok-pg.
+-javaagent:lombok.jar
+-Xbootclasspath/a:lombok.jar
+-Xbootclasspath/a:artemis-lombok.jar
+```
+
 ## Example:
 ```java
 @ArtemisConfiguration(
