@@ -34,3 +34,4 @@ public final class TimeDilationSystem extends EntityProcessingSystem
 
 ## What works
 - Injecting referenced systems, managers and components as fields.
+- Prepending to existing _initialize()_ under javac.
