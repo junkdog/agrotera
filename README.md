@@ -16,6 +16,8 @@ __eclipse.ini__
 ```
 
 ## Example:
+Declares and wires appropriate fields for all referenced classes.
+
 ```java
 @ArtemisConfiguration(
     requires={ThrusterPush.class, TimeDilationFuel.class},
