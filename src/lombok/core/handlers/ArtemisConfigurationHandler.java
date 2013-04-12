@@ -37,7 +37,7 @@ public abstract class ArtemisConfigurationHandler<COMPILER_BINDING, TYPE_TYPE ex
 			type.editor().injectField(createField(getBinding(type, manager)));
 		}
 		
-		hookUpInitializeMethod(type, mappedComponentTypes, systemTypes, managerTypes);
+//		hookUpInitializeMethod(type, mappedComponentTypes, systemTypes, managerTypes);
 		type.editor().rebuild();
 	}
 	

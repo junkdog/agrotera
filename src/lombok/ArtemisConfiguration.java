@@ -24,7 +24,7 @@ import com.artemis.Manager;
  * type name. All field names are <code>camelCased</code>.</p>
  */
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface ArtemisConfiguration
 {
