@@ -1,6 +1,8 @@
 bin/
 gen/
 *.jar
+*.jad
+*.class
 target/
 *.log
 target/
