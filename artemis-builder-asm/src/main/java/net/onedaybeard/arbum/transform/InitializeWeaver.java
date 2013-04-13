@@ -1,6 +1,6 @@
 package net.onedaybeard.arbum.transform;
 
-import net.onedaybeard.arbum.annotation.ArtemisConfigurationData;
+import net.onedaybeard.arbum.meta.ArtemisConfigurationData;
 
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
@@ -29,7 +29,6 @@ class InitializeWeaver extends MethodVisitor implements Opcodes
 	@Override
 	public void visitCode()
 	{
-		System.out.println("\t\"" + className + '"');
 		mv.visitCode();
 		for (Type component : info.requires)
 			injectMapper(component);

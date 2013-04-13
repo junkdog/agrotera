@@ -1,19 +1,18 @@
 package net.onedaybeard.arbum.transform;
 
-import net.onedaybeard.arbum.annotation.ArtemisConfigurationData;
+import net.onedaybeard.arbum.meta.ArtemisConfigurationData;
 
+import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class InitializeVisitor extends ClassVisitor implements Opcodes
+public class SystemVisitor extends ClassVisitor implements Opcodes
 {
 	private String className;
 	private ArtemisConfigurationData info;
 	
-	private boolean foundInitializeMethod;
-	
-	public InitializeVisitor(ClassVisitor cv, String className, ArtemisConfigurationData info)
+	public SystemVisitor(ClassVisitor cv, String className, ArtemisConfigurationData info)
 	{
 		super(Opcodes.ASM4, cv);
 		this.className = className;
@@ -26,38 +25,33 @@ public class InitializeVisitor extends ClassVisitor implements Opcodes
 		System.out.println("class " + name + " extends " + superName);
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
-
+	
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature,
 		String[] exceptions)
 	{
-		System.out.println("visiting " + name);
 		MethodVisitor method = super.visitMethod(access, name, desc, signature, exceptions);
 		
 		if ("initialize".equals(name) && "()V".equals(desc))
-		{
 			method = new InitializeWeaver(method, className, info);
-			foundInitializeMethod = true;
-		}
+		else if ("<init>".equals(name))
+			method = new ConstructorWeaver(method, className, info);
 		
 		return method;
 	}
 	
+	@Override
+	public AnnotationVisitor visitAnnotation(String desc, boolean visible)
+	{
+		if ("Llombok/ArtemisConfiguration;".equals(desc))
+			return null; // removing annotation to avoid further processing
+		else
+			return super.visitAnnotation(desc, visible);
+	}
 	
 	@Override
 	public void visitEnd()
 	{
-		if (!foundInitializeMethod)
-		{
-			MethodVisitor method = visitMethod(ACC_PROTECTED, "initialize", "()V", null, null);
-			new InitializeWeaver(method, className, info);
-		}
-		
 		super.visitEnd();
-	}
-	
-	public boolean foundInitializeMethod()
-	{
-		return foundInitializeMethod;
 	}
 }

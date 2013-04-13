@@ -1,4 +1,4 @@
-package net.onedaybeard.arbum.annotation;
+package net.onedaybeard.arbum.meta;
 
 
 import org.objectweb.asm.AnnotationVisitor;
@@ -26,7 +26,7 @@ final class ArtemisAnnotationReader extends AnnotationVisitor
 			info.requires.add((Type)value);
 		else if ("optional".equals(annotationField))
 			info.optional.add((Type)value);
-		else if ("exclude".equals(annotationField))
+		else if ("excludes".equals(annotationField))
 			info.exclude.add((Type)value);
 		else if ("systems".equals(annotationField))
 			info.systems.add((Type)value);

@@ -1,4 +1,4 @@
-package net.onedaybeard.arbum.annotation;
+package net.onedaybeard.arbum.meta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,10 @@ public class ArtemisConfigurationData
 	public final List<Type> managers = new ArrayList<>();
 	
 	public boolean isAnnotationPresent;
+	
+	public boolean foundInitialize;
+	public boolean foundBegin;
+	public boolean foundEnd;
 	
 	ArtemisConfigurationData() {}
 }

@@ -1,4 +1,4 @@
-package net.onedaybeard.arbum.annotation;
+package net.onedaybeard.arbum.meta;
 
 import org.objectweb.asm.ClassReader;
 
@@ -6,10 +6,10 @@ public final class ArtemisConfigurationResolver
 {
 	private ArtemisConfigurationResolver() {}
 	
-	public static ArtemisConfigurationData getAnnotation(ClassReader source)
+	public static ArtemisConfigurationData scan(ClassReader source)
 	{
 		ArtemisConfigurationData info = new ArtemisConfigurationData();
-		source.accept(new ArtemisAnnotationScanner(info), 0);
+		source.accept(new ArtemisMetaScanner(info), 0);
 		return info;
 	}
 }
