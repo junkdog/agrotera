@@ -1,8 +1,8 @@
 # Agrotera
 
-Anti-boilerplate strategies for Artemis Entity System Framework. Injects
-systems with referenced component mappers, systems and managers during 
-compilation/post-compilation.
+Anti-boilerplate strategies for [Artemis Entity System Framework](http://gamadu.com/artemis/).
+Injects systems with referenced component mappers, systems and managers
+during compilation/post-compilation.
 
 
 ## Installation (wip: builder, maven...)
@@ -86,9 +86,9 @@ Agrotera consists of two intermingling parts.
 Responsible for declaring the fields, inferred from `@ArtemisConfiguration`,
 ensuring that the IDE doesn't complain about unresolved fields.
 
-Contains`@ArtemisConfiguration`, processed alongside lombok-pg (you know, that
-fork of project lombok - because I couldn't get type resolution working under
-vanilla lombok).
+Contains`@ArtemisConfiguration`, processed alongside [lombok-pg](https://github.com/peichhorn/lombok-pg)
+(you know, that fork of [Project Lombok](http://projectlombok.org/) - because
+I couldn't get type resolution working under vanilla lombok).
 
 
 ### agrotera-asm
