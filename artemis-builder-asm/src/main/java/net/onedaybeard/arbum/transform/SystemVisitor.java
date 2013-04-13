@@ -22,7 +22,8 @@ public class SystemVisitor extends ClassVisitor implements Opcodes
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces)
 	{
-		System.out.println("class " + name + " extends " + superName);
+		System.out.println("class " + name.substring(name.lastIndexOf('/') + 1)
+			+ " extends " + superName.substring(superName.lastIndexOf('/') + 1));
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 	
@@ -35,7 +36,7 @@ public class SystemVisitor extends ClassVisitor implements Opcodes
 		if ("initialize".equals(name) && "()V".equals(desc))
 			method = new InitializeWeaver(method, className, info);
 		else if ("<init>".equals(name))
-			method = new ConstructorWeaver(method, className, info);
+			method = new ConstructorWeaver(method, info);
 		
 		return method;
 	}

@@ -14,15 +14,13 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 	private static final String ASPECT = "com/artemis/Aspect";
 	private static final String CLASS = "java/lang/Class";
 	
-	private String className;
 	private ArtemisConfigurationData info;
 	
 	private boolean aspectIntercepted;
 	
-	ConstructorWeaver(MethodVisitor methodVisitor, String className, ArtemisConfigurationData info)
+	ConstructorWeaver(MethodVisitor methodVisitor, ArtemisConfigurationData info)
 	{
 		super(Opcodes.ASM4, methodVisitor);
-		this.className = className;
 		this.info = info;
 	}
 	
