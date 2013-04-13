@@ -1,39 +1,102 @@
-# artemis-lombok
+# Agrotera
 
-Artemis-specific annotation(s) for lombok-pg.
+Anti-boilerplate strategies for Artemis Entity System Framework. Injects
+systems with referenced component mappers, systems and managers during 
+compilation/post-compilation.
 
-Relies on [artemis-odb](https://github.com/junkdog/artemis-odb) to function properly.
 
-Currently very much a WIP.
-
-## Installation
+## Installation (wip: builder, maven...)
 __eclipse.ini__
 ```
 # where lombok.jar refers to lombok-pg.
 -javaagent:lombok.jar
 -Xbootclasspath/a:lombok.jar
--Xbootclasspath/a:artemis-lombok.jar
+-Xbootclasspath/a:agrotera-lombok.jar
 ```
 
-## Example:
-Declares and wires appropriate fields for all referenced classes.
-
+## Minimal example
+###What you type:
 ```java
 @ArtemisConfiguration(
-    requires={ThrusterPush.class, TimeDilationFuel.class},
-    optional=Velocity.class,
-    excludes=Dummy.class,
-    managers=TagManager.class,
-    systems=BroadcasterSystem.class)
-public final class TimeDilationSystem extends EntityProcessingSystem
+    requires={Renderable.class, Velocity.class},
+	excludes={Cullable.class, AssetReference.class},
+	managers={TagManager.class, GroupManager.class},
+	systems=VelocitySystem.class)
+public class TestSystem extends IntervalEntityProcessingSystem
+{
+	@SuppressWarnings("unchecked")
+	public TestSystem()
+	{
+		super(null, 0.05f);
+	}
+	
+	@Override
+	protected void process(Entity e)
+	{
+		// process system
+	}
+}
+```
+###What the JVM gets:
+```java
+@ArtemisConfiguration(
+	requires={Renderable.class, Velocity.class},
+	excludes={Cullable.class, AssetReference.class},
+	managers={TagManager.class, GroupManager.class},
+	systems=VelocitySystem.class)
+public class TestSystem extends IntervalEntityProcessingSystem
+{
+	private ComponentMapper renderableMapper;
+	private ComponentMapper velocityMapper;
+	private VelocitySystem velocitySystem;
+	private TagManager tagManager;
+	private GroupManager groupManager;
+	
+	@SuppressWarnings("unchecked")
+	public TestSystem()
+	{
+		super(Aspect.getAspectForAll(Renderable.class, Velocity.class)
+			.exclude(Cullable.class, AssetReference.class), 0.05f);
+	}
+	
+	protected void initialize()
+	{
+		renderableMapper = world.getMapper(Renderable.class);
+		velocityMapper = world.getMapper(Velocity.class);
+		tagManager = world.getManager(TagManager.class);
+		groupManager = world.getManager(GroupManager.class);
+		velocitySystem = world.getSystem(VelocitySystem.class);
+	}
+	
+	@Override
+	protected void process(Entity e)
+	{
+		// process system
+	}
+}
 ```
 
-## Missing features:
-- Injecting the Aspect inside the constructor.
-- Prepending to existing _initialize()_ under ECJ.
-- Add support for Managers.
-- Separate profiling annotation for injecting logging/profiling into _begin()_ and _end()_.
+- If `initialize` is defined, the injection code is prepended to the method.
+- In the constructor, the Aspect is inferred if it previously was `null`.
 
-## What works
-- Injecting referenced systems, managers and components as fields.
-- Prepending to existing _initialize()_ under javac.
+# Behind the veil
+Agrotera consists of two intermingling parts.
+
+### agrotera-lombok
+Responsible for declaring the fields, inferred from `@ArtemisConfiguration`,
+ensuring that the IDE doesn't complain about unresolved fields.
+
+Contains`@ArtemisConfiguration`, processed alongside lombok-pg (you know, that
+fork of project lombok - because I couldn't get type resolution working under
+vanilla lombok).
+
+
+### agrotera-asm
+Responsible for modifying the classes; wiring up the systems. Conceived as a
+post-compile step run with an eclipse builder, exec-maven-plugin or similar.
+
+## Missing/planned features
+- Inject conditional profiling calls into `EntitySystem#begin` and
+  `EntitySystem#end`
+- Add support for Managers: inject fields, only trigger on requested entities.
+- Easier maven and IDE integration.
