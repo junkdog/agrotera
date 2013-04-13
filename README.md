@@ -59,6 +59,7 @@ public class TestSystem extends IntervalEntityProcessingSystem
 			.exclude(Cullable.class, AssetReference.class), 0.05f);
 	}
 	
+	@Override
 	protected void initialize()
 	{
 		renderableMapper = world.getMapper(Renderable.class);
