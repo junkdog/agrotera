@@ -1,4 +1,4 @@
-package net.onedaybeard.arbum.meta;
+package net.onedaybeard.agrotera.meta;
 
 import java.util.ArrayList;
 import java.util.List;

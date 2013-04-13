@@ -1,4 +1,4 @@
-package net.onedaybeard.arbum;
+package net.onedaybeard.agrotera;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,9 +13,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.onedaybeard.arbum.meta.ArtemisConfigurationData;
-import net.onedaybeard.arbum.meta.ArtemisConfigurationResolver;
-import net.onedaybeard.arbum.transform.SystemVisitor;
+import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
+import net.onedaybeard.agrotera.meta.ArtemisConfigurationResolver;
+import net.onedaybeard.agrotera.transform.SystemVisitor;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -29,11 +29,11 @@ import org.objectweb.asm.util.CheckClassAdapter;
  * Hello world!
  *
  */
-public class App 
+public class ProcessArtemis 
 {
 	public static void main(String[] args)
     {
-    	App app = new App();
+    	ProcessArtemis app = new ProcessArtemis();
     	
     	if (args.length == 0)
     	{
