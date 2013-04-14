@@ -6,6 +6,7 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
 - `@ArtemisConfiguration` for EntitySystems
   - Injects `Aspect` in constructor, unless already defined.
   - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
+  - Wires up referenced classes in `initialize()`, prpeending to the method if already defined.
 - `@Profile` EntitySystems
   - Injects conditional profiler call at start of `begin()` and before any exit point in `end()`.
   - Profiler class must implement [ArtemisProfiler](https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java).
