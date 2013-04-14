@@ -1,8 +1,6 @@
 # Agrotera
 
-Anti-boilerplate strategies for [Artemis Entity System Framework](http://gamadu.com/artemis/).
-Injects systems with referenced component mappers, systems and managers
-during compilation/post-compilation.
+Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](http://gamadu.com/artemis/).
 
 ## Features
 - `@ArtemisConfiguration` for EntitySystems
