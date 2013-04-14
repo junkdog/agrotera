@@ -32,5 +32,8 @@ public class ArtemisConfigurationData
 	
 	public Type current;
 	
+	public boolean isManagerType;
+	public boolean isSystemType;
+	
 	ArtemisConfigurationData() {}
 }

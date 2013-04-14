@@ -35,7 +35,7 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 			aspectIntercepted = true;
 		}
 		
-		if (injectAspect)
+		if (injectAspect && info.requires.size() > 0) // avoid VoidSystems
 			transformConstructor();
 		else
 			mv.visitInsn(opcode);

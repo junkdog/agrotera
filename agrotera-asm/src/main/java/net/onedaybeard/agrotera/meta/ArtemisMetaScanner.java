@@ -19,6 +19,12 @@ class ArtemisMetaScanner extends ClassVisitor
 	}
 	
 	@Override
+	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces)
+	{
+		super.visit(version, access, name, signature, superName, interfaces);
+	}
+	
+	@Override
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible)
 	{
 		if (ARTEMIS_ANNOTATION.equals(desc))
