@@ -153,7 +153,7 @@ public class ProcessArtemis implements Opcodes
 //		cr.accept(cw, 0);
 //    	PrintWriter printer = new PrintWriter(System.out);
 //    	CheckClassAdapter.verify(new ClassReader(writer.toByteArray()), false, printer);
-		try (FileOutputStream fos = new FileOutputStream(file.substring(file.lastIndexOf('/') + 1)))
+		try (FileOutputStream fos = new FileOutputStream(file))
 		{
 			fos.write(writer.toByteArray());
 		}
