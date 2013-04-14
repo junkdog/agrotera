@@ -4,6 +4,14 @@ Anti-boilerplate strategies for [Artemis Entity System Framework](http://gamadu.
 Injects systems with referenced component mappers, systems and managers
 during compilation/post-compilation.
 
+## Features
+- `@ArtemisConfiguration` for EntitySystems
+  - Injects `Aspect` in constructor, unless already defined.
+  - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
+- `@Profile` EntitySystems
+  - Injects conditional profiler call at start of of `begin()` and before any exit point in `end()`.
+  - Profiler class must implement [ArtemisProfiler](https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java).
+
 
 ## Installation (wip: builder, maven...)
 __eclipse.ini__
@@ -92,9 +100,6 @@ public class TestSystem extends IntervalEntityProcessingSystem
 	}
 }
 ```
-
-- If `initialize` is defined, the injection code is prepended to the method.
-- In the constructor, the Aspect is inferred if it previously was `null`.
 
 # Behind the veil
 Agrotera consists of two intermingling parts.
