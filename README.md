@@ -9,7 +9,7 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
   - Wires up referenced classes in `initialize()`, prepending to the method if already defined.
 - `@Profile` EntitySystems
   - Injects conditional profiler call at start of `begin()` and before any exit point in `end()`.
-  - Profiler class must implement [ArtemisProfiler](https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java).
+  - User-specified profiler class - adhering to [ArtemisProfiler](https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java).
 
 
 ## Installation (wip: builder, maven...)
