@@ -6,11 +6,11 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.commons.AdviceAdapter;
 
-class ProfileConstructorWeaver extends AdviceAdapter implements Opcodes
+class ProfileEndWeaver extends AdviceAdapter implements Opcodes
 {
 	private ArtemisConfigurationData info;
 	
-	ProfileConstructorWeaver(MethodVisitor methodVisitor, ArtemisConfigurationData info, int access, String name, String desc)
+	ProfileEndWeaver(MethodVisitor methodVisitor, ArtemisConfigurationData info, int access, String name, String desc)
 	{
 		super(Opcodes.ASM4, methodVisitor, access, name, desc);
 		this.info = info;
@@ -24,15 +24,7 @@ class ProfileConstructorWeaver extends AdviceAdapter implements Opcodes
 		String profileDescriptor = info.profilerClass.getDescriptor();
 		
 		mv.visitVarInsn(ALOAD, 0);
-		mv.visitTypeInsn(NEW, profiler);
-		mv.visitInsn(DUP);
-		mv.visitMethodInsn(INVOKESPECIAL, profiler, "<init>", "()V");
-		mv.visitFieldInsn(PUTFIELD, systemName, "$profiler", profileDescriptor);
-		
-		mv.visitVarInsn(ALOAD, 0);
 		mv.visitFieldInsn(GETFIELD, systemName, "$profiler", profileDescriptor);
-		mv.visitVarInsn(ALOAD, 0);
-		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
-		mv.visitMethodInsn(INVOKEVIRTUAL, profiler, "setTag", "(Ljava/lang/Class;)V");
+		mv.visitMethodInsn(INVOKEVIRTUAL, profiler, "stop", "()V");
 	}
 }

@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +14,13 @@ import net.onedaybeard.agrotera.transform.ProfileVisitor;
 import net.onedaybeard.agrotera.transform.SystemVisitor;
 
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
-import org.objectweb.asm.util.CheckClassAdapter;
 
 /**
  * Hello world!
@@ -83,8 +82,7 @@ public class ProcessArtemis implements Opcodes
     		if (meta.profilingEnabled)
     			injectProfiler(meta);
     		
-    		if (meta.isAnnotationPresent || meta.profilingEnabled)
-    			writeClass(cw, file);
+    		compileClass(meta, file);
     	}
 		catch (FileNotFoundException e)
 		{
@@ -95,6 +93,19 @@ public class ProcessArtemis implements Opcodes
 			e.printStackTrace();
 		}
     }
+
+	private void compileClass(ArtemisConfigurationData meta, String file)
+	{
+		ClassVisitor cv = cw;
+		if (meta.isAnnotationPresent)
+			cv = new SystemVisitor(cv, cr.getClassName(), meta);
+		if (meta.profilingEnabled)
+			cv = new ProfileVisitor(cv , cr.getClassName(), meta);
+		cr.accept(cv, ClassReader.EXPAND_FRAMES);
+		
+		if (meta.isAnnotationPresent || meta.profilingEnabled)
+			writeClass(cw, file);
+	}
 
 	private void injectProfiler(ArtemisConfigurationData meta)
 	{
@@ -108,11 +119,9 @@ public class ProcessArtemis implements Opcodes
 		if (!meta.foundEnd)
 			injectMethodStub("end");
 		
-//		cr.accept(cw, 0);
-//		cr = new ClassReader(cw.toByteArray());
-//		cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-		
-		cr.accept(new ProfileVisitor(cw , cr.getClassName(), meta), 0);
+		cr.accept(cw, 0);
+		cr = new ClassReader(cw.toByteArray());
+		cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 	}
 
 	private void injectMethodStub(String methodName)
@@ -137,7 +146,6 @@ public class ProcessArtemis implements Opcodes
 			cr = new ClassReader(cw.toByteArray());
 			cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 		}
-		cr.accept(new SystemVisitor(cw, cr.getClassName(), meta), 0);
 	}
 
 	private void writeClass(ClassWriter writer, String file)

@@ -26,17 +26,15 @@ public class ProfileVisitor extends ClassVisitor implements Opcodes
 	{
 		System.out.println("\tgetting method: " + name);
 		MethodVisitor method = super.visitMethod(access, name, desc, signature, exceptions);
-//		
-//		if ("begin".equals(name) && "()V".equals(desc))
-//			method = new InitializeWeaver(method, className, info);
-//		else if ("end".equals(name) && "()V".equals(desc))
-//			method = new InitializeWeaver(method, className, info);
-//		else
-		if ("<init>".equals(name))
+		
+		if ("begin".equals(name) && "()V".equals(desc))
+			method = new ProfileBeginWeaver(method, info, access, name, desc);
+		else if ("end".equals(name) && "()V".equals(desc))
+			method = new ProfileEndWeaver(method, info, access, name, desc);
+		else if ("<init>".equals(name))
 			method = new ProfileConstructorWeaver(method, info, access, name, desc);
 		
 		return method;
-//		return null;
 	}
 	
 	@Override
