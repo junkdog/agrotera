@@ -57,8 +57,8 @@ public class TestSystem extends IntervalEntityProcessingSystem
 public class TestSystem extends IntervalEntityProcessingSystem
 {
 	private Profiler $profiler;
-	private ComponentMapper renderableMapper;
-	private ComponentMapper velocityMapper;
+	private ComponentMapper<Renderable> renderableMapper;
+	private ComponentMapper<Velocity> velocityMapper;
 	private VelocitySystem velocitySystem;
 	private TagManager tagManager;
 	private GroupManager groupManager;
