@@ -114,8 +114,9 @@ I couldn't get type resolution working under vanilla lombok).
 
 
 ### agrotera-asm
-Responsible for modifying the classes; wiring up the systems. Conceived as a
-post-compile step run with an eclipse builder, exec-maven-plugin or similar.
+Transforms the classes; wiring up the systems and injecting profiler calls.
+Conceived as a post-compile step run with an eclipse builder,
+exec-maven-plugin or similar.
 
 ## Missing/planned features
 - Add support for Managers: inject fields, only trigger on requested entities.
