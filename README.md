@@ -113,8 +113,6 @@ Responsible for modifying the classes; wiring up the systems. Conceived as a
 post-compile step run with an eclipse builder, exec-maven-plugin or similar.
 
 ## Missing/planned features
-- Inject conditional profiling calls into `EntitySystem#begin` and
-  `EntitySystem#end`
 - Add support for Managers: inject fields, only trigger on requested entities.
 - Easier maven and IDE integration.
 
