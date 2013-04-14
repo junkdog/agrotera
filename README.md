@@ -17,6 +17,7 @@ __eclipse.ini__
 ## Minimal example
 ###What you type:
 ```java
+@Profile(using=Profiler.class, enabled=true)
 @ArtemisConfiguration(
     requires={Renderable.class, Velocity.class},
 	excludes={Cullable.class, AssetReference.class},
@@ -39,6 +40,7 @@ public class TestSystem extends IntervalEntityProcessingSystem
 ```
 ###What the JVM gets:
 ```java
+@Profile(using=Profiler.class, enabled=true)
 @ArtemisConfiguration(
 	requires={Renderable.class, Velocity.class},
 	excludes={Cullable.class, AssetReference.class},
