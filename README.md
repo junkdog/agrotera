@@ -9,7 +9,7 @@ during compilation/post-compilation.
   - Injects `Aspect` in constructor, unless already defined.
   - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
 - `@Profile` EntitySystems
-  - Injects conditional profiler call at start of of `begin()` and before any exit point in `end()`.
+  - Injects conditional profiler call at start of `begin()` and before any exit point in `end()`.
   - Profiler class must implement [ArtemisProfiler](https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java).
 
 
