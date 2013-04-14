@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <jardesc>
-    <jar path="artemis-lombok/artemis-lombok.jar"/>
-    <options buildIfNeeded="true" compress="true" descriptionLocation="/artemis-lombok/artemis-lombok.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <jar path="agrotera-lombok/agrotera-lombok.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/agrotera-lombok/artemis-lombok.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
     <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
@@ -11,8 +11,9 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <folder path="/artemis-lombok/META-INF"/>
-        <javaElement handleIdentifier="=artemis-lombok/src"/>
-        <javaElement handleIdentifier="=artemis-lombok/src-pg"/>
+        <folder path="/agrotera-lombok/META-INF"/>
+        <javaElement handleIdentifier="=agrotera-lombok/gen"/>
+        <javaElement handleIdentifier="=agrotera-lombok/src"/>
+        <javaElement handleIdentifier="=agrotera-lombok/src-pg"/>
     </selectedElements>
 </jardesc>

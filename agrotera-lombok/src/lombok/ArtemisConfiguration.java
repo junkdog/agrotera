@@ -29,32 +29,29 @@ import com.artemis.Manager;
 public @interface ArtemisConfiguration
 {
 	/**
-	 * @return
+	 * Required systems are matched by the {@link EntitySystem}'s
+	 * aspect. 
 	 */
 	Class<? extends Component>[] requires() default {};
 	
 	/**
-	 * @return
+	 * Only mappers are created for optional components, no bearing on
+	 * the system's aspect.
 	 */
 	Class<? extends Component>[] optional() default {};
 	
 	/**
-	 * @return
+	 * Only affects the system's aspect, no mapper is created.
 	 */
 	Class<? extends Component>[] excludes() default {};
 	
 	/**
-	 * @return
+	 * Systems to inject as fields.
 	 */
 	Class<? extends EntitySystem>[] systems() default {};
 	
 	/**
-	 * @return
+	 * Managers to inject as fields.
 	 */
 	Class<? extends Manager>[] managers() default{};
-	
-	/**
-	 * @return
-	 */
-	boolean profile() default false;
 }
