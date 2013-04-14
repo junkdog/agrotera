@@ -101,3 +101,7 @@ post-compile step run with an eclipse builder, exec-maven-plugin or similar.
   `EntitySystem#end`
 - Add support for Managers: inject fields, only trigger on requested entities.
 - Easier maven and IDE integration.
+
+
+## Contact
+junkdog at onedaybeard dot net - twitter: [@junkdogap]()
