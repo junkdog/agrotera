@@ -46,34 +46,44 @@ public class TestSystem extends IntervalEntityProcessingSystem
 	systems=VelocitySystem.class)
 public class TestSystem extends IntervalEntityProcessingSystem
 {
-	private ComponentMapper renderableMapper;
-	private ComponentMapper velocityMapper;
-	private VelocitySystem velocitySystem;
-	private TagManager tagManager;
-	private GroupManager groupManager;
-	
-	@SuppressWarnings("unchecked")
-	public TestSystem()
-	{
-		super(Aspect.getAspectForAll(Renderable.class, Velocity.class)
-			.exclude(Cullable.class, AssetReference.class), 0.05f);
-	}
-	
-	@Override
-	protected void initialize()
-	{
-		renderableMapper = world.getMapper(Renderable.class);
-		velocityMapper = world.getMapper(Velocity.class);
-		tagManager = world.getManager(TagManager.class);
-		groupManager = world.getManager(GroupManager.class);
-		velocitySystem = world.getSystem(VelocitySystem.class);
-	}
-	
-	@Override
-	protected void process(Entity e)
-	{
-		// process system
-	}
+    private Profiler $profiler;
+    private ComponentMapper renderableMapper;
+    private ComponentMapper velocityMapper;
+    private VelocitySystem velocitySystem;
+    private TagManager tagManager;
+    private GroupManager groupManager;
+
+    public TestSystem()
+    {
+        super(Aspect.getAspectForAll(Renderable.class, Velocity.class})
+            .exclude(Cullable.class, AssetReference.class)}), 0.05F);
+        $profiler = new Profiler();
+        $profiler.setTag(getClass());
+    }
+
+    protected void initialize()
+    {
+        renderableMapper = world.getMapper(Renderable.class);
+        velocityMapper = world.getMapper(Velocity.class);
+        tagManager = world.getManager(TagManager.class);
+        groupManager = world.getManager(GroupManager.class);
+        velocitySystem = world.getSystem(VelocitySystem.class);
+    }
+
+    protected void begin()
+    {
+        $profiler.start();
+    }
+
+    protected void end()
+    {
+        $profiler.stop();
+    }
+
+    protected void process(Entity entity)
+    {
+        // process system
+    }
 }
 ```
 
