@@ -3,7 +3,7 @@
 Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](http://gamadu.com/artemis/).
 
 ## Features
-- Compile-time class engineering; no reflection overhead, works with Android.
+- Compile-time class engineering; no reflection overhead, no extra classes, works with Android.
 - `@ArtemisConfiguration` for EntitySystems
   - Injects `Aspect` in constructor, unless already defined.
   - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
