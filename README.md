@@ -124,4 +124,4 @@ exec-maven-plugin or similar.
 
 
 ## Contact
-junkdog at onedaybeard dot net - twitter: [@junkdogap](https://twitter.com/junkdogAP)
+junkdog at onedaybeard dot net - twitter: [@junkdogap](http://twitter.com/junkdogAP)
