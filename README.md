@@ -33,7 +33,6 @@ __eclipse.ini__
 	systems=VelocitySystem.class)
 public class TestSystem extends IntervalEntityProcessingSystem
 {
-	@SuppressWarnings("unchecked")
 	public TestSystem()
 	{
 		super(null, 0.05f);
