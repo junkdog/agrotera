@@ -4,7 +4,7 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
 
 ## Features
 - Compile-time class engineering; no reflection overhead, no extra classes, works with Android.
-- `@ArtemisConfiguration` for EntitySystems
+- `@ArtemisSystem` for EntitySystems
   - Injects `Aspect` in constructor, unless already defined.
   - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
   - Wires up referenced classes in `initialize()`, prepending to the method if already defined.
@@ -26,7 +26,7 @@ __eclipse.ini__
 ###What you type:
 ```java
 @Profile(using=Profiler.class, enabled=true)
-@ArtemisConfiguration(
+@ArtemisSystem(
     requires={Renderable.class, Velocity.class},
 	excludes={Cullable.class, AssetReference.class},
 	managers={TagManager.class, GroupManager.class},
@@ -48,7 +48,7 @@ public class TestSystem extends IntervalEntityProcessingSystem
 ###What the JVM gets:
 ```java
 @Profile(using=Profiler.class, enabled=true)
-@ArtemisConfiguration(
+@ArtemisSystem(
     requires={Renderable.class, Velocity.class},
 	excludes={Cullable.class, AssetReference.class},
 	managers={TagManager.class, GroupManager.class},
@@ -107,7 +107,7 @@ Agrotera consists of two intermingling parts.
 Responsible for declaring the fields, inferred from `@ArtemisConfiguration`,
 ensuring that the IDE doesn't complain about unresolved fields.
 
-Contains`@ArtemisConfiguration`, processed alongside [lombok-pg](https://github.com/peichhorn/lombok-pg)
+Provides `@ArtemisSystem`, processed alongside [lombok-pg](https://github.com/peichhorn/lombok-pg)
 (you know, that fork of [Project Lombok](http://projectlombok.org/) - because
 I couldn't get type resolution working under vanilla lombok).
 
