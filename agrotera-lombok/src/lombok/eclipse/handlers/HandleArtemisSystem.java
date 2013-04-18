@@ -10,7 +10,7 @@ import java.util.*;
 import lombok.*;
 import lombok.core.AnnotationValues;
 import lombok.core.DiagnosticsReceiver;
-import lombok.core.handlers.ArtemisConfigurationHandler;
+import lombok.core.handlers.ArtemisSystemHandler;
 import lombok.eclipse.DeferUntilBuildFieldsAndMethods;
 import lombok.eclipse.EclipseAnnotationHandler;
 import lombok.eclipse.EclipseNode;
@@ -29,16 +29,16 @@ import org.mangosdk.spi.ProviderFor;
 @ProviderFor(EclipseAnnotationHandler.class)
 @DeferUntilBuildFieldsAndMethods
 //@DeferUntilPostDiet
-public class HandleArtemisConfiguration extends EclipseAnnotationHandler<ArtemisConfiguration>
+public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 {
 	@Override
-	public void handle(final AnnotationValues<ArtemisConfiguration> annotation, final Annotation source, final EclipseNode annotationNode) {
+	public void handle(final AnnotationValues<ArtemisSystem> annotation, final Annotation source, final EclipseNode annotationNode) {
 		EclipseType type = EclipseType.typeOf(annotationNode, source);
 		if (type.isAnnotation() || type.isInterface()) {
-			annotationNode.addError(canBeUsedOnClassOnly(ArtemisConfiguration.class));
+			annotationNode.addError(canBeUsedOnClassOnly(ArtemisSystem.class));
 			return;
 		}
-
+		
 		List<Object> mappedComponentTypes = annotation.getActualExpressions("requires");
 		mappedComponentTypes.addAll(annotation.getActualExpressions("optional"));
 		List<Object> systemTypes = annotation.getActualExpressions("systems");
@@ -61,7 +61,7 @@ public class HandleArtemisConfiguration extends EclipseAnnotationHandler<Artemis
 		}
 	}
 	
-	private static class Handler extends ArtemisConfigurationHandler<TypeBinding,EclipseType,EclipseMethod>
+	private static class Handler extends ArtemisSystemHandler<TypeBinding,EclipseType,EclipseMethod>
 	{
 		public Handler(DiagnosticsReceiver diagnostic)
 		{

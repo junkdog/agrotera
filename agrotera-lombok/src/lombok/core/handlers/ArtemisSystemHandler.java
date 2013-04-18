@@ -12,7 +12,7 @@ import lombok.ast.*;
 import lombok.core.DiagnosticsReceiver;
 
 @RequiredArgsConstructor
-public abstract class ArtemisConfigurationHandler<COMPILER_BINDING, TYPE_TYPE extends IType<METHOD_TYPE, ?, ?, ?, ?, ?>, METHOD_TYPE extends IMethod<TYPE_TYPE, ?, ?, ?>>
+public abstract class ArtemisSystemHandler<COMPILER_BINDING, TYPE_TYPE extends IType<METHOD_TYPE, ?, ?, ?, ?, ?>, METHOD_TYPE extends IMethod<TYPE_TYPE, ?, ?, ?>>
 {
 	private static final String INITIALIZE_METHOD = "initialize";
 	

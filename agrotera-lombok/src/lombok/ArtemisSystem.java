@@ -12,7 +12,7 @@ import com.artemis.EntitySystem;
 import com.artemis.Manager;
 
 /**
- * Configures an artemis {@link EntitySystem} or {@link Manager} by injecting
+ * Configures an artemis {@link EntitySystem} by injecting
  * code during the compilation phase.</p>
  * 
  * Fields for {@link ComponentMapper}s, <code>EntitySystem</code>s and
@@ -26,7 +26,7 @@ import com.artemis.Manager;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ArtemisConfiguration
+public @interface ArtemisSystem
 {
 	/**
 	 * Required systems are matched by the {@link EntitySystem}'s

@@ -10,7 +10,7 @@ import java.util.*;
 
 import lombok.*;
 import lombok.core.AnnotationValues;
-import lombok.core.handlers.ArtemisConfigurationHandler;
+import lombok.core.handlers.ArtemisSystemHandler;
 import lombok.javac.JavacAnnotationHandler;
 import lombok.javac.JavacNode;
 //import lombok.javac.ResolutionBased;
@@ -25,11 +25,11 @@ import com.sun.tools.javac.tree.JCTree.JCFieldAccess;
 import org.mangosdk.spi.ProviderFor;
 
 @ProviderFor(JavacAnnotationHandler.class)
-public class HandleArtemisConfiguration extends JavacAnnotationHandler<ArtemisConfiguration>
+public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
 {
 
 	@Override
-	public void handle(final AnnotationValues<ArtemisConfiguration> annotation, final JCAnnotation source, final JavacNode annotationNode)
+	public void handle(final AnnotationValues<ArtemisSystem> annotation, final JCAnnotation source, final JavacNode annotationNode)
 	{
 		JavacType type = JavacType.typeOf(annotationNode, source);
 		
@@ -42,7 +42,7 @@ public class HandleArtemisConfiguration extends JavacAnnotationHandler<ArtemisCo
 			.handle(type, mappedComponentTypes, systemTypes, managerTypes);
 	}
 
-	private static class Handler extends ArtemisConfigurationHandler<TypeSymbol,JavacType,JavacMethod>
+	private static class Handler extends ArtemisSystemHandler<TypeSymbol,JavacType,JavacMethod>
 	{
 		private JavacNode annotationNode;
 

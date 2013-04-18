@@ -54,30 +54,30 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 		mv.visitLdcInsn(components.get(0));
 		
 		// size of varargs array
-		injectIntConst(components.size() - 1);
+		injectIntValue(mv, components.size() - 1);
 		mv.visitTypeInsn(ANEWARRAY, CLASS);
 		for (int i = 1; components.size() > i; i++)
 		{
-			if (i > 1) mv.visitInsn(AASTORE);
+//			if (i > 1) mv.visitInsn(AASTORE); // TODO: remove if works
 			mv.visitInsn(DUP);
-			injectIntConst(i - 1);
+			injectIntValue(mv, i - 1);
 			mv.visitLdcInsn(components.get(i));
+			mv.visitInsn(AASTORE); //TODO: make sure it works
 		}
 		
-		if (components.size() > 1)
-			mv.visitInsn(AASTORE);
+//		if (components.size() > 1) // TODO: remove if works
+//			mv.visitInsn(AASTORE);
 		
 		mv.visitMethodInsn(methodInvocation, ASPECT, 
 			methodName, COMPONENT_ARGUMENT_DESC);
 		
 	}
 	
-	private void injectIntConst(int constant)
+	private static void injectIntValue(MethodVisitor methodVisitor, int value)
 	{
-		int offset = ICONST_0;
-		if (constant > (ICONST_5 - offset))
-			mv.visitIntInsn(BIPUSH, constant);
+		if (value > (ICONST_5 - ICONST_0))
+			methodVisitor.visitIntInsn(BIPUSH, value);
 		else
-			mv.visitInsn(offset + constant);
+			methodVisitor.visitInsn(ICONST_0 + value);
 	}
 }

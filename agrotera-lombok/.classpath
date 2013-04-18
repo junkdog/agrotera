@@ -9,7 +9,8 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/lombok-pg"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/agrotera-api"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lombok"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lombok-pg"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
