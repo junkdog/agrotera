@@ -1,11 +1,9 @@
 package net.onedaybeard.agrotera;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
-import net.onedaybeard.agrotera.meta.ArtemisConfigurationResolver;
 import net.onedaybeard.agrotera.transform.ClassUtil;
 import net.onedaybeard.agrotera.transform.ProfileVisitor;
 import net.onedaybeard.agrotera.transform.SystemVisitor;
@@ -17,7 +15,6 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
 
 class SystemWeaver implements Opcodes, ClassWeaver
 {

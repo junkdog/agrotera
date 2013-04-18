@@ -8,7 +8,7 @@ import org.objectweb.asm.Opcodes;
 
 class ArtemisMetaScanner extends ClassVisitor
 {
-	private static final String ARTEMIS_ANNOTATION = "Llombok/ArtemisConfiguration;";
+	private static final String ARTEMIS_ANNOTATION = "Llombok/ArtemisSystem;";
 	private static final String PROFILER_ANNOTATION = "Llombok/Profile;";
 	private ArtemisConfigurationData info;
 

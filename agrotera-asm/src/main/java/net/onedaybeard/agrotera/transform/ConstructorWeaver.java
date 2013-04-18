@@ -58,15 +58,11 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 		mv.visitTypeInsn(ANEWARRAY, CLASS);
 		for (int i = 1; components.size() > i; i++)
 		{
-//			if (i > 1) mv.visitInsn(AASTORE); // TODO: remove if works
 			mv.visitInsn(DUP);
 			injectIntValue(mv, i - 1);
 			mv.visitLdcInsn(components.get(i));
-			mv.visitInsn(AASTORE); //TODO: make sure it works
+			mv.visitInsn(AASTORE);
 		}
-		
-//		if (components.size() > 1) // TODO: remove if works
-//			mv.visitInsn(AASTORE);
 		
 		mv.visitMethodInsn(methodInvocation, ASPECT, 
 			methodName, COMPONENT_ARGUMENT_DESC);

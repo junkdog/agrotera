@@ -44,7 +44,7 @@ public class SystemVisitor extends ClassVisitor implements Opcodes
 	@Override
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible)
 	{
-		if ("Llombok/ArtemisConfiguration;".equals(desc))
+		if ("Llombok/ArtemisSystem;".equals(desc))
 			return null; // removing annotation to avoid further processing
 		else
 			return super.visitAnnotation(desc, visible);
