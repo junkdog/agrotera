@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.onedaybeard.agrotera</groupId>
+		<artifactId>agrotera-base</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>agrotera-lombok</artifactId>
+	<packaging>jar</packaging>
+	<name>agrotera-lombok</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.github.peichhorn</groupId>
+			<artifactId>lombok-pg</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.onedaybeard.agrotera</groupId>
+			<artifactId>agrotera-api</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mangosdk.spi</groupId>
+			<artifactId>spi</artifactId>
+			<version>0.2.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.onedaybeard</groupId>
+			<artifactId>artemis-odb</artifactId>
+			<version>0.3.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jdt</groupId>
+			<artifactId>core</artifactId>
+			<version>3.6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun</groupId>
+			<artifactId>tools</artifactId>
+			<version>1.7</version>
+			<scope>system</scope>
+			<systemPath>${java.home}/../lib/tools.jar</systemPath>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>artemis-odb</id>
+			<url>https://raw.github.com/junkdog/artemis-odb/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+</project>
