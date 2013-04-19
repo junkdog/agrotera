@@ -13,14 +13,11 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
   - User-specified profiler class - adhering to [ArtemisProfiler](https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java).
 
 
-## Installation (wip: builder, maven...)
-__eclipse.ini__
-```
-# where lombok.jar refers to lombok-pg.
--javaagent:lombok.jar
--Xbootclasspath/a:lombok.jar
--Xbootclasspath/a:agrotera-lombok.jar
-```
+## Installation (WIP...)
+- [Preparing Eclipse IDE](http://github.com/junkdog/agrotera/wiki/EclipseIdeInstallation): adding lombok-pg and `agrotera-lombok` to `eclipse.ini`.
+- [Eclipse project setup](EclipseProjectSetup): Add lombok-pg to classpath and `agrotera-asm` as a project builder.
+- [Maven project Setup](http://github.com/junkdog/agrotera/wiki/MavenProjectSetup): Configure `agrotera-maven-plugin`.
+
 
 ## Minimal example
 ###What you type:
