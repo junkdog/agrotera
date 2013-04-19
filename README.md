@@ -18,7 +18,7 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
 There is no maven repository as of yet. To use agrotera, clone the repository and run `mvn -Pall install`.
 
 - [Preparing Eclipse IDE](http://github.com/junkdog/agrotera/wiki/EclipseIdeInstallation): adding lombok-pg and `agrotera-lombok` to `eclipse.ini`.
-- [Eclipse project setup](EclipseProjectSetup): Add lombok-pg to classpath and `agrotera-asm` as a project builder.
+- [Eclipse project setup](http://github.com/junkdog/agrotera/wiki/EclipseProjectSetup): Add lombok-pg to classpath and `agrotera-asm` as a project builder.
 - [Maven project setup](http://github.com/junkdog/agrotera/wiki/MavenProjectSetup): Configure `agrotera-maven-plugin`.
 
 
