@@ -13,7 +13,7 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
   - User-specified profiler class - adhering to [ArtemisProfiler](https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java).
 
 
-## Installation (WIP...)
+## Installation
 
 There is no maven repository as of yet. To use agrotera, clone the repository and run `mvn -Pall install`.
 
@@ -119,7 +119,7 @@ exec-maven-plugin or similar.
 
 ## Missing/planned features
 - Add support for Managers: inject fields, only trigger on requested entities.
-- Easier maven and IDE integration.
+- Easier IDE integration.
 
 
 ## Contact
