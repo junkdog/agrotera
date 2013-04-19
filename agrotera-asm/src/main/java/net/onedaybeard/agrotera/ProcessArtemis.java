@@ -16,11 +16,17 @@ import org.objectweb.asm.Type;
 
 public class ProcessArtemis implements Opcodes 
 {
+	private File root;
 	private ClassReader cr;
+	
+	public ProcessArtemis(File root)
+	{
+		this.root = root;
+	}
 	
 	public static void main(String[] args)
     {
-    	ProcessArtemis app = new ProcessArtemis();
+    	ProcessArtemis app = new ProcessArtemis(null);
     	
     	if (args.length == 0)
     	{
@@ -29,17 +35,25 @@ public class ProcessArtemis implements Opcodes
     		
     		for (File f : klazzes)
     		{
-    			app.readFile(f.getAbsolutePath());
+    			app.processClass(f.getAbsolutePath());
     		}
     	}
     	else
     	{
     		for (String arg : args)
     		{
-    			app.readFile(arg);
+    			app.processClass(arg);
     		}
     	}
     }
+	
+	public void process()
+	{
+		List<File> klazzes = new ArrayList<>();
+		addFiles(klazzes, root);
+		for (File f : klazzes)
+			processClass(f.getAbsolutePath());
+	}
 	
 	private static void addFiles(List<File> files, File folder)
 	{
@@ -52,7 +66,7 @@ public class ProcessArtemis implements Opcodes
 		}
 	}
 
-    private void readFile(String file)
+    private void processClass(String file)
     {
     	if (!file.endsWith(".class"))
     		return;
