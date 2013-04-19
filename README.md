@@ -19,7 +19,7 @@ There is no maven repository as of yet. To use agrotera, clone the repository an
 
 - [Preparing Eclipse IDE](http://github.com/junkdog/agrotera/wiki/EclipseIdeInstallation): adding lombok-pg and `agrotera-lombok` to `eclipse.ini`.
 - [Eclipse project setup](EclipseProjectSetup): Add lombok-pg to classpath and `agrotera-asm` as a project builder.
-- [Maven project Setup](http://github.com/junkdog/agrotera/wiki/MavenProjectSetup): Configure `agrotera-maven-plugin`.
+- [Maven project setup](http://github.com/junkdog/agrotera/wiki/MavenProjectSetup): Configure `agrotera-maven-plugin`.
 
 
 ## Minimal example
