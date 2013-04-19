@@ -75,6 +75,16 @@
 			<modules>
 				<module>agrotera-api</module>
 				<module>agrotera-lombok</module>
+				<module>agrotera-lombok</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>all</id>
+			<modules>
+				<module>agrotera-api</module>
+				<module>agrotera-lombok</module>
+				<module>agrotera-asm</module>
+				<module>agrotera-maven</module>
 			</modules>
 		</profile>
 	</profiles>
