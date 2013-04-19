@@ -24,7 +24,6 @@ public class ProfileVisitor extends ClassVisitor implements Opcodes
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature,
 		String[] exceptions)
 	{
-		System.out.println("\tgetting method: " + name);
 		MethodVisitor method = super.visitMethod(access, name, desc, signature, exceptions);
 		
 		if ("begin".equals(name) && "()V".equals(desc))

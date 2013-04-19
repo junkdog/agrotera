@@ -20,14 +20,6 @@ public class SystemVisitor extends ClassVisitor implements Opcodes
 	}
 	
 	@Override
-	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces)
-	{
-		System.out.println("class " + name.substring(name.lastIndexOf('/') + 1)
-			+ " extends " + superName.substring(superName.lastIndexOf('/') + 1));
-		super.visit(version, access, name, signature, superName, interfaces);
-	}
-	
-	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature,
 		String[] exceptions)
 	{

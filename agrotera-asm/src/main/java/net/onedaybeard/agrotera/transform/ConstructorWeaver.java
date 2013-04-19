@@ -31,7 +31,6 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 		if (!aspectIntercepted)
 		{
 			injectAspect = (opcode == ACONST_NULL);
-			System.out.println("\taspect: " + (injectAspect ? "building" : "already defined"));
 			aspectIntercepted = true;
 		}
 		
