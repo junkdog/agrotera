@@ -62,7 +62,7 @@ public class TestSystem extends IntervalEntityProcessingSystem
 	public TestSystem()
 	{
 		super(Aspect.getAspectForAll(Renderable.class, Velocity.class)
-			.exclude(Cullable.class, AssetReference.class), 0.05F);
+			.exclude(Cullable.class, AssetReference.class), 0.05f);
 		$profiler = new Profiler();
 		$profiler.setTag(getClass());
 	}
