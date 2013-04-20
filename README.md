@@ -126,6 +126,7 @@ Conceived as a post-compile step run via the agrotera-maven-plugin
 or with an eclipse builder.
 
 ## Missing/planned features
+- Add missing oneOf aspect call.
 - Add support for Managers: inject fields, only trigger on requested entities.
 
 
