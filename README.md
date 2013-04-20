@@ -127,7 +127,7 @@ or with an eclipse builder.
 
 ## Missing/planned features
 - Add support for Managers: inject fields, only trigger on requested entities.
-- Easier IDE integration.
+
 
 ## Artemis Maven dependency / Shameless self-promotion
 Our [fork](https://github.com/junkdog/artemis-odb) of Artemis:
