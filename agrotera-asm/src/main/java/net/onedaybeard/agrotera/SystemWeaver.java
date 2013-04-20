@@ -26,7 +26,6 @@ class SystemWeaver implements Opcodes, ClassWeaver
 
 	protected SystemWeaver(ClassReader cr, ArtemisConfigurationData meta)
 	{
-		super();
 		this.cr = cr;
 		this.meta = meta;
 		this.cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
