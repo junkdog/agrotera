@@ -2,6 +2,7 @@
 
 Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](http://gamadu.com/artemis/).
 
+
 ## Features
 - Compile-time class engineering: no reflection overhead, no extra classes, no additional
   runtime dependencies, works with Android.
@@ -16,7 +17,9 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
 
 ## Installation
 
-There is no maven repository as of yet. To use agrotera, clone the repository and run `mvn -Pall install`.
+There is no maven repository as of yet. To use agrotera, clone the repository and run `mvn -Pall install`,
+alternatively `mvn -Pall package` if you prefer to not install into the local maven repository.
+Extract the relevant _agrotera jars_ from each module's _target_ folder, if necessary (eclipse).
 
 - [Preparing Eclipse IDE](http://github.com/junkdog/agrotera/wiki/Eclipse-IDE-Installation): 
   Add lombok-pg and agrotera-lombok to `eclipse.ini`.
@@ -119,12 +122,13 @@ I couldn't get type resolution working under vanilla lombok).
 
 ### agrotera-asm
 Transforms the classes; wiring up the systems and injecting profiler calls.
-Conceived as a post-compile step run with an eclipse builder,
-exec-maven-plugin or similar.
+Conceived as a post-compile step run via the agrotera-maven-plugin 
+or with an eclipse builder.
 
 ## Missing/planned features
+- Add missing oneOf aspect call.
 - Add support for Managers: inject fields, only trigger on requested entities.
-- Easier IDE integration.
+
 
 ## Artemis Maven dependency / Shameless self-promotion
 Our [fork](https://github.com/junkdog/artemis-odb) of Artemis:
