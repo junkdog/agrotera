@@ -51,6 +51,7 @@ public class TestSystem extends IntervalEntityProcessingSystem
 ```
 ###What the JVM gets:
 ```java
+@WovenByTheHuntress // marker annotation; don't process class when present
 @Profile(using=Profiler.class, enabled=true)
 @ArtemisSystem(
     requires={Renderable.class, Velocity.class},
