@@ -2,21 +2,17 @@ package net.onedaybeard.agrotera.transform;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 public class ProfileVisitor extends ClassVisitor implements Opcodes
 {
-	private String className;
 	private ArtemisConfigurationData info;
 	
-	public ProfileVisitor(ClassVisitor cv, String className, ArtemisConfigurationData info)
+	public ProfileVisitor(ClassVisitor cv, ArtemisConfigurationData info)
 	{
 		super(Opcodes.ASM4, cv);
-		this.className = className;
 		this.info = info;
 	}
 	

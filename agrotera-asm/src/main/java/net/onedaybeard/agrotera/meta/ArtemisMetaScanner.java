@@ -1,6 +1,8 @@
 package net.onedaybeard.agrotera.meta;
 
 
+import static net.onedaybeard.agrotera.ProcessArtemis.WOVEN_ANNOTATION;
+
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -8,7 +10,7 @@ import org.objectweb.asm.Opcodes;
 
 class ArtemisMetaScanner extends ClassVisitor
 {
-	private static final String ARTEMIS_ANNOTATION = "Llombok/ArtemisSystem;";
+	private static final String SYSTEM_ANNOTATION = "Llombok/ArtemisSystem;";
 	private static final String PROFILER_ANNOTATION = "Llombok/Profile;";
 	private ArtemisConfigurationData info;
 
@@ -27,12 +29,14 @@ class ArtemisMetaScanner extends ClassVisitor
 	@Override
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible)
 	{
-		if (ARTEMIS_ANNOTATION.equals(desc))
+		if (SYSTEM_ANNOTATION.equals(desc))
 			return new ArtemisAnnotationReader(desc, info);
 		else if (PROFILER_ANNOTATION.equals(desc))
 			return new ProfileAnnotationReader(desc, info);
-		else
-			return super.visitAnnotation(desc, visible);
+		else if (WOVEN_ANNOTATION.equals(desc))
+			info.isPreviouslyProcessed = true;
+			
+		return super.visitAnnotation(desc, visible);
 	}
 	
 	@Override

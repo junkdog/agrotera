@@ -16,6 +16,8 @@ import org.objectweb.asm.Type;
 
 public class ProcessArtemis implements Opcodes 
 {
+	public static final String WOVEN_ANNOTATION = "Lnet/onedaybeard/agrotera/internal/WovenByTheHuntress;";
+	
 	private File root;
 	private ClassReader cr;
 	
@@ -77,8 +79,12 @@ public class ProcessArtemis implements Opcodes
     		ArtemisConfigurationData meta = ArtemisConfigurationResolver.scan(cr);
     		meta.current = Type.getObjectType(cr.getClassName());
     		
-    		ClassWeaver weaver = new SystemWeaver(cr, meta);
-    		weaver.process(file);
+    		if (!meta.isPreviouslyProcessed &&
+    			(meta.isSystemAnnotation || meta.profilingEnabled))
+    		{
+	    		ClassWeaver weaver = new SystemWeaver(cr, meta);
+	    		weaver.process(file);
+    		}
     	}
 		catch (FileNotFoundException e)
 		{

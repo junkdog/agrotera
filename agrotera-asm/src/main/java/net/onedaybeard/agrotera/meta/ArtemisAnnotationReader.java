@@ -16,7 +16,7 @@ final class ArtemisAnnotationReader extends AnnotationVisitor
 		this.annotationField = name;
 		this.info = info;
 		
-		info.isAnnotationPresent = true;
+		info.isSystemAnnotation = true;
 	}
 
 	@Override

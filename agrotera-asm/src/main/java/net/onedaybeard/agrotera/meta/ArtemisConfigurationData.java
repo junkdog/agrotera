@@ -19,21 +19,22 @@ public class ArtemisConfigurationData
 	public final List<Type> exclude = new ArrayList<>();
 	public final List<Type> systems = new ArrayList<>();
 	public final List<Type> managers = new ArrayList<>();
-	public boolean isAnnotationPresent;
+	public boolean isSystemAnnotation;
+	public boolean isManagerAnnotation;
 	
 	// method search
 	public boolean foundInitialize;
 	public boolean foundBegin;
 	public boolean foundEnd;
 	
+	// when found, means class has been processed
+	public boolean isPreviouslyProcessed;
+	
 	// profiler annotation
 	public boolean profilingEnabled;
 	public Type profilerClass;
 	
 	public Type current;
-	
-	public boolean isManagerType;
-	public boolean isSystemType;
 	
 	ArtemisConfigurationData() {}
 }

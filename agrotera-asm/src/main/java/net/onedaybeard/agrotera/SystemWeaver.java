@@ -1,5 +1,7 @@
 package net.onedaybeard.agrotera;
 
+import static net.onedaybeard.agrotera.ProcessArtemis.WOVEN_ANNOTATION;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -21,8 +23,7 @@ class SystemWeaver implements Opcodes, ClassWeaver
 	private ArtemisConfigurationData meta;
 	private ClassReader cr;
 	private ClassWriter cw;
-	
-	
+
 	protected SystemWeaver(ClassReader cr, ArtemisConfigurationData meta)
 	{
 		super();
@@ -30,16 +31,13 @@ class SystemWeaver implements Opcodes, ClassWeaver
 		this.meta = meta;
 		this.cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 	}
-	
+
 	@Override
     public void process(String file) throws FileNotFoundException, IOException
     {
-    	if (!file.endsWith(".class"))
-    		return;
-    	
 		cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-		
-		if (meta.isAnnotationPresent)
+		ClassUtil.injectAnnotation(cw, WOVEN_ANNOTATION);
+		if (meta.isSystemAnnotation)
 			injectConfiguration(meta);
 		if (meta.profilingEnabled)
 			injectProfiler(meta);
@@ -49,17 +47,13 @@ class SystemWeaver implements Opcodes, ClassWeaver
 
 	private void compileClass(ArtemisConfigurationData meta, String file)
 	{
-		boolean transformFile = meta.isAnnotationPresent || meta.profilingEnabled;
-		if (!transformFile)
-			return;
-		
 		ClassVisitor cv = cw;
-		if (meta.isAnnotationPresent)
+		if (meta.isSystemAnnotation)
 			cv = new SystemVisitor(cv, cr.getClassName(), meta);
 		if (meta.profilingEnabled)
-			cv = new ProfileVisitor(cv , cr.getClassName(), meta);
+			cv = new ProfileVisitor(cv, meta);
 		cr.accept(cv, ClassReader.EXPAND_FRAMES);
-		
+
 		ClassUtil.writeClass(cw, file);
 	}
 
@@ -67,17 +61,17 @@ class SystemWeaver implements Opcodes, ClassWeaver
 	{
 		FieldVisitor fv = cw.visitField(ACC_PRIVATE, "$profiler", meta.profilerClass.getDescriptor(), null, null);
 		fv.visitEnd();
-		
+
 		if (!meta.foundBegin)
 			ClassUtil.injectMethodStub(cw, "begin");
 		if (!meta.foundEnd)
 			ClassUtil.injectMethodStub(cw, "end");
-		
+
 		cr.accept(cw, 0);
 		cr = new ClassReader(cw.toByteArray());
 		cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 	}
-	
+
 	private void injectConfiguration(ArtemisConfigurationData meta)
 	{
 		if (!meta.foundInitialize)
@@ -87,7 +81,7 @@ class SystemWeaver implements Opcodes, ClassWeaver
 			method.visitLabel(new Label());
 			method.visitInsn(RETURN);
 			method.visitEnd();
-			
+
 			cr.accept(cw, 0);
 			cr = new ClassReader(cw.toByteArray());
 			cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);

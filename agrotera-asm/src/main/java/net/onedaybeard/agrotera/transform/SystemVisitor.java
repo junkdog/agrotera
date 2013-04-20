@@ -2,7 +2,6 @@ package net.onedaybeard.agrotera.transform;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -31,15 +30,6 @@ public class SystemVisitor extends ClassVisitor implements Opcodes
 			method = new ConstructorWeaver(method, info);
 		
 		return method;
-	}
-	
-	@Override
-	public AnnotationVisitor visitAnnotation(String desc, boolean visible)
-	{
-		if ("Llombok/ArtemisSystem;".equals(desc))
-			return null; // removing annotation to avoid further processing
-		else
-			return super.visitAnnotation(desc, visible);
 	}
 	
 	@Override

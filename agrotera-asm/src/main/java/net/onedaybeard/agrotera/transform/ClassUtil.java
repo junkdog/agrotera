@@ -3,6 +3,7 @@ package net.onedaybeard.agrotera.transform;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -17,6 +18,12 @@ public final class ClassUtil implements Opcodes
 		mv.visitCode();
 		mv.visitInsn(RETURN);
 		mv.visitEnd();
+	}
+	
+	public static void injectAnnotation(ClassWriter cw, String desc)
+	{
+		AnnotationVisitor av = cw.visitAnnotation(desc, true);
+		av.visitEnd();
 	}
 	
 	public static void writeClass(ClassWriter writer, String file)
