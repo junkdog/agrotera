@@ -17,9 +17,12 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
 
 There is no maven repository as of yet. To use agrotera, clone the repository and run `mvn -Pall install`.
 
-- [Preparing Eclipse IDE](http://github.com/junkdog/agrotera/wiki/EclipseIdeInstallation): adding lombok-pg and `agrotera-lombok` to `eclipse.ini`.
-- [Eclipse project setup](EclipseProjectSetup): Add lombok-pg to classpath and `agrotera-asm` as a project builder.
-- [Maven project Setup](http://github.com/junkdog/agrotera/wiki/MavenProjectSetup): Configure `agrotera-maven-plugin`.
+- [Preparing Eclipse IDE](http://github.com/junkdog/agrotera/wiki/Eclipse-IDE-Installation): 
+  Add lombok-pg and agrotera-lombok to `eclipse.ini`.
+- [Eclipse project setup](http://github.com/junkdog/agrotera/wiki/Eclipse-Project-Setup):
+  Add lombok-pg to classpath and `agrotera-asm` as a project builder.
+- [Maven project setup](http://github.com/junkdog/agrotera/wiki/Maven-Project-Setup):
+  Configure `agrotera-maven-plugin`.
 
 
 ## Minimal example
@@ -121,6 +124,15 @@ exec-maven-plugin or similar.
 - Add support for Managers: inject fields, only trigger on requested entities.
 - Easier IDE integration.
 
+## Artemis Maven dependency / Shameless self-promotion
+Our [fork](https://github.com/junkdog/artemis-odb) of Artemis:
+```xml
+<dependency>
+    <groupId>net.onedaybeard.artemis</groupId>
+    <artifactId>artemis-odb</artifactId>
+    <version>0.3.2</version>
+</dependency>
+```
 
 ## Contact
 junkdog at onedaybeard dot net - twitter: [@junkdogap](http://twitter.com/junkdogAP)
