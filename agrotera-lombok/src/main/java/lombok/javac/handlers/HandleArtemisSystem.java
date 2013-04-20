@@ -19,7 +19,6 @@ import com.sun.tools.javac.code.Symbol.TypeSymbol;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.JCTree.JCAnnotation;
 import com.sun.tools.javac.tree.JCTree.JCFieldAccess;
-//import lombok.javac.ResolutionBased;
 
 @MetaInfServices(JavacAnnotationHandler.class)
 public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
