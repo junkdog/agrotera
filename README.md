@@ -124,6 +124,15 @@ exec-maven-plugin or similar.
 - Add support for Managers: inject fields, only trigger on requested entities.
 - Easier IDE integration.
 
+## Artemis Maven dependency / Shameless self-promotion
+Our [fork](https://github.com/junkdog/artemis-odb) of Artemis:
+```xml
+<dependency>
+    <groupId>net.onedaybeard.artemis</groupId>
+    <artifactId>artemis-odb</artifactId>
+    <version>0.3.2</version>
+</dependency>
+```
 
 ## Contact
 junkdog at onedaybeard dot net - twitter: [@junkdogap](http://twitter.com/junkdogAP)
