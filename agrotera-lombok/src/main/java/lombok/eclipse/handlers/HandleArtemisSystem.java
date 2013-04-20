@@ -21,13 +21,13 @@ import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.ClassLiteralAccess;
 import org.eclipse.jdt.internal.compiler.ast.TypeReference;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
-import org.mangosdk.spi.ProviderFor;
+import org.kohsuke.MetaInfServices;
 
 /**
  * Handles the {@link ListenerSupport} annotation for eclipse using the {@link PatchListenerSupport}.
  */
-@ProviderFor(EclipseAnnotationHandler.class)
 @DeferUntilBuildFieldsAndMethods
+@MetaInfServices(EclipseAnnotationHandler.class)
 //@DeferUntilPostDiet
 public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 {

@@ -10,7 +10,35 @@
 	<artifactId>agrotera-lombok</artifactId>
 	<packaging>jar</packaging>
 	<name>agrotera-lombok</name>
-	
+
+	<!-- found on SO: http://stackoverflow.com/a/3080695/431535 -->
+	<profiles>
+		<profile>
+			<id>default-profile</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<file>
+					<exists>${java.home}/../lib/tools.jar</exists>
+				</file>
+			</activation>
+			<properties>
+				<toolsjar>${java.home}/../lib/tools.jar</toolsjar>
+			</properties>
+		</profile>
+		<profile>
+			<id>mac-profile</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${java.home}/../Classes/classes.jar</exists>
+				</file>
+			</activation>
+			<properties>
+				<toolsjar>${java.home}/../Classes/classes.jar</toolsjar>
+			</properties>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.github.peichhorn</groupId>
@@ -25,34 +53,31 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.mangosdk.spi</groupId>
-			<artifactId>spi</artifactId>
-			<version>0.2.4</version>
+			<groupId>org.kohsuke.metainf-services</groupId>
+			<artifactId>metainf-services</artifactId>
+			<version>1.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.onedaybeard</groupId>
+			<groupId>net.onedaybeard.artemis</groupId>
 			<artifactId>artemis-odb</artifactId>
-			<version>0.3.0-SNAPSHOT</version>
+			<version>0.3.2</version>
 			<scope>provided</scope>
 		</dependency>
-		
 		<dependency>
-			<groupId>org.eclipse.jdt</groupId>
-			<artifactId>core</artifactId>
-			<version>3.6.0</version>
-			<scope>provided</scope>
+			<groupId>org.sonatype.tycho</groupId>
+			<artifactId>org.eclipse.jdt.core</artifactId>
+			<version>3.6.2.v_A76_R36x</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>com.sun</groupId>
 			<artifactId>tools</artifactId>
 			<version>1.7</version>
 			<scope>system</scope>
-			<systemPath>${java.home}/../lib/tools.jar</systemPath>
+			<systemPath>${toolsjar}</systemPath>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -66,15 +91,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>artemis-odb</id>
-			<url>https://raw.github.com/junkdog/artemis-odb/mvn-repo/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 </project>

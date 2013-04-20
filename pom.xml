@@ -17,6 +17,7 @@
 		<developerConnection>scm:git:git@github.com:junkdog/agrotera-odb.git</developerConnection>
 	</scm>
 	
+	<!-- 
 	<distributionManagement>
 		<repository>
 			<id>internal.repo</id>
@@ -24,6 +25,7 @@
 			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
 	</distributionManagement>
+	 -->
 	
 	<developers>
 		<developer>
@@ -75,7 +77,6 @@
 			<modules>
 				<module>agrotera-api</module>
 				<module>agrotera-lombok</module>
-				<module>agrotera-lombok</module>
 			</modules>
 		</profile>
 		<profile>
@@ -100,25 +101,24 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+		<!-- 
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
 				<version>0.7</version>
 				<configuration>
-					<message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
+					<message>Maven artifacts for ${project.version}</message>  
 					<noJekyll>true</noJekyll>      
-					<merge>true</merge>                            <!-- disable webpage processing -->
-					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-					<branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
+					<merge>true</merge>                    
+					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> 
+					<branch>refs/heads/mvn-repo</branch>                     
 					<includes>
 						<include>**/*</include>
 					</includes>
-					<repositoryName>agrotera</repositoryName>      <!-- github repo name -->
-					<repositoryOwner>junkdog</repositoryOwner>    <!-- github username -->
+					<repositoryName>agrotera</repositoryName>     
+					<repositoryOwner>junkdog</repositoryOwner>   
 				</configuration>
 				<executions>
-					<!-- run site-maven-plugin's 'site' target as part of the build's normal 
-						'deploy' phase -->
 					<execution>
 						<goals>
 							<goal>site</goal>
@@ -127,6 +127,7 @@
 					</execution>
 				</executions>
 			</plugin>
+		 -->
 		</plugins>
 	</build>
 	

@@ -5,6 +5,8 @@ import static lombok.javac.handlers.ast.JavacResolver.CLASS;
 
 import java.util.List;
 
+import org.kohsuke.MetaInfServices;
+
 import lombok.ArtemisSystem;
 import lombok.core.AnnotationValues;
 import lombok.core.handlers.ArtemisSystemHandler;
@@ -13,15 +15,13 @@ import lombok.javac.JavacNode;
 import lombok.javac.handlers.ast.JavacMethod;
 import lombok.javac.handlers.ast.JavacType;
 
-import org.mangosdk.spi.ProviderFor;
-
 import com.sun.tools.javac.code.Symbol.TypeSymbol;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.JCTree.JCAnnotation;
 import com.sun.tools.javac.tree.JCTree.JCFieldAccess;
 //import lombok.javac.ResolutionBased;
 
-@ProviderFor(JavacAnnotationHandler.class)
+@MetaInfServices(JavacAnnotationHandler.class)
 public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
 {
 
