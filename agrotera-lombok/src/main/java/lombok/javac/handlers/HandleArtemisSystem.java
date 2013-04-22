@@ -8,6 +8,7 @@ import java.util.List;
 import org.kohsuke.MetaInfServices;
 
 import lombok.ArtemisSystem;
+import lombok.ast.Annotation;
 import lombok.core.AnnotationValues;
 import lombok.core.handlers.ArtemisSystemHandler;
 import lombok.javac.JavacAnnotationHandler;
@@ -28,6 +29,12 @@ public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
 	public void handle(final AnnotationValues<ArtemisSystem> annotation, final JCAnnotation source, final JavacNode annotationNode)
 	{
 		JavacType type = JavacType.typeOf(annotationNode, source);
+		for (Annotation a : type.annotations())
+		{
+			// because all else is null... 
+			if (a.toString().startsWith("@WovenByTheHuntress"))
+				return;
+		}
 		
 		List<Object> mappedComponentTypes = annotation.getActualExpressions("requires");
 		mappedComponentTypes.addAll(annotation.getActualExpressions("optional"));

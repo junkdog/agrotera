@@ -39,6 +39,13 @@ public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 			return;
 		}
 		
+		for (lombok.ast.Annotation a : type.annotations())
+		{
+			// because all else is null... 
+			if (a.toString().startsWith("@WovenByTheHuntress"))
+				return;
+		}
+		
 		List<Object> mappedComponentTypes = annotation.getActualExpressions("requires");
 		mappedComponentTypes.addAll(annotation.getActualExpressions("optional"));
 		List<Object> systemTypes = annotation.getActualExpressions("systems");
