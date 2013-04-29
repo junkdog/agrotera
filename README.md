@@ -127,7 +127,7 @@ or with an eclipse builder.
 
 ## Missing/planned features
 - Add missing oneOf aspect call.
-- Add support for Managers: inject fields, only trigger on requested entities.
+- Add `@ArtemisManager`: inject fields, only trigger on requested entities.
 
 
 ## Artemis Maven dependency / Shameless self-promotion
