@@ -24,6 +24,8 @@ final class ArtemisAnnotationReader extends AnnotationVisitor
 	{
 		if ("requires".equals(annotationField))
 			info.requires.add((Type)value);
+		else if ("requiresOne".equals(annotationField))
+			info.requiresOne.add((Type)value);
 		else if ("optional".equals(annotationField))
 			info.optional.add((Type)value);
 		else if ("excludes".equals(annotationField))

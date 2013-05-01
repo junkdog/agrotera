@@ -43,6 +43,8 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 	private void transformConstructor()
 	{
 		injectAspect(info.requires, INVOKESTATIC, "getAspectForAll");
+		if (info.requiresOne.size() > 0)
+			injectAspect(info.requiresOne, INVOKEVIRTUAL, "one");
 		if (info.exclude.size() > 0)
 			injectAspect(info.exclude, INVOKEVIRTUAL, "exclude");
 	}
