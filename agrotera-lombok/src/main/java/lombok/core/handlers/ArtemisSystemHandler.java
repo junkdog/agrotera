@@ -1,9 +1,11 @@
 package lombok.core.handlers;
 
 import static lombok.ast.AST.Assign;
+import static lombok.ast.AST.Annotation;
 import static lombok.ast.AST.Call;
 import static lombok.ast.AST.Field;
 import static lombok.ast.AST.FieldDecl;
+import static lombok.ast.AST.String;
 import static lombok.ast.AST.Type;
 import static lombok.core.util.Names.decapitalize;
 
@@ -56,7 +58,7 @@ public abstract class ArtemisSystemHandler<COMPILER_BINDING, TYPE_TYPE extends I
 		String name = toFieldName(type);
 		
 		return FieldDecl(Type(toQualifiedName(type)), name)
-			.makePrivate();
+				.makePrivate();
 	}
 	
 	private FieldDecl createMapperField(COMPILER_BINDING componentType)
@@ -64,9 +66,10 @@ public abstract class ArtemisSystemHandler<COMPILER_BINDING, TYPE_TYPE extends I
 		String name = decapitalize(toFieldName(componentType)) + "Mapper";
 		
 		return FieldDecl(Type("com.artemis.ComponentMapper")
-				.withTypeArgument(Type(toQualifiedName(componentType))),
-				name)
-			.makePrivate();
+				.withTypeArgument(Type(toQualifiedName(componentType))), name)
+				.withAnnotation(Annotation(Type(SuppressWarnings.class))
+					.withValue(String("all"))) // not sure why this bleeds...
+				.makePrivate();
 	}
 	
 	protected abstract COMPILER_BINDING getBinding(TYPE_TYPE type, Object classLiteral);
