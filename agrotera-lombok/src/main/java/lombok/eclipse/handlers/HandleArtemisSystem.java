@@ -47,6 +47,7 @@ public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 		}
 		
 		List<Object> mappedComponentTypes = annotation.getActualExpressions("requires");
+		mappedComponentTypes.addAll(annotation.getActualExpressions("requiresOne"));
 		mappedComponentTypes.addAll(annotation.getActualExpressions("optional"));
 		List<Object> systemTypes = annotation.getActualExpressions("systems");
 		List<Object> managerTypes = annotation.getActualExpressions("managers");

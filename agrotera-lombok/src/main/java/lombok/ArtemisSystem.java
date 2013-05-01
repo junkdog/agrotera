@@ -6,6 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.artemis.Aspect;
 import com.artemis.Component;
 import com.artemis.ComponentMapper;
 import com.artemis.EntitySystem;
@@ -29,10 +30,14 @@ import com.artemis.Manager;
 public @interface ArtemisSystem
 {
 	/**
-	 * Required systems are matched by the {@link EntitySystem}'s
-	 * aspect. 
+	 * Maps to {@link Aspect#all}.
 	 */
 	Class<? extends Component>[] requires() default {};
+	
+	/**
+	 * Maps to {@link Aspect#one}.
+	 */
+	Class<? extends Component>[] requiresOne() default {};
 	
 	/**
 	 * Only mappers are created for optional components, no bearing on
