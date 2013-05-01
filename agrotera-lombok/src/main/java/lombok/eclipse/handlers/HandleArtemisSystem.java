@@ -56,6 +56,15 @@ public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 		filterInvalid(systemTypes);
 		filterInvalid(managerTypes);
 		
+		if (mappedComponentTypes.size() == 0 
+			&& annotation.getActualExpressions("excludes").size() > 0)
+		{
+			annotationNode.addError(
+				"Excludes is only possible with at least 'requires' or 'requiresOne'");
+			
+			return;
+		}
+		
 		new Handler(annotationNode)
 			.handle(type, mappedComponentTypes, systemTypes, managerTypes);
 	}

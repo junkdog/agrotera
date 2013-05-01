@@ -42,6 +42,15 @@ public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
 		List<Object> systemTypes = annotation.getActualExpressions("systems");
 		List<Object> managerTypes = annotation.getActualExpressions("managers");
 		
+		if (mappedComponentTypes.size() == 0 
+			&& annotation.getActualExpressions("excludes").size() > 0)
+		{
+			annotationNode.addError(
+				"Excludes is only possible with at least 'requires' or 'requiresOne'");
+			
+			return;
+		}
+		
 		new Handler(annotationNode)
 			.handle(type, mappedComponentTypes, systemTypes, managerTypes);
 	}
