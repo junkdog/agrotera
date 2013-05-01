@@ -42,15 +42,11 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 	
 	private void transformConstructor()
 	{
-		boolean hasAll = info.requires.size() > 0;
-		boolean hasOne = info.requiresOne.size() > 0;
-		boolean isEmpty = !hasAll && !hasOne && (info.exclude.size() == 0); 
-
-		if (hasAll)
+		if (info.requires.size() > 0)
 			injectAspectAll();
-		else if (hasOne)
+		else if (info.requiresOne.size() > 0)
 			injectAspectOne();
-		else if (isEmpty)
+		else if (info.exclude.size() == 0)
 			injectAspectEmpty();
 		else
 			System.err.println("Malformed constructor: only contains exclude");
