@@ -34,7 +34,7 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 			aspectIntercepted = true;
 		}
 		
-		if (injectAspect && info.requires.size() > 0) // avoid VoidSystems
+		if (injectAspect)
 			transformConstructor();
 		else
 			mv.visitInsn(opcode);
@@ -42,11 +42,39 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 	
 	private void transformConstructor()
 	{
+		boolean hasAll = info.requires.size() > 0;
+		boolean hasOne = info.requiresOne.size() > 0;
+		boolean isEmpty = !hasAll && !hasOne && (info.exclude.size() == 0); 
+
+		if (hasAll)
+			injectAspectAll();
+		else if (hasOne)
+			injectAspectOne();
+		else if (isEmpty)
+			injectAspectEmpty();
+		else
+			System.err.println("Malformed constructor: only contains exclude");
+	}
+	
+	private void injectAspectAll()
+	{
 		injectAspect(info.requires, INVOKESTATIC, "getAspectForAll");
 		if (info.requiresOne.size() > 0)
 			injectAspect(info.requiresOne, INVOKEVIRTUAL, "one");
 		if (info.exclude.size() > 0)
 			injectAspect(info.exclude, INVOKEVIRTUAL, "exclude");
+	}
+	
+	private void injectAspectOne()
+	{
+		injectAspect(info.requiresOne, INVOKESTATIC, "getAspectForOne");
+		if (info.exclude.size() > 0)
+			injectAspect(info.exclude, INVOKEVIRTUAL, "exclude");
+	}
+	
+	private void injectAspectEmpty()
+	{
+		mv.visitMethodInsn(INVOKESTATIC, ASPECT, "getEmpty", "()Lcom/artemis/Aspect;");
 	}
 
 	private void injectAspect(List<Type> components, int methodInvocation, String methodName)
