@@ -4,11 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationResolver;
+import net.onedaybeard.agrotera.util.ClassFinder;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
@@ -19,7 +18,6 @@ public class ProcessArtemis implements Opcodes
 	public static final String WOVEN_ANNOTATION = "Lnet/onedaybeard/agrotera/internal/WovenByTheHuntress;";
 	
 	private File root;
-	private ClassReader cr;
 	
 	public ProcessArtemis(File root)
 	{
@@ -28,54 +26,34 @@ public class ProcessArtemis implements Opcodes
 	
 	public static void main(String[] args)
     {
-    	ProcessArtemis app = new ProcessArtemis(null);
-    	
     	if (args.length == 0)
     	{
-    		List<File> klazzes = new ArrayList<>();
-    		addFiles(klazzes, new File("."));
-    		
-    		for (File f : klazzes)
+    		for (File f : ClassFinder.find("."))
     		{
-    			app.processClass(f.getAbsolutePath());
+    			processClass(f.getAbsolutePath());
     		}
     	}
     	else
     	{
     		for (String arg : args)
     		{
-    			app.processClass(arg);
+    			// eclipse sends folders along too
+    			if (arg.endsWith(".class")) processClass(arg);
     		}
     	}
     }
 	
 	public void process()
 	{
-		List<File> klazzes = new ArrayList<>();
-		addFiles(klazzes, root);
-		for (File f : klazzes)
+		for (File f : ClassFinder.find(root))
 			processClass(f.getAbsolutePath());
 	}
 	
-	private static void addFiles(List<File> files, File folder)
-	{
-		for (File f : folder.listFiles())
-		{
-			if (f.isFile() && f.getName().endsWith(".class"))
-				files.add(f);
-			else if (f.isDirectory())
-				addFiles(files, f);
-		}
-	}
-
-    private void processClass(String file)
+    private static void processClass(String file)
     {
-    	if (!file.endsWith(".class"))
-    		return;
-    	
     	try (FileInputStream stream = new FileInputStream(file))
     	{
-    		cr = new ClassReader(stream);
+    		ClassReader cr = new ClassReader(stream);
     		ArtemisConfigurationData meta = ArtemisConfigurationResolver.scan(cr);
     		meta.current = Type.getObjectType(cr.getClassName());
     		
