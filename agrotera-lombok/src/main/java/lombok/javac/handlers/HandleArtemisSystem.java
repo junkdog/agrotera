@@ -51,7 +51,7 @@ public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
 
 		public Handler(JavacNode diagnostic)
 		{
-			super(diagnostic, false);
+			super(diagnostic);
 			this.annotationNode = diagnostic;
 		}
 

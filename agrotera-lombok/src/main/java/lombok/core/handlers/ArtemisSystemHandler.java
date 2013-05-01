@@ -1,19 +1,12 @@
 package lombok.core.handlers;
 
-import static lombok.ast.AST.Annotation;
-import static lombok.ast.AST.Arg;
 import static lombok.ast.AST.Assign;
 import static lombok.ast.AST.Call;
 import static lombok.ast.AST.Field;
 import static lombok.ast.AST.FieldDecl;
-import static lombok.ast.AST.MethodDecl;
-import static lombok.ast.AST.Null;
-import static lombok.ast.AST.String;
-import static lombok.ast.AST.This;
 import static lombok.ast.AST.Type;
 import static lombok.core.util.Names.decapitalize;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
@@ -21,18 +14,14 @@ import lombok.ast.Assignment;
 import lombok.ast.FieldDecl;
 import lombok.ast.IMethod;
 import lombok.ast.IType;
-import lombok.ast.MethodDecl;
-import lombok.ast.Statement;
 import lombok.ast.StringLiteral;
 import lombok.core.DiagnosticsReceiver;
 
 @RequiredArgsConstructor
 public abstract class ArtemisSystemHandler<COMPILER_BINDING, TYPE_TYPE extends IType<METHOD_TYPE, ?, ?, ?, ?, ?>, METHOD_TYPE extends IMethod<TYPE_TYPE, ?, ?, ?>>
 {
-	private static final String INITIALIZE_METHOD = "initialize";
-	
+	@SuppressWarnings("unused")
 	private final DiagnosticsReceiver diagnosticsReceiver;
-	private final boolean forceDummyInitializer;
 
 	public void handle(TYPE_TYPE type, List<Object> mappedComponentTypes,
 		List<Object> systemTypes, List<Object> managerTypes)
@@ -52,115 +41,7 @@ public abstract class ArtemisSystemHandler<COMPILER_BINDING, TYPE_TYPE extends I
 			type.editor().injectField(createField(getBinding(type, manager)));
 		}
 		
-//		hookUpInitializeMethod(type, mappedComponentTypes, systemTypes, managerTypes);
 		type.editor().rebuild();
-	}
-	
-	private void hookUpInitializeMethod(TYPE_TYPE type, List<Object> mappedComponentTypes, List<Object> systemTypes,
-		List<Object> managerTypes)
-	{
-		List<Statement<?>> statements = new ArrayList<Statement<?>>();
-		statements.addAll(assignMappers(type, mappedComponentTypes));
-		statements.addAll(assignSystems(type, systemTypes));
-		statements.addAll(assignManagers(type, managerTypes));
-
-		boolean initializeMethodExists = type.hasMethod(INITIALIZE_METHOD); 
-		if (initializeMethodExists && !forceDummyInitializer)
-			prependInitializeBody(type, statements);
-		else if (initializeMethodExists && forceDummyInitializer)
-			rewriteInitializeSignatureWarning(type, statements);
-		
-		if (!initializeMethodExists || forceDummyInitializer)
-		{
-			MethodDecl method = MethodDecl(Type("void"), INITIALIZE_METHOD).makeProtected()
-				.withAnnotation(Annotation(Type(Override.class)));
-			method.withStatements(statements);
-			type.editor().injectMethod(method);
-		}
-	}
-	
-	
-	private void rewriteInitializeSignatureWarning(TYPE_TYPE type, List<Statement<?>> statements)
-	{
-		diagnosticsReceiver.addWarning("Can't prepend to initialize() with EJC yet...");
-		type.editor().removeMethod(getMethod(type, INITIALIZE_METHOD, false));
-	}
-
-	private void rewriteInitializeSignature(TYPE_TYPE type, List<Statement<?>> statements)
-	{
-		METHOD_TYPE method = getMethod(type, INITIALIZE_METHOD, false);
-		
-		method.editor().replaceArguments(Arg(Type("java.lang.Object"), "dummy"));
-		method.editor().makePublic();
-		
-		method.editor().rebuild();
-		type.editor().rebuild();
-		
-		statements.add(Call(This(), INITIALIZE_METHOD).withArgument(Null()));
-	}
-	
-	private METHOD_TYPE getMethod(TYPE_TYPE owner, String name, boolean hasArguments)
-	{
-		for (METHOD_TYPE method : owner.methods())
-		{
-			if (method.name().equals(name) && method.hasArguments() == hasArguments)
-				return method;
-		}
-		System.out.println("method not found: " + name);
-		return null;
-	}
-	
-	private void prependInitializeBody(TYPE_TYPE type, List<Statement<?>> prepended)
-	{
-		METHOD_TYPE method = getMethod(type, INITIALIZE_METHOD, false);
-		List<Statement<?>> existingBody = new ArrayList<Statement<?>>();
-		existingBody.addAll(prepended);
-		if (!forceDummyInitializer)
-			existingBody.addAll(method.statements());
-		method.editor().replaceBody(existingBody);
-		method.editor().rebuild();
-	}
-
-	private List<Statement<?>> assignSystems(TYPE_TYPE type, List<Object> systemTypes)
-	{
-		List<Statement<?>> statements = new ArrayList<Statement<?>>();
-		for (Object system : systemTypes)
-		{
-			COMPILER_BINDING binding = getBinding(type, system);
-			String fieldName = toFieldName(binding);
-			StringLiteral qualifiedName = String(toQualifiedName(binding));
-			
-			statements.add(assignField(fieldName, "getSystem", qualifiedName));
-		}
-		return statements;
-	}
-	
-	private List<Statement<?>> assignManagers(TYPE_TYPE type, List<Object> managerTypes)
-	{
-		List<Statement<?>> statements = new ArrayList<Statement<?>>();
-		for (Object system : managerTypes)
-		{
-			COMPILER_BINDING binding = getBinding(type, system);
-			String fieldName = toFieldName(binding);
-			StringLiteral qualifiedName = String(toQualifiedName(binding));
-			
-			statements.add(assignField(fieldName, "getManager", qualifiedName));
-		}
-		return statements;
-	}
-
-	private List<Statement<?>> assignMappers(TYPE_TYPE type, List<Object> mappedComponentTypes)
-	{
-		List<Statement<?>> statements = new ArrayList<Statement<?>>();
-		for (Object component : mappedComponentTypes)
-		{
-			COMPILER_BINDING binding = getBinding(type, component);
-			String fieldName = toFieldName(binding) +  "Mapper";
-			StringLiteral qualifiedName = String(toQualifiedName(binding));
-			
-			statements.add(assignField(fieldName, "getMapper", qualifiedName));
-		}
-		return statements;
 	}
 	
 	protected Assignment assignField(String fieldName, String invokeMethod,

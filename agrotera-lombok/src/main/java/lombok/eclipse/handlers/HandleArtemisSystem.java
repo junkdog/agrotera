@@ -72,7 +72,7 @@ public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 	{
 		public Handler(DiagnosticsReceiver diagnostic)
 		{
-			super(diagnostic, true);
+			super(diagnostic);
 		}
 
 		@Override
