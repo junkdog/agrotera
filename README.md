@@ -127,7 +127,7 @@ Conceived as a post-compile step run via the agrotera-maven-plugin
 or with an eclipse builder.
 
 ## Missing/planned features
-- Add missing oneOf aspect call.
+- Correctly handle aspect for systems with no components, which aren't VoidEntitySystems.
 - Add `@ArtemisManager`: inject fields, only trigger on requested entities.
 
 
