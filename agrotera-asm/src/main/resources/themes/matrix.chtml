@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<head>
+	<title>{$project}: System-Component matrix</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script>
+		(function ($) {
+				$.fn.rotateTableCellContent = function (options) {
+				/*
+				Version 1.0
+				7/2011
+				Written by David Votrubec (davidjs.com) and
+				Michal Tehnik (@Mictech) for ST-Software.com
+				*/
+				
+				var cssClass = ((options) ? options.className : false) || "vertical";
+				
+				var cellsToRotate = $('.' + cssClass, this);
+				
+				var betterCells = [];
+				cellsToRotate.each(function () {
+					var cell = $(this)
+					, newText = cell.text()
+					, height = cell.height()
+					, width = cell.width()
+					, newDiv = $('<div>', { height: width, width: height })
+					, newInnerDiv = $('<div>', { text: newText, 'class': 'rotated' });
+				
+					newInnerDiv.css('-webkit-transform-origin', (width / 2) + 'px ' + (width / 2) + 'px');
+					newInnerDiv.css('-moz-transform-origin', (width / 2) + 'px ' + (width / 2) + 'px');
+					newDiv.append(newInnerDiv);
+					
+					betterCells.push(newDiv);
+				});
+			
+				cellsToRotate.each(function (i) {
+					$(this).html(betterCells[i]);
+				});
+			};
+		})(jQuery);
+		
+		$(document).ready(function(){
+		    $('.matrix').rotateTableCellContent();
+		});
+	</script>
+	<style type="text/css" title="currentStyle">
+		/* colors: http://colorschemedesigner.com/#2P42zm-vvz9N7 */
+		
+		/* Styles for rotateTableCellContent plugin*/
+		table div.rotated {
+		  -webkit-transform: rotate(270deg);
+		  -moz-transform: rotate(270deg);
+		  writing-mode:tb-rl;
+		  white-space: nowrap;
+		}
+
+		h1 {
+			font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+			font-size: 22px;
+			text-align: center;
+		}
+
+		table {
+			white-space: nowrap;
+			background: none repeat scroll 0 0 #eeeeee;
+			font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+			font-size: 12px;
+			border-bottom: 7px solid #9599ee;
+			border-collapse: collapse;
+			border-top: 7px solid #9599ee;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		tr.systems:hover {
+			background-color: #ffffdd;
+		}
+
+		th {
+			vertical-align: bottom;
+			border-left: 1px solid #c2c5ee;
+			border-right: 1px solid #c2c5ee;
+			color: #003399;
+			font-size: 13px;
+			font-weight: normal;
+		}
+		th.horizontal {
+			text-align: right;
+		}
+		
+		td {
+			border: 1px solid #c2c5ee;
+		}
+		td.referenced {
+			text-alignment: left;
+			color: #003399;
+			font-size: 13px;
+			font-weight: normal;
+		}
+		td.R {
+			background-color: #39c939;
+		}
+		td.A {
+			background-color: #107c10;
+		}
+		td.O {
+			background-color: #fbcc47;
+		}
+		td.X {
+			background-color: #fb4747;
+		}
+	</style>
+	</head>
+	<body>
+		<h1>{$project}: System-Component matrix</h1>
+		<table border="0" class="matrix">
+			<thead>
+				<tr>
+					<th></th>
+					{.loop in $headers as $header}
+					<th class="vertical">{$header}</th>
+					{/loop}
+					<th class="horizontal" style="text-align: center;">Managers</th>
+					<th class="horizontal" style="text-align: center;">Systems</th>
+				</tr>
+			</thead>
+			<tbody>
+				{.loop in $systems as $system}
+				<tr class="systems">
+					<th class="horizontal" style="padding-right: 5px;">{$system.name}</th>
+					{.loop in $system.component_indices as $component}
+					<td class="{$component.symbol}"></td>
+					{/loop}
+					<td class="referenced">
+						{.loop in $system.ref_managers as $manager}
+						{$manager} 
+						{.onEmpty}{/loop}
+					</td>
+					<td class="referenced">
+						{.loop in $system.ref_systems as $system}
+						{$system} 
+						{.onEmpty}{/loop}
+					</td>
+				</tr>
+				{/loop}
+			<tbody>
+		</table>
+		<table border="0" class="matrix" style="padding: 5px">
+			<tr class="systems">
+				<th class="horizontal" style="padding-right: 10px;">Required</th>
+				<td class="R" style="width: 50px"></td>
+			</tr>
+			<tr class="systems">
+				<th class="horizontal" style="padding-right: 10px;">Match one</th>
+				<td class="A"></td>
+			</tr>
+			<tr class="systems">
+				<th class="horizontal" style="padding-right: 10px;">Optional</th>
+				<td class="O"></td>
+			</tr>
+			<tr class="systems">
+				<th class="horizontal" style="padding-right: 10px;">Excluded</th>
+				<td class="X"></td>
+			</tr>
+		</table>
+	</body>
+</html>
