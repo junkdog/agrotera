@@ -12,7 +12,7 @@ class ProfileConstructorWeaver extends AdviceAdapter implements Opcodes
 	
 	ProfileConstructorWeaver(MethodVisitor methodVisitor, ArtemisConfigurationData info, int access, String name, String desc)
 	{
-		super(Opcodes.ASM4, methodVisitor, access, name, desc);
+		super(ASM4, methodVisitor, access, name, desc);
 		this.info = info;
 	}
 
@@ -33,6 +33,6 @@ class ProfileConstructorWeaver extends AdviceAdapter implements Opcodes
 		mv.visitFieldInsn(GETFIELD, systemName, "$profiler", profileDescriptor);
 		mv.visitVarInsn(ALOAD, 0);
 		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
-		mv.visitMethodInsn(INVOKEVIRTUAL, profiler, "setTag", "(Ljava/lang/Class;)V");
+		mv.visitMethodInsn(INVOKEVIRTUAL, profiler, "setTag", "(Ljava/lang/Object;)V");
 	}
 }

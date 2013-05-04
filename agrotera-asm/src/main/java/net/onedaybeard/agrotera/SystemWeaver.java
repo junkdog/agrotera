@@ -58,7 +58,7 @@ class SystemWeaver implements Opcodes, ClassWeaver
 
 	private void injectProfiler(ArtemisConfigurationData meta)
 	{
-		FieldVisitor fv = cw.visitField(ACC_PRIVATE, "$profiler", meta.profilerClass.getDescriptor(), null, null);
+		FieldVisitor fv = cw.visitField(ACC_PRIVATE|ACC_FINAL, "$profiler", meta.profilerClass.getDescriptor(), null, null);
 		fv.visitEnd();
 
 		if (!meta.foundBegin)
