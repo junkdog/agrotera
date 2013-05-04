@@ -20,7 +20,7 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 	
 	ConstructorWeaver(MethodVisitor methodVisitor, ArtemisConfigurationData info)
 	{
-		super(Opcodes.ASM4, methodVisitor);
+		super(ASM4, methodVisitor);
 		this.info = info;
 	}
 	
@@ -34,10 +34,17 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 			aspectIntercepted = true;
 		}
 		
-		if (injectAspect && ((info.requires.size() + info.requiresOne.size()) > 0))
+		if (injectAspect)
 			transformConstructor();
 		else
 			mv.visitInsn(opcode);
+	}
+	
+	@Override
+	public void visitMethodInsn(int opcode, String owner, String name, String desc)
+	{
+		super.visitMethodInsn(opcode, owner, name, desc);
+		aspectIntercepted = true; // must have called super() at this point
 	}
 	
 	private void transformConstructor()
@@ -49,7 +56,7 @@ class ConstructorWeaver extends MethodVisitor implements Opcodes
 		else if (info.exclude.size() == 0)
 			injectAspectEmpty();
 		else
-			System.err.println("Malformed constructor: only contains exclude");
+			System.err.println("Malformed constructor: only specifies exclude");
 	}
 	
 	private void injectAspectAll()
