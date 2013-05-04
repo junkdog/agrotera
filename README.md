@@ -64,7 +64,7 @@ public class TestSystem extends IntervalEntityProcessingSystem
 	systems=VelocitySystem.class)
 public class TestSystem extends IntervalEntityProcessingSystem
 {
-	private Profiler $profiler;
+	private final Profiler $profiler;
 	private ComponentMapper<Renderable> renderableMapper;
 	private ComponentMapper<Velocity> velocityMapper;
 	private VelocitySystem velocitySystem;
@@ -102,7 +102,7 @@ public class TestSystem extends IntervalEntityProcessingSystem
 	}
 
 	@Override
-	protected void process(Entity entity)
+	protected void process(Entity e)
 	{
 		// process system
 	}
@@ -127,9 +127,9 @@ Conceived as a post-compile step run via the agrotera-maven-plugin
 or with an eclipse builder.
 
 ## Missing/planned features
-- `0.1.0` Correctly handle aspect for systems with no components, which aren't VoidEntitySystems.
 - `0.2.0` Add `@ArtemisManager`: inject fields, only trigger on requested entities.
 - `0.2.0` Sexify system-component matrix and enable running it outside a maven build.
+- `0.3.0` Simplify eclipse project setup.
 
 
 ## Artemis Maven dependency / Shameless self-promotion
