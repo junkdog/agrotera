@@ -22,7 +22,7 @@
 	<scm>
 		<url>https://github.com/junkdog/agrotera/</url>
 		<connection>scm:git:git@github.com:junkdog/agrotera.git</connection>
-		<developerConnection>scm:git:git@github.com:junkdog/agrotera-odb.git</developerConnection>
+		<developerConnection>scm:git:git@github.com:junkdog/agrotera.git</developerConnection>
 	</scm>
 	
 	<developers>
