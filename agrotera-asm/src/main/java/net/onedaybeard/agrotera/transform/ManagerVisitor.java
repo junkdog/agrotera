@@ -19,7 +19,7 @@ public class ManagerVisitor extends ClassVisitor implements Opcodes
 	
 	public ManagerVisitor(ClassVisitor cv, String className, ArtemisConfigurationData info)
 	{
-		super(Opcodes.ASM4, cv);
+		super(ASM4, cv);
 		this.className = className;
 		this.info = info;
 	}

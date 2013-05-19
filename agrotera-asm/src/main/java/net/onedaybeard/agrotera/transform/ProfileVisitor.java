@@ -12,7 +12,7 @@ public class ProfileVisitor extends ClassVisitor implements Opcodes
 	
 	public ProfileVisitor(ClassVisitor cv, ArtemisConfigurationData info)
 	{
-		super(Opcodes.ASM4, cv);
+		super(ASM4, cv);
 		this.info = info;
 	}
 	

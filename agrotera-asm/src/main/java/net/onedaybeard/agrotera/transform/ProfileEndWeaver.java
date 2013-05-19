@@ -12,7 +12,7 @@ class ProfileEndWeaver extends AdviceAdapter implements Opcodes
 	
 	ProfileEndWeaver(MethodVisitor methodVisitor, ArtemisConfigurationData info, int access, String name, String desc)
 	{
-		super(Opcodes.ASM4, methodVisitor, access, name, desc);
+		super(ASM4, methodVisitor, access, name, desc);
 		this.info = info;
 	}
 
