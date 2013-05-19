@@ -8,6 +8,7 @@ import org.kohsuke.MetaInfServices;
 import lombok.ArtemisSystem;
 import lombok.ast.Annotation;
 import lombok.core.AnnotationValues;
+import lombok.core.handlers.ArtemisSystemHandler;
 import lombok.javac.JavacAnnotationHandler;
 import lombok.javac.JavacNode;
 import lombok.javac.handlers.ast.JavacType;
@@ -15,7 +16,7 @@ import lombok.javac.handlers.ast.JavacType;
 import com.sun.tools.javac.tree.JCTree.JCAnnotation;
 
 @MetaInfServices(JavacAnnotationHandler.class)
-public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
+public class HandleArtemisManager extends JavacAnnotationHandler<ArtemisSystem>
 {
 
 	@Override
@@ -30,19 +31,9 @@ public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
 		}
 		
 		List<Object> mappedComponentTypes = annotation.getActualExpressions("requires");
-		mappedComponentTypes.addAll(annotation.getActualExpressions("requiresOne"));
 		mappedComponentTypes.addAll(annotation.getActualExpressions("optional"));
 		List<Object> systemTypes = annotation.getActualExpressions("systems");
 		List<Object> managerTypes = annotation.getActualExpressions("managers");
-		
-		if (mappedComponentTypes.size() == 0 
-			&& annotation.getActualExpressions("excludes").size() > 0)
-		{
-			annotationNode.addError(
-				"Excludes is only possible with at least 'requires' or 'requiresOne'");
-			
-			return;
-		}
 		
 		new JavacHandler(annotationNode)
 			.handle(type, mappedComponentTypes, systemTypes, managerTypes);

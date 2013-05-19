@@ -1,26 +1,21 @@
 package lombok.eclipse.handlers;
 
 import static lombok.core.util.ErrorMessages.canBeUsedOnClassOnly;
-import static lombok.core.util.Names.decapitalize;
 
 import java.util.Iterator;
 import java.util.List;
 
+import lombok.ArtemisManager;
 import lombok.ArtemisSystem;
 import lombok.ListenerSupport;
 import lombok.core.AnnotationValues;
-import lombok.core.DiagnosticsReceiver;
-import lombok.core.handlers.AbstractArtemisHandler;
 import lombok.eclipse.DeferUntilBuildFieldsAndMethods;
 import lombok.eclipse.EclipseAnnotationHandler;
 import lombok.eclipse.EclipseNode;
-import lombok.eclipse.handlers.ast.EclipseMethod;
 import lombok.eclipse.handlers.ast.EclipseType;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.ClassLiteralAccess;
-import org.eclipse.jdt.internal.compiler.ast.TypeReference;
-import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 import org.kohsuke.MetaInfServices;
 
 /**
@@ -29,13 +24,13 @@ import org.kohsuke.MetaInfServices;
 @DeferUntilBuildFieldsAndMethods
 @MetaInfServices(EclipseAnnotationHandler.class)
 //@DeferUntilPostDiet
-public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
+public class HandleArtemisManager extends EclipseAnnotationHandler<ArtemisManager>
 {
 	@Override
-	public void handle(final AnnotationValues<ArtemisSystem> annotation, final Annotation source, final EclipseNode annotationNode) {
+	public void handle(final AnnotationValues<ArtemisManager> annotation, final Annotation source, final EclipseNode annotationNode) {
 		EclipseType type = EclipseType.typeOf(annotationNode, source);
 		if (type.isAnnotation() || type.isInterface()) {
-			annotationNode.addError(canBeUsedOnClassOnly(ArtemisSystem.class));
+			annotationNode.addError(canBeUsedOnClassOnly(ArtemisManager.class));
 			return;
 		}
 		
@@ -47,7 +42,6 @@ public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 		}
 		
 		List<Object> mappedComponentTypes = annotation.getActualExpressions("requires");
-		mappedComponentTypes.addAll(annotation.getActualExpressions("requiresOne"));
 		mappedComponentTypes.addAll(annotation.getActualExpressions("optional"));
 		List<Object> systemTypes = annotation.getActualExpressions("systems");
 		List<Object> managerTypes = annotation.getActualExpressions("managers");
@@ -55,15 +49,6 @@ public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 		filterInvalid(mappedComponentTypes);
 		filterInvalid(systemTypes);
 		filterInvalid(managerTypes);
-		
-		if (mappedComponentTypes.size() == 0 
-			&& annotation.getActualExpressions("excludes").size() > 0)
-		{
-			annotationNode.addError(
-				"Excludes is only possible with at least 'requires' or 'requiresOne'");
-			
-			return;
-		}
 		
 		new EclipseHandler(annotationNode)
 			.handle(type, mappedComponentTypes, systemTypes, managerTypes);
