@@ -1,7 +1,6 @@
 package lombok.eclipse.handlers;
 
 import static lombok.core.util.ErrorMessages.canBeUsedOnClassOnly;
-import static lombok.core.util.Names.decapitalize;
 
 import java.util.Iterator;
 import java.util.List;
@@ -9,18 +8,13 @@ import java.util.List;
 import lombok.ArtemisSystem;
 import lombok.ListenerSupport;
 import lombok.core.AnnotationValues;
-import lombok.core.DiagnosticsReceiver;
-import lombok.core.handlers.AbstractArtemisHandler;
 import lombok.eclipse.DeferUntilBuildFieldsAndMethods;
 import lombok.eclipse.EclipseAnnotationHandler;
 import lombok.eclipse.EclipseNode;
-import lombok.eclipse.handlers.ast.EclipseMethod;
 import lombok.eclipse.handlers.ast.EclipseType;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.ClassLiteralAccess;
-import org.eclipse.jdt.internal.compiler.ast.TypeReference;
-import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 import org.kohsuke.MetaInfServices;
 
 /**
@@ -65,8 +59,8 @@ public class HandleArtemisSystem extends EclipseAnnotationHandler<ArtemisSystem>
 			return;
 		}
 		
-		new EclipseHandler(annotationNode)
-			.handle(type, mappedComponentTypes, systemTypes, managerTypes);
+		new EclipseHandler().handle(
+			type, mappedComponentTypes, systemTypes, managerTypes);
 	}
 	
 	private static void filterInvalid(List<Object> types)

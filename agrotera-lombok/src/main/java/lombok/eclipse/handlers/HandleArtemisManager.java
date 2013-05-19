@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import lombok.ArtemisManager;
-import lombok.ArtemisSystem;
 import lombok.ListenerSupport;
 import lombok.core.AnnotationValues;
 import lombok.eclipse.DeferUntilBuildFieldsAndMethods;
@@ -50,8 +49,8 @@ public class HandleArtemisManager extends EclipseAnnotationHandler<ArtemisManage
 		filterInvalid(systemTypes);
 		filterInvalid(managerTypes);
 		
-		new EclipseHandler(annotationNode)
-			.handle(type, mappedComponentTypes, systemTypes, managerTypes);
+		new EclipseHandler().handle(
+			type, mappedComponentTypes, systemTypes, managerTypes);
 	}
 	
 	private static void filterInvalid(List<Object> types)

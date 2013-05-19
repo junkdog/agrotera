@@ -8,7 +8,6 @@ import org.kohsuke.MetaInfServices;
 import lombok.ArtemisSystem;
 import lombok.ast.Annotation;
 import lombok.core.AnnotationValues;
-import lombok.core.handlers.ArtemisSystemHandler;
 import lombok.javac.JavacAnnotationHandler;
 import lombok.javac.JavacNode;
 import lombok.javac.handlers.ast.JavacType;

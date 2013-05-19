@@ -8,17 +8,12 @@ import static lombok.core.util.Names.decapitalize;
 
 import java.util.List;
 
-import lombok.RequiredArgsConstructor;
 import lombok.ast.FieldDecl;
 import lombok.ast.IMethod;
 import lombok.ast.IType;
-import lombok.core.DiagnosticsReceiver;
 
-@RequiredArgsConstructor
 public abstract class AbstractArtemisHandler<COMPILER_BINDING, TYPE_TYPE extends IType<METHOD_TYPE,?,?,?,?,?>, METHOD_TYPE extends IMethod<TYPE_TYPE,?,?,?>>
 {
-	private final DiagnosticsReceiver diagnosticsReceiver;
-	
 	public void handle(TYPE_TYPE type, List<Object> mappedComponentTypes, List<Object> systemTypes, List<Object> managerTypes)
 	{
 		for (Object component : mappedComponentTypes)

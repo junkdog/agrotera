@@ -17,7 +17,6 @@ class JavacHandler extends AbstractArtemisHandler<TypeSymbol,JavacType,JavacMeth
 
 	public JavacHandler(JavacNode diagnostic)
 	{
-		super(diagnostic);
 		this.annotationNode = diagnostic;
 	}
 
