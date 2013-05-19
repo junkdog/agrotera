@@ -21,7 +21,7 @@ class InitializeWeaver extends MethodVisitor implements Opcodes
 	
 	InitializeWeaver(MethodVisitor methodVisitor, String className, ArtemisConfigurationData info)
 	{
-		super(Opcodes.ASM4, methodVisitor);
+		super(ASM4, methodVisitor);
 		this.className = className;
 		this.info = info;
 	}
@@ -34,17 +34,19 @@ class InitializeWeaver extends MethodVisitor implements Opcodes
 			injectMapper(component);
 		for (Type component : info.optional)
 			injectMapper(component);
+		if (info.isManagerAnnotation) for (Type component : info.exclude)
+			injectMapper(component);
 		for (Type manager : info.managers)
 			injectWordly(manager, CLASS_OF_MANAGER_TYPE);
 		for (Type system : info.systems)
 			injectWordly(system, CLASS_OF_SYSTEM_TYPE);
 	}
 	
-	@Override
-	public void visitMaxs(int maxStack, int maxLocals)
-	{
-		mv.visitMaxs(maxStack + 3, maxLocals + 1);
-	}
+//	@Override
+//	public void visitMaxs(int maxStack, int maxLocals)
+//	{
+//		mv.visitMaxs(maxStack + 3, maxLocals + 1);
+//	}
 
 	private void injectMapper(Type component)
 	{

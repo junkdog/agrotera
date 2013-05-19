@@ -57,11 +57,18 @@ public class ProcessArtemis implements Opcodes
     		ArtemisConfigurationData meta = ArtemisConfigurationResolver.scan(cr);
     		meta.current = Type.getObjectType(cr.getClassName());
     		
-    		if (!meta.isPreviouslyProcessed &&
-    			(meta.isSystemAnnotation || meta.profilingEnabled))
+    		if (meta.isPreviouslyProcessed)
+    			return;
+    		
+    		if (meta.isSystemAnnotation || meta.profilingEnabled)
     		{
 	    		ClassWeaver weaver = new SystemWeaver(cr, meta);
 	    		weaver.process(file);
+    		}
+    		else if (meta.isManagerAnnotation)
+    		{
+    			ClassWeaver weaver = new ManagerWeaver(cr, meta);
+    			weaver.process(file);
     		}
     	}
 		catch (FileNotFoundException e)

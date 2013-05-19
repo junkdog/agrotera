@@ -16,9 +16,12 @@ final class ArtemisAnnotationReader extends AnnotationVisitor
 		this.annotationField = name;
 		this.info = info;
 		
-		info.isSystemAnnotation = true;
+		if (ArtemisMetaScanner.SYSTEM_ANNOTATION.equals(name))
+			info.isSystemAnnotation = true;
+		else if (ArtemisMetaScanner.MANAGER_ANNOTATION.equals(name))
+			info.isManagerAnnotation = true;
 	}
-
+	
 	@Override
 	public void visit(String ignore, Object value)
 	{

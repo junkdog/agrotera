@@ -10,7 +10,8 @@ import org.objectweb.asm.Opcodes;
 
 class ArtemisMetaScanner extends ClassVisitor
 {
-	private static final String SYSTEM_ANNOTATION = "Llombok/ArtemisSystem;";
+	static final String SYSTEM_ANNOTATION = "Llombok/ArtemisSystem;";
+	static final String MANAGER_ANNOTATION = "Llombok/ArtemisManager;";
 	private static final String PROFILER_ANNOTATION = "Llombok/Profile;";
 	private ArtemisConfigurationData info;
 
@@ -33,6 +34,8 @@ class ArtemisMetaScanner extends ClassVisitor
 			return new ArtemisAnnotationReader(desc, info);
 		else if (PROFILER_ANNOTATION.equals(desc))
 			return new ProfileAnnotationReader(desc, info);
+		else if (MANAGER_ANNOTATION.equals(desc))
+			return new ArtemisAnnotationReader(desc, info);
 		else if (WOVEN_ANNOTATION.equals(desc))
 			info.isPreviouslyProcessed = true;
 			
