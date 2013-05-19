@@ -22,9 +22,9 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
 - [Preparing Eclipse IDE](http://github.com/junkdog/agrotera/wiki/Eclipse-IDE-Installation): 
   Add lombok-pg and agrotera-lombok to `eclipse.ini`.
 - [Eclipse project setup](http://github.com/junkdog/agrotera/wiki/Eclipse-Project-Setup):
-  Add lombok-pg to classpath and `agrotera-asm` as a project builder.
+  Add lombok-pg to classpath and `agrotera-asm` as a project builder. _Not necessary_ when using Eclipse+Maven.
 - [Maven project setup](http://github.com/junkdog/agrotera/wiki/Maven-Project-Setup):
-  Configure `agrotera-maven-plugin`.
+  Configure `agrotera-maven-plugin`. Also applies to Eclipse+Maven.
 
 
 ## Minimal example
