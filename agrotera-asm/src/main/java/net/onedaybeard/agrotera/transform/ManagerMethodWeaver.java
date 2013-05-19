@@ -31,9 +31,9 @@ class ManagerMethodWeaver extends MethodVisitor implements Opcodes
 		mv.visitFrame(F_NEW, 2, new Object[] {className, ENTITY}, 0, new Object[]{});
 		
 		for (Type component : info.requires)
-			injectIfCheck(component, IFEQ, exitLabel);
-		for (Type component : info.exclude)
 			injectIfCheck(component, IFNE, exitLabel);
+		for (Type component : info.exclude)
+			injectIfCheck(component, IFEQ, exitLabel);
 		
 		mv.visitInsn(RETURN);
 		mv.visitLabel(exitLabel);
