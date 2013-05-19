@@ -8,11 +8,12 @@ import java.lang.annotation.Target;
 
 import com.artemis.Component;
 import com.artemis.ComponentMapper;
+import com.artemis.EntityManager;
 import com.artemis.EntitySystem;
 import com.artemis.Manager;
 
 /**
- * Configures an artemis {@link EntitySystem} by injecting
+ * Configures an artemis {@link EntityManager} by injecting
  * code during the compilation phase.</p>
  * 
  * Fields for {@link ComponentMapper}s, <code>EntitySystem</code>s and
@@ -28,21 +29,13 @@ import com.artemis.Manager;
 @Documented
 public @interface ArtemisManager
 {
-	/**
-	 * Required systems are matched by the {@link EntitySystem}'s
-	 * aspect. 
-	 */
 	Class<? extends Component>[] requires() default {};
 	
 	/**
-	 * Only mappers are created for optional components, no bearing on
-	 * the system's aspect.
+	 * Only mappers are created for optional components.
 	 */
 	Class<? extends Component>[] optional() default {};
 	
-	/**
-	 * Only affects the system's aspect, no mapper is created.
-	 */
 	Class<? extends Component>[] excludes() default {};
 	
 	/**
