@@ -24,14 +24,22 @@ import net.onedaybeard.agrotera.MatrixBuilder;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.sonatype.plexus.build.incremental.BuildContext;
 
 @Mojo(name="matrix", defaultPhase=PROCESS_CLASSES)
 public class ComponentMatrix extends AbstractMojo
 {
 	@Parameter(property="project.build.outputDirectory")
 	private File classDirectory;
+
+	@Parameter(property="project.build.sourceDirectory")
+	private File sourceDirectory;
+	
+	@Component
+	private BuildContext context;
 
 	@Parameter(property="project.build.directory") 
 	private File saveDirectory;

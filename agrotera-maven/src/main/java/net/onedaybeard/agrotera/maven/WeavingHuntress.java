@@ -24,8 +24,10 @@ import net.onedaybeard.agrotera.ProcessArtemis;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.sonatype.plexus.build.incremental.BuildContext;
 
 @Mojo(name="agrotera", defaultPhase=PROCESS_CLASSES)
 public class WeavingHuntress extends AbstractMojo
@@ -33,8 +35,17 @@ public class WeavingHuntress extends AbstractMojo
 	@Parameter(property="project.build.outputDirectory")
 	private File outputDirectory;
 
+	@Parameter(property="project.build.sourceDirectory")
+	private File sourceDirectory;
+	
+	@Component
+	private BuildContext context;
+
 	public void execute() throws MojoExecutionException
 	{
+		if (context != null && !context.hasDelta(sourceDirectory))
+			return;
+		
 		ProcessArtemis hunter = new ProcessArtemis(outputDirectory);
 		hunter.process();
 	}
