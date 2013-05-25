@@ -113,15 +113,16 @@ Agrotera consists of two intermingling parts.
 Responsible for declaring the fields, inferred from `@ArtemisSystem`,
 ensuring that the IDE doesn't complain about unresolved fields.
 
-Provides `@ArtemisSystem`, processed alongside [lombok-pg](https://github.com/peichhorn/lombok-pg)
-(you know, that fork of [Project Lombok](http://projectlombok.org/) - because
-I couldn't get type resolution working under vanilla lombok).
+Provides `@Profiler`, `@ArtemisSystem` and `ArtemisManager`, processed alongside
+[lombok-pg](https://github.com/peichhorn/lombok-pg) (you know, that fork of
+[Project Lombok](http://projectlombok.org/) - because I couldn't get type 
+resolution working under vanilla lombok).
 
 
 ### agrotera-asm
-Transforms the classes; wiring up the systems and injecting profiler calls.
-Conceived as a post-compile step run via the agrotera-maven-plugin 
-or with an eclipse builder.
+Transforms the entity systems and managers; wiring up dependencies and
+injecting profiler calls. Conceived as a post-compile step run via the
+agrotera-maven-plugin or with an eclipse builder.
 
 ## Missing/planned/unreleased features
 - `0.2.0` **(done)** Add `@ArtemisManager`: inject fields, only trigger on requested entities.
