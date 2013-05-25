@@ -12,8 +12,6 @@ import net.onedaybeard.agrotera.transform.ManagerVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Label;
-import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 class ManagerWeaver implements Opcodes, ClassWeaver
@@ -45,18 +43,5 @@ class ManagerWeaver implements Opcodes, ClassWeaver
 		cr.accept(cv, ClassReader.EXPAND_FRAMES);
 
 		ClassUtil.writeClass(cw, file);
-	}
-
-	private void injectInitializeStub(ArtemisConfigurationData meta)
-	{
-		MethodVisitor method = cw.visitMethod(ACC_PROTECTED, "initialize", "()V", null, null);
-		method.visitCode();
-		method.visitLabel(new Label());
-		method.visitInsn(RETURN);
-		method.visitEnd();
-
-		cr.accept(cw, 0);
-		cr = new ClassReader(cw.toByteArray());
-		cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 	}
 }
