@@ -123,7 +123,7 @@ Transforms the classes; wiring up the systems and injecting profiler calls.
 Conceived as a post-compile step run via the agrotera-maven-plugin 
 or with an eclipse builder.
 
-## Missing/planned features
+## Missing/planned/unreleased features
 - `0.2.0` **(done)** Add `@ArtemisManager`: inject fields, only trigger on requested entities.
 - `0.2.0` Sexify system-component matrix and enable running it outside a maven build.
 - `0.3.0` Simplify eclipse project setup.
