@@ -3,11 +3,6 @@
 	<pluginExecutions>
 		<pluginExecution>
 			<pluginExecutionFilter>
-			<!-- 
-				<groupId>net.onedaybeard.agrotera</groupId>
-				<artifactId>agrotera-maven-plugin</artifactId>
-				<versionRange>[${agrotera.version},)</versionRange>
-			 -->
 				<goals>
 					<goal>agrotera</goal>
 					<goal>matrix</goal>
