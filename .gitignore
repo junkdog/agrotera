@@ -5,3 +5,4 @@ target/
 *.jad
 *.class
 *.log
+*.kate-swp
