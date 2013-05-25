@@ -8,15 +8,27 @@ import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 
 import org.objectweb.asm.Type;
 
-public final class SystemMapping
+public final class AgroteraMapping
 {
-	private final Type system;
+	public final Type system;
 	public final ComponentReference[] componentIndices;
 	public final String name;
 	public final String[] refSystems;
 	public final String[] refManagers;
+	
+	public final boolean isPackage;
+	
+	public AgroteraMapping(String packageName)
+	{
+		isPackage = true;
+		name = packageName;
+		system = null;
+		refSystems = null;
+		refManagers = null;
+		componentIndices = null;
+	}
 
-	private SystemMapping(ArtemisConfigurationData system, ComponentReference[] componentIndices)
+	private AgroteraMapping(ArtemisConfigurationData system, ComponentReference[] componentIndices)
 	{
 		this.system = system.current;
 		this.componentIndices = componentIndices;
@@ -34,9 +46,11 @@ public final class SystemMapping
 		{
 			refSystems[i] = shortName(system.systems.get(i));
 		}
+		
+		isPackage = false;
 	}
 	
-	public static SystemMapping from(ArtemisConfigurationData system,
+	public static AgroteraMapping from(ArtemisConfigurationData system,
 		Map<Type, Integer> componentIndices)
 	{
 		ComponentReference[] components = new ComponentReference[componentIndices.size()];
@@ -46,7 +60,7 @@ public final class SystemMapping
 		mapComponents(system.optional, ComponentReference.OPTIONAL, componentIndices, components);
 		mapComponents(system.exclude, ComponentReference.EXCLUDED, componentIndices, components);
 		
-		return new SystemMapping(system, components);
+		return new AgroteraMapping(system, components);
 	}
 	
 	public String getName()
@@ -69,11 +83,6 @@ public final class SystemMapping
 	
 	@Override
 	public String toString()
-	{
-		return format();
-	}
-	
-	public String format()
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("[ ");

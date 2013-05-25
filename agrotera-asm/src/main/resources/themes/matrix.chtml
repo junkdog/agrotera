@@ -2,7 +2,7 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <head>
-	<title>{$project}: System-Component matrix</title>
+	<title>{$project}: Component Dependency Matrix</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script>
 		(function ($) {
@@ -115,7 +115,7 @@
 	</style>
 	</head>
 	<body>
-		<h1>{$project}: System-Component matrix</h1>
+		<h1>{$project}: Component Dependency Matrix</h1>
 		<table border="0" class="matrix">
 			<thead>
 				<tr>
@@ -129,6 +129,11 @@
 			</thead>
 			<tbody>
 				{.loop in $systems as $system}
+				{.if ($system.is_package)}
+				<tr class="systems">
+					<th style="padding-left: 5px; font-weight: bold; text-align: left;">{$system.name}</th>
+				</tr>
+				{.else}
 				<tr class="systems">
 					<th class="horizontal" style="padding-right: 5px;">{$system.name}</th>
 					{.loop in $system.component_indices as $component}
@@ -145,8 +150,19 @@
 						{.onEmpty}{/loop}
 					</td>
 				</tr>
+				{/if}
 				{/loop}
 			<tbody>
+			<tfoot>
+				<tr>
+					<th></th>
+					{.loop in $headers as $header}
+					<th class="vertical">{$header}</th>
+					{/loop}
+					<th class="horizontal" style="text-align: center;">Managers</th>
+					<th class="horizontal" style="text-align: center;">Systems</th>
+				</tr>
+			</tfoot>
 		</table>
 		<table border="0" class="matrix" style="padding: 5px">
 			<tr class="systems">
