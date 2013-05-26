@@ -110,7 +110,7 @@ public class TestSystem extends IntervalEntityProcessingSystem
 Agrotera consists of two intermingling parts.
 
 ### agrotera-lombok
-Responsible for declaring the fields, inferred from `@ArtemisSystem`,
+Responsible for declaring the fields, inferred from annotations,
 ensuring that the IDE doesn't complain about unresolved fields.
 
 Provides `@Profiler`, `@ArtemisSystem` and `ArtemisManager`, processed alongside
