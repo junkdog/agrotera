@@ -6,8 +6,8 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework][
 ## Features
 - Compile-time class engineering: no reflection overhead, no extra classes, no additional
   runtime dependencies, works with Android.
-- `@ArtemisSystem` for EntitySystems
-  - Injects `Aspect` in constructor, unless already defined.
+- `@ArtemisSystem` for EntitySystems and `@ArtemisManager` for Managers.
+  - Injects `Aspect` in constructor, unless already defined (only applies to EntitySystems).
   - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
   - Wires up referenced classes in `initialize()`, prepending to the method if already defined.
   - Generate system-component matrices via maven plugin ([example][11]).
