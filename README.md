@@ -10,7 +10,7 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework][
   - Injects `Aspect` in constructor, unless already defined (only applies to EntitySystems).
   - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
   - Wires up referenced classes in `initialize()`, prepending to the method if already defined.
-  - Generate system-component matrices via maven plugin ([example][11]).
+  - Generate *Component Dependency Matrices* via maven plugin ([example][11]).
 - `@Profile` EntitySystems
   - Injects conditional profiler call at start of `begin()` and before any exit point in `end()`.
   - User-specified profiler class - adhering to [ArtemisProfiler][12].
