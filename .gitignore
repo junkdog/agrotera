@@ -6,3 +6,6 @@ target/
 *.class
 *.log
 *.kate-swp
+.project
+.settings
+.classpath
