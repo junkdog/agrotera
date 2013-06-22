@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -115,6 +116,21 @@ public class MatrixBuilder implements Opcodes
 
 		return prefix;
 	}
+	
+	private static String findLongestString(Map<String, List<AgroteraMapping>> mappings)
+	{
+		String longest = "";
+		for (Entry<String, List<AgroteraMapping>> entry : mappings.entrySet())
+		{
+			if (entry.getKey().length() > longest.length()) longest = entry.getKey();
+			for (AgroteraMapping mapping : entry.getValue())
+			{
+				if (mapping.name.length() > longest.length())
+					longest = mapping.name;
+			}
+		}
+		return longest;
+	}
 
 	private static String toPackageName(String className)
 	{
@@ -157,6 +173,8 @@ public class MatrixBuilder implements Opcodes
 			mapping.addAll(entry.getValue());
 		}
 		
+		
+		chunk.set("longestString", findLongestString(mappedSystems));
 		chunk.set("systems", mapping);
 		chunk.set("headers", columns);
 		chunk.set("project", projectName);

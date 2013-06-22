@@ -62,6 +62,7 @@
 		});
 	</script>
 	<script>
+		// source: http://stackoverflow.com/a/11828637/431535
 		$(document).ready(function() {
 			$('td').hover(function() {
 				var t = parseInt($(this).index()) + 1;
@@ -71,6 +72,58 @@
 				var t = parseInt($(this).index()) + 1;
 				$('td:nth-child(' + t + ')').removeClass('highlighted');
 			})
+		});
+	</script>
+	<script type="text/javascript">
+		// source: http://stackoverflow.com/a/1041566/431535
+		function updateTableHeaders() {
+			$("div.divTableWithFloatingHeader").each(function() {
+				var originalHeaderRow = $(".tableFloatingHeaderOriginal", this);
+				var floatingHeaderRow = $(".tableFloatingHeader", this);
+				var offset = $(this).offset();
+				var scrollTop = $(window).scrollTop();
+				if ((scrollTop > offset.top) && (scrollTop < offset.top + $(this).height())) {
+					floatingHeaderRow.css("visibility", "visible");
+					floatingHeaderRow.css("top", Math.min(scrollTop - offset.top, $(this).height() - floatingHeaderRow.height()) + "px");
+
+					// Copy cell widths from original header
+					$("th", floatingHeaderRow).each(function(index) {
+						var cellWidth = $("th", originalHeaderRow).eq(index).css('width');
+						$(this).css('width', cellWidth);
+					});
+
+					// Copy row width from whole table
+					floatingHeaderRow.css("width", $(this).css("width"));
+					originalHeaderRow.css("visibility", "hidden");
+				}
+				else {
+					originalHeaderRow.css("visibility", "visible");
+					floatingHeaderRow.css("visibility", "hidden");
+					floatingHeaderRow.css("top", "0px");
+				}
+			});
+		}
+
+		$(document).ready(function() {
+			$("table.matrix").each(function() {
+				$(this).wrap("<div class=\"divTableWithFloatingHeader\" style=\"position:relative\"></div>");
+
+				var originalHeaderRow = $("tr:first", this)
+				originalHeaderRow.before(originalHeaderRow.clone());
+				var clonedHeaderRow = $("tr:first", this)
+
+				clonedHeaderRow.addClass("tableFloatingHeader");
+				clonedHeaderRow.css("position", "absolute");
+				clonedHeaderRow.css("top", "0px");
+				clonedHeaderRow.css("left", $(this).css("margin-left"));
+				clonedHeaderRow.css("visibility", "hidden");
+
+				originalHeaderRow.addClass("tableFloatingHeaderOriginal");
+		});
+		
+			updateTableHeaders();
+			$(window).scroll(updateTableHeaders);
+			$(window).resize(updateTableHeaders);
 		});
 	</script>
 	<style type="text/css" title="currentStyle">
@@ -89,15 +142,17 @@
 			font-size: 22px;
 			text-align: center;
 		}
+		
+		body {
+			background-color: #e7e7e7;
+		}
 
 		table {
 			white-space: nowrap;
 			background: none repeat scroll 0 0 #eeeeee;
 			font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
 			font-size: 12px;
-			border-bottom: 7px solid #9599ee;
 			border-collapse: collapse;
-			border-top: 7px solid #9599ee;
 			margin-top: 20px;
 			margin-bottom: 20px;
 			margin-left: auto;
@@ -109,6 +164,7 @@
 		}
 
 		th {
+			background: none repeat scroll 0 0 #eeeeee;
 			vertical-align: bottom;
 			border-left: 1px solid #c2c5ee;
 			border-right: 1px solid #c2c5ee;
@@ -149,9 +205,9 @@
 	<body>
 		<h1>{$project}: Component Dependency Matrix</h1>
 		<table border="0" class="matrix">
-			<thead>
+			<thead style="background-color: #eee;">
 				<tr>
-					<th></th>
+					<th style="color: rgba(0,0,0,0)">{$longestString}aaaa</th>
 					{.loop in $headers as $header}
 					<th class="vertical">{$header}</th>
 					{/loop}
@@ -185,16 +241,6 @@
 				{/if}
 				{/loop}
 			<tbody>
-			<tfoot>
-				<tr>
-					<th></th>
-					{.loop in $headers as $header}
-					<th class="vertical">{$header}</th>
-					{/loop}
-					<th class="horizontal" style="text-align: center;">Managers</th>
-					<th class="horizontal" style="text-align: center;">Systems</th>
-				</tr>
-			</tfoot>
 		</table>
 		<table border="0" class="matrix" style="padding: 5px">
 			<tr class="systems">
