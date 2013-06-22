@@ -1,6 +1,6 @@
 # Agrotera
 
-Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](http://gamadu.com/artemis/).
+Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework][01].
 
 
 ## Features
@@ -10,10 +10,10 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework](
   - Injects `Aspect` in constructor, unless already defined.
   - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
   - Wires up referenced classes in `initialize()`, prepending to the method if already defined.
-  - Generate system-component matrices via maven plugin ([example](http://htmlpreview.github.com/?https://raw.github.com/wiki/junkdog/agrotera/html/matrix.html)).
+  - Generate system-component matrices via maven plugin ([example][11]).
 - `@Profile` EntitySystems
   - Injects conditional profiler call at start of `begin()` and before any exit point in `end()`.
-  - User-specified profiler class - adhering to [ArtemisProfiler](https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java).
+  - User-specified profiler class - adhering to [ArtemisProfiler][12].
 
 
 ## Installation
@@ -114,9 +114,8 @@ Responsible for declaring the fields, inferred from annotations,
 ensuring that the IDE doesn't complain about unresolved fields.
 
 Provides `@Profiler`, `@ArtemisSystem` and `ArtemisManager`, processed alongside
-[lombok-pg](https://github.com/peichhorn/lombok-pg) (you know, that fork of
-[Project Lombok](http://projectlombok.org/) - because I couldn't get type 
-resolution working under vanilla lombok).
+[lombok-pg][41] (you know, that fork of [Project Lombok][42] - because I couldn't
+get type resolution working under vanilla lombok).
 
 
 ### agrotera-asm
@@ -124,14 +123,8 @@ Transforms the entity systems and managers; wiring up dependencies and
 injecting profiler calls. Conceived as a post-compile step run via the
 agrotera-maven-plugin or with an eclipse builder.
 
-## Missing/planned/unreleased features
-- `0.2.0` **(done)** Add `@ArtemisManager`: inject fields, only trigger on requested entities.
-- `0.2.0` Sexify system-component matrix and enable running it outside a maven build.
-- `0.3.0` Simplify eclipse project setup.
-
-
 ## Artemis Maven dependency / Shameless self-promotion
-Our [fork](https://github.com/junkdog/artemis-odb) of Artemis:
+Our [fork][61] of Artemis:
 ```xml
 <dependency>
     <groupId>net.onedaybeard.artemis</groupId>
@@ -142,3 +135,10 @@ Our [fork](https://github.com/junkdog/artemis-odb) of Artemis:
 
 ## Contact
 junkdog at onedaybeard dot net - twitter: [@junkdogAP](http://twitter.com/junkdogAP)
+
+ [01]: http://gamadu.com/artemis/
+ [11]: http://htmlpreview.github.com/?https://raw.github.com/wiki/junkdog/agrotera/html/matrix.html
+ [12]: https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java
+ [41]: https://github.com/peichhorn/lombok-pg
+ [42]: http://projectlombok.org/
+ [61]: https://github.com/junkdog/artemis-odb
