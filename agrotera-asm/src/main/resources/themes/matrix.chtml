@@ -41,8 +41,20 @@
 		})(jQuery);
 		
 		$(document).ready(function(){
-		    $('.matrix').rotateTableCellContent();
+			$('.matrix').rotateTableCellContent();
 		});
+	</script>
+	<script>
+		$(document).ready($(document).ready(function() {
+			$('td').hover(function() {
+				var t = parseInt($(this).index()) + 1;
+				$('td:nth-child(' + t + ')').addClass('highlighted');
+			},
+			function() {
+				var t = parseInt($(this).index()) + 1;
+				$('td:nth-child(' + t + ')').removeClass('highlighted');
+			})
+		}));
 	</script>
 	<style type="text/css" title="currentStyle">
 		/* colors: http://colorschemedesigner.com/#2P42zm-vvz9N7 */
@@ -75,7 +87,7 @@
 			margin-right: auto;
 		}
 		
-		tr.systems:hover {
+		tr.systems:hover, .highlighted  {
 			background-color: #ffffdd;
 		}
 
@@ -90,15 +102,14 @@
 		th.horizontal {
 			text-align: right;
 		}
-		
-		td {
-			border: 1px solid #c2c5ee;
-		}
-		td.referenced {
-			text-alignment: left;
+		th.referenced {
+			text-align: left;
 			color: #003399;
 			font-size: 13px;
 			font-weight: normal;
+		}
+		td, th.referenced {
+			border: 1px solid #c2c5ee;
 		}
 		td.R {
 			background-color: #39c939;
@@ -139,16 +150,16 @@
 					{.loop in $system.component_indices as $component}
 					<td class="{$component.symbol}"></td>
 					{/loop}
-					<td class="referenced">
+					<th class="referenced">
 						{.loop in $system.ref_managers as $manager}
 						{$manager} 
 						{.onEmpty}{/loop}
-					</td>
-					<td class="referenced">
+					</th>
+					<th class="referenced">
 						{.loop in $system.ref_systems as $system}
 						{$system} 
 						{.onEmpty}{/loop}
-					</td>
+					</th>
 				</tr>
 				{/if}
 				{/loop}
