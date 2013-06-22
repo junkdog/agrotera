@@ -79,6 +79,9 @@
 		</profile>
 		<profile>
 			<id>all</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<modules>
 				<module>agrotera-api</module>
 				<module>agrotera-lombok</module>
