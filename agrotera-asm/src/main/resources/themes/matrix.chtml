@@ -3,6 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <head>
 	<title>{$project}: Component Dependency Matrix</title>
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script>
 		(function ($) {
@@ -45,7 +46,23 @@
 		});
 	</script>
 	<script>
-		$(document).ready($(document).ready(function() {
+		(function ($) {
+			$.fn.doLegend = function (klazz, icon) {
+				$('td[class=' + klazz + ']').each(function() {
+					$(this).html('<i class="' + icon + '"></i>');
+				})
+			}
+		})(jQuery);
+		
+		$(document).ready(function() {
+			$(document).doLegend('R', 'icon-ok');
+			$(document).doLegend('A', 'icon-plus');
+			$(document).doLegend('O', 'icon-asterisk');
+			$(document).doLegend('X', 'icon-remove');
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
 			$('td').hover(function() {
 				var t = parseInt($(this).index()) + 1;
 				$('td:nth-child(' + t + ')').addClass('highlighted');
@@ -54,7 +71,7 @@
 				var t = parseInt($(this).index()) + 1;
 				$('td:nth-child(' + t + ')').removeClass('highlighted');
 			})
-		}));
+		});
 	</script>
 	<style type="text/css" title="currentStyle">
 		/* colors: http://colorschemedesigner.com/#2P42zm-vvz9N7 */
@@ -112,16 +129,20 @@
 			border: 1px solid #c2c5ee;
 		}
 		td.R {
-			background-color: #39c939;
+			background-color: rgba(57, 201, 57, 0.5);
+			text-align: center;
 		}
 		td.A {
-			background-color: #107c10;
+			background-color: rgba(16, 124, 16, 0.5);
+			text-align: center;
 		}
 		td.O {
-			background-color: #fbcc47;
+			background-color: rgba(251, 204, 71, 0.5);
+			text-align: center;
 		}
 		td.X {
-			background-color: #fb4747;
+			background-color: rgba(251, 71, 71, 0.5);
+			text-align: center;
 		}
 	</style>
 	</head>
