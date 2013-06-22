@@ -16,11 +16,8 @@ public final class AgroteraMapping
 	public final String[] refSystems;
 	public final String[] refManagers;
 	
-	public final boolean isPackage;
-	
 	public AgroteraMapping(String packageName)
 	{
-		isPackage = true;
 		name = packageName;
 		system = null;
 		refSystems = null;
@@ -46,8 +43,6 @@ public final class AgroteraMapping
 		{
 			refSystems[i] = shortName(system.systems.get(i));
 		}
-		
-		isPackage = false;
 	}
 	
 	public static AgroteraMapping from(ArtemisConfigurationData system,

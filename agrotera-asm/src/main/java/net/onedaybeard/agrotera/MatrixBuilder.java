@@ -81,7 +81,7 @@ public class MatrixBuilder implements Opcodes
 	{
 		String common = findCommonPackage(systems);
 		SortedMap<String, List<AgroteraMapping>> map = new TreeMap<>();
-		for (int i = 1, s = systems.size(); s > i; i++)
+		for (int i = 0, s = systems.size(); s > i; i++)
 		{
 			AgroteraMapping system = systems.get(i);
 			String packageName = toPackageName(system.system.getClassName());
