@@ -1,8 +1,10 @@
 # Change Log
 
+ - First entry in _Component Dependency Matrix_ was omitted.
+
 ## Version 0.2.0 - 2013-06-23
  - `@ArtemisManager`, like `@ArtemisSystem` but for Managers.
- - `agrotera:matrix` renders *Component Dependency Matrix* - showing
+ - `agrotera:matrix` renders _Component Dependency Matrix_ - showing
    mappings between systems, managers and components.
  - `@ArtemisManager` handles `Aspect#one`.
  - Less bloat in pom when working with Eclipse + Maven.
