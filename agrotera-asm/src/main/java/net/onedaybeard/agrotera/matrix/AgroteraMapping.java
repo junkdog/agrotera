@@ -16,6 +16,8 @@ public final class AgroteraMapping
 	public final String[] refSystems;
 	public final String[] refManagers;
 	
+	public final boolean isPackage; // referenced by chtml
+	
 	public AgroteraMapping(String packageName)
 	{
 		name = packageName;
@@ -23,6 +25,8 @@ public final class AgroteraMapping
 		refSystems = null;
 		refManagers = null;
 		componentIndices = null;
+		
+		isPackage = true;
 	}
 
 	private AgroteraMapping(ArtemisConfigurationData system, ComponentReference[] componentIndices)
@@ -43,6 +47,8 @@ public final class AgroteraMapping
 		{
 			refSystems[i] = shortName(system.systems.get(i));
 		}
+		
+		isPackage = false;
 	}
 	
 	public static AgroteraMapping from(ArtemisConfigurationData system,
