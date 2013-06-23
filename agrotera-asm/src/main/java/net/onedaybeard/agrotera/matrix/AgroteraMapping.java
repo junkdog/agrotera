@@ -11,6 +11,7 @@ import org.objectweb.asm.Type;
 public final class AgroteraMapping
 {
 	public final Type system;
+	public final boolean isSystem;
 	public final ComponentReference[] componentIndices;
 	public final String name;
 	public final String[] refSystems;
@@ -27,6 +28,7 @@ public final class AgroteraMapping
 		componentIndices = null;
 		
 		isPackage = true;
+		isSystem = false;
 	}
 
 	private AgroteraMapping(ArtemisConfigurationData system, ComponentReference[] componentIndices)
@@ -48,6 +50,7 @@ public final class AgroteraMapping
 			refSystems[i] = shortName(system.systems.get(i));
 		}
 		
+		isSystem = system.isSystemAnnotation;
 		isPackage = false;
 	}
 	

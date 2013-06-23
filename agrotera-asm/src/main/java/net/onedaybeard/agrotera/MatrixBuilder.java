@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -174,7 +173,7 @@ public class MatrixBuilder implements Opcodes
 		}
 		
 		
-		chunk.set("longestString", findLongestString(mappedSystems));
+		chunk.set("longestString", findLongestString(mappedSystems).replaceAll(".", "_") + "______");
 		chunk.set("systems", mapping);
 		chunk.set("headers", columns);
 		chunk.set("project", projectName);
