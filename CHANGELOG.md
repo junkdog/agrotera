@@ -8,5 +8,5 @@
  - Less bloat in pom when working with Eclipse + Maven.
 
 ## Version 0.1.1 - 2013-05-05
- - Initial release: support for `@ArtemisManager` and `@Profiler`.
+ - Initial release: support for `@ArtemisSystem` and `@Profiler`.
  
