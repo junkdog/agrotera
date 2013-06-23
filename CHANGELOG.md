@@ -1,6 +1,8 @@
 # Change Log
 
- - First entry in _Component Dependency Matrix_ was omitted.
+ - Component Dependency Matrix (agrotera:matrix)
+   - First entry system/manager was omitted.
+   - Added icons for systems and managers.
 
 ## Version 0.2.0 - 2013-06-23
  - `@ArtemisManager`, like `@ArtemisSystem` but for Managers.
