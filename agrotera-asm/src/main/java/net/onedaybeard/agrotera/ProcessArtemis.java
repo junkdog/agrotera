@@ -25,23 +25,23 @@ public class ProcessArtemis implements Opcodes
 	}
 	
 	public static void main(String[] args)
-    {
-    	if (args.length == 0)
-    	{
-    		for (File f : ClassFinder.find("."))
-    		{
-    			processClass(f.getAbsolutePath());
-    		}
-    	}
-    	else
-    	{
-    		for (String arg : args)
-    		{
-    			// eclipse sends folders along too
-    			if (arg.endsWith(".class")) processClass(arg);
-    		}
-    	}
-    }
+	{
+		if (args.length == 0)
+		{
+			for (File f : ClassFinder.find("."))
+			{
+				processClass(f.getAbsolutePath());
+			}
+		}
+		else
+		{
+			for (String arg : args)
+			{
+				// eclipse sends folders along too
+				if (arg.endsWith(".class")) processClass(arg);
+			}
+		}
+	}
 	
 	public void process()
 	{
@@ -49,28 +49,28 @@ public class ProcessArtemis implements Opcodes
 			processClass(f.getAbsolutePath());
 	}
 	
-    private static void processClass(String file)
-    {
-    	try (FileInputStream stream = new FileInputStream(file))
-    	{
-    		ClassReader cr = new ClassReader(stream);
-    		ArtemisConfigurationData meta = ArtemisConfigurationResolver.scan(cr);
-    		meta.current = Type.getObjectType(cr.getClassName());
-    		
-    		if (meta.isPreviouslyProcessed)
-    			return;
-    		
-    		if (meta.isSystemAnnotation || meta.profilingEnabled)
-    		{
-	    		ClassWeaver weaver = new SystemWeaver(cr, meta);
-	    		weaver.process(file);
-    		}
-    		else if (meta.isManagerAnnotation)
-    		{
-    			ClassWeaver weaver = new ManagerWeaver(cr, meta);
-    			weaver.process(file);
-    		}
-    	}
+	private static void processClass(String file)
+	{
+		try (FileInputStream stream = new FileInputStream(file))
+		{
+			ClassReader cr = new ClassReader(stream);
+			ArtemisConfigurationData meta = ArtemisConfigurationResolver.scan(cr);
+			meta.current = Type.getObjectType(cr.getClassName());
+			
+			if (meta.isPreviouslyProcessed)
+				return;
+			
+			if (meta.isSystemAnnotation || meta.profilingEnabled)
+			{
+				ClassWeaver weaver = new SystemWeaver(cr, meta);
+				weaver.process(file);
+			}
+			else if (meta.isManagerAnnotation)
+			{
+				ClassWeaver weaver = new ManagerWeaver(cr, meta);
+				weaver.process(file);
+			}
+		}
 		catch (FileNotFoundException e)
 		{
 			System.err.println("not found: " + file);
@@ -79,5 +79,5 @@ public class ProcessArtemis implements Opcodes
 		{
 			e.printStackTrace();
 		}
-    }
+	}
 }
