@@ -113,7 +113,7 @@ Agrotera consists of two intermingling parts.
 Responsible for declaring the fields, inferred from annotations,
 ensuring that the IDE doesn't complain about unresolved fields.
 
-Provides `@Profiler`, `@ArtemisSystem` and `ArtemisManager`, processed alongside
+Provides `@Profiler`, `@ArtemisSystem` and `@ArtemisManager`, processed alongside
 [lombok-pg][41] (you know, that fork of [Project Lombok][42] - because I couldn't
 get type resolution working under vanilla lombok).
 
