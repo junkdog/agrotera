@@ -14,15 +14,18 @@ import com.artemis.Manager;
 
 /**
  * Configures an artemis {@link EntitySystem} by injecting
- * code during the compilation phase.</p>
+ * code during the compilation phase.<p/>
+ * 
+ * The Aspect is automatically passed along in the <code>super()</code> call
+ * if the Aspect argument is <code>null</code><p/>
  * 
  * Fields for {@link ComponentMapper}s, <code>EntitySystem</code>s and
  * <code>Manger</code>s are wired in the <code>initialize</code> method, prior
- * to any existing code in the <code>initialize</code> method is executed.</p>
+ * to any existing code in the <code>initialize</code> method is executed.<p/>
  * 
  * Component mappers are named according to the component type they operate on,
  * suffixed with <code>-Mapper</code>. Systems and managers retain their full
- * type name. All field names are <code>camelCased</code>.</p>
+ * type name. All field names are <code>camelCased</code>.<p/>
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

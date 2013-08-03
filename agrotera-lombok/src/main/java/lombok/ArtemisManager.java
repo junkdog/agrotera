@@ -6,23 +6,27 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.artemis.Aspect;
 import com.artemis.Component;
 import com.artemis.ComponentMapper;
-import com.artemis.EntityManager;
+import com.artemis.EntityObserver;
 import com.artemis.EntitySystem;
 import com.artemis.Manager;
 
 /**
- * Configures an artemis {@link EntityManager} by injecting
- * code during the compilation phase.</p>
+ * Configures an artemis {@link Manager} by injecting code during
+ * the compilation phase.<p/>
+ * 
+ * Simulates {@link Aspect}s by prepending if-checks before any methods defined
+ * in {@link EntityObserver}.<p/>
  * 
  * Fields for {@link ComponentMapper}s, <code>EntitySystem</code>s and
  * <code>Manger</code>s are wired in the <code>initialize</code> method, prior
- * to any existing code in the <code>initialize</code> method is executed.</p>
+ * to any existing code in the <code>initialize</code> method is executed.<p/>
  * 
  * Component mappers are named according to the component type they operate on,
  * suffixed with <code>-Mapper</code>. Systems and managers retain their full
- * type name. All field names are <code>camelCased</code>.</p>
+ * type name. All field names are <code>camelCased</code>.<p/>
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

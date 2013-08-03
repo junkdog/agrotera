@@ -8,6 +8,12 @@ import java.lang.annotation.Target;
 
 import net.onedaybeard.agrotera.ArtemisProfiler;
 
+/**
+ * Profile EntitySystems with user-specified profiler class, implementing ArtemisProfiler.<p/>
+ * 
+ * Injects conditional profiler call at start of <code>begin()</code> and before any exit
+ * point in <code>end()</code>.
+ */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
