@@ -6,14 +6,14 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework][
 ## Features
 - Compile-time class engineering: no reflection overhead, no extra classes, no additional
   runtime dependencies, works with Android.
-- `@ArtemisSystem` for EntitySystems and `@ArtemisManager` for Managers.
+- [@ArtemisSystem][11] for EntitySystems and [@ArtemisManager][12] for Managers.
   - Injects `Aspect` in constructor, unless already defined (only applies to EntitySystems).
   - Declares fields for referenced component mappers, managers and systems (only tested with Eclipse and maven).
   - Wires up referenced classes in `initialize()`, prepending to the method if already defined.
-  - Generate *Component Dependency Matrices* via maven plugin ([example][11]).
-- `@Profile` EntitySystems
+  - Generate *Component Dependency Matrices* via maven plugin ([example][14]).
+- [@Profile][13] EntitySystems
   - Injects conditional profiler call at start of `begin()` and before any exit point in `end()`.
-  - User-specified profiler class - adhering to [ArtemisProfiler][12].
+  - User-specified profiler class - adhering to [ArtemisProfiler][15].
 
 
 ## Installation
@@ -137,8 +137,11 @@ Our [fork][61] of Artemis:
 junkdog at onedaybeard dot net - twitter: [@junkdogAP](http://twitter.com/junkdogAP)
 
  [01]: http://gamadu.com/artemis/
- [11]: http://htmlpreview.github.com/?https://raw.github.com/wiki/junkdog/agrotera/html/matrix.html
- [12]: https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java
+ [11]: https://github.com/junkdog/agrotera/wiki/@ArtemisSystem
+ [12]: https://github.com/junkdog/agrotera/wiki/@ArtemisManager
+ [13]: https://github.com/junkdog/agrotera/wiki/@Profile
+ [14]: http://htmlpreview.github.com/?https://raw.github.com/wiki/junkdog/agrotera/html/matrix.html
+ [15]: https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java
  [41]: https://github.com/peichhorn/lombok-pg
  [42]: http://projectlombok.org/
  [61]: https://github.com/junkdog/artemis-odb
