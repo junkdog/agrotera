@@ -50,8 +50,8 @@ public class ComponentMatrix extends AbstractMojo
 
 	public void execute() throws MojoExecutionException
 	{
-		MatrixBuilder hunter = new MatrixBuilder(name, classDirectory,
+		MatrixBuilder matrix = new MatrixBuilder(name, classDirectory,
 			new File(saveDirectory, "matrix.html"));
-		hunter.process();
+		matrix.process();
 	}
 }

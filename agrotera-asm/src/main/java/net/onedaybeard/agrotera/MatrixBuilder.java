@@ -19,6 +19,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import net.onedaybeard.agrotera.matrix.AgroteraMapping;
+import net.onedaybeard.agrotera.matrix.MatrixStringUtil;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationResolver;
 import net.onedaybeard.agrotera.util.ClassFinder;
@@ -44,12 +45,12 @@ public class MatrixBuilder implements Opcodes
 	}
 	
 	public static void main(String[] args)
-    {
-    	MatrixBuilder app = new MatrixBuilder("Rebel Escape",
-    		new File("/home/junkdog/opt/dev/git/rebelescape/rebelescape/target/classes"),
-    		new File("target/matrix.html"));
-    	app.process();
-    }
+	{
+		MatrixBuilder app = new MatrixBuilder("Rebel Escape",
+			new File("/home/junkdog/opt/dev/git/rebelescape/rebelescape/target/classes"),
+			new File("target/matrix.html"));
+		app.process();
+	}
 	
 	public void process()
 	{
@@ -115,21 +116,6 @@ public class MatrixBuilder implements Opcodes
 
 		return prefix;
 	}
-	
-	private static String findLongestString(Map<String, List<AgroteraMapping>> mappings)
-	{
-		String longest = "";
-		for (Entry<String, List<AgroteraMapping>> entry : mappings.entrySet())
-		{
-			if (entry.getKey().length() > longest.length()) longest = entry.getKey();
-			for (AgroteraMapping mapping : entry.getValue())
-			{
-				if (mapping.name.length() > longest.length())
-					longest = mapping.name;
-			}
-		}
-		return longest;
-	}
 
 	private static String toPackageName(String className)
 	{
@@ -172,8 +158,9 @@ public class MatrixBuilder implements Opcodes
 			mapping.addAll(entry.getValue());
 		}
 		
-		
-		chunk.set("longestString", findLongestString(mappedSystems).replaceAll(".", "_") + "______");
+		chunk.set("longestName", MatrixStringUtil.findLongestClassName(mappedSystems).replaceAll(".", "_") + "______");
+		chunk.set("longestManagers", MatrixStringUtil.findLongestManagerList(mappedSystems).replaceAll(".", "_"));
+		chunk.set("longestSystems", MatrixStringUtil.findLongestSystemList(mappedSystems).replaceAll(".", "_"));
 		chunk.set("systems", mapping);
 		chunk.set("headers", columns);
 		chunk.set("project", projectName);

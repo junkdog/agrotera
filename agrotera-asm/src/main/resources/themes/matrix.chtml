@@ -207,12 +207,12 @@
 		<table border="0" class="matrix">
 			<thead style="background-color: #eee;">
 				<tr>
-					<th style="color: rgba(0,0,0,0)">{$longestString}</th>
+					<th style="color: rgba(0,0,0,0)">{$longestName}</th>
 					{.loop in $headers as $header}
 					<th class="vertical">{$header}</th>
 					{/loop}
-					<th class="horizontal" style="text-align: center;">Managers</th>
-					<th class="horizontal" style="text-align: center;">Systems</th>
+					<th class="horizontal" style="text-align: center;">Managers<span style="color: rgba(0,0,0,0)">{$longestManagers}</span></th>
+					<th class="horizontal" style="text-align: center;">Systems<span style="color: rgba(0,0,0,0)">{$longestSystems}</span></th>
 				</tr>
 			</thead>
 			<tbody>
