@@ -30,7 +30,6 @@ import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.objectweb.asm.Type;
 import org.sonatype.plexus.build.incremental.BuildContext;
 
 @Mojo(name="agrotera", defaultPhase=PROCESS_CLASSES)
