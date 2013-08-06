@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationResolver;
@@ -26,11 +28,12 @@ public class ProcessArtemis implements Opcodes
 	
 	public static void main(String[] args)
 	{
+		List<ArtemisConfigurationData> processed = new ArrayList<>();
 		if (args.length == 0)
 		{
 			for (File f : ClassFinder.find("."))
 			{
-				processClass(f.getAbsolutePath());
+				processClass(f.getAbsolutePath(), processed);
 			}
 		}
 		else
@@ -38,18 +41,21 @@ public class ProcessArtemis implements Opcodes
 			for (String arg : args)
 			{
 				// eclipse sends folders along too
-				if (arg.endsWith(".class")) processClass(arg);
+				if (arg.endsWith(".class")) processClass(arg, processed);
 			}
 		}
 	}
 	
-	public void process()
+	public List<ArtemisConfigurationData> process()
 	{
+		List<ArtemisConfigurationData> processed = new ArrayList<>();
 		for (File f : ClassFinder.find(root))
-			processClass(f.getAbsolutePath());
+			processClass(f.getAbsolutePath(), processed);
+		
+		return processed;
 	}
 	
-	private static void processClass(String file)
+	private static void processClass(String file, List<ArtemisConfigurationData> processed)
 	{
 		try (FileInputStream stream = new FileInputStream(file))
 		{
@@ -64,11 +70,13 @@ public class ProcessArtemis implements Opcodes
 			{
 				ClassWeaver weaver = new SystemWeaver(cr, meta);
 				weaver.process(file);
+				processed.add(meta);
 			}
 			else if (meta.isManagerAnnotation)
 			{
 				ClassWeaver weaver = new ManagerWeaver(cr, meta);
 				weaver.process(file);
+				processed.add(meta);
 			}
 		}
 		catch (FileNotFoundException e)

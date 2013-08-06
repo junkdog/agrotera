@@ -165,8 +165,6 @@ public class MatrixBuilder implements Opcodes
 		chunk.set("headers", columns);
 		chunk.set("project", projectName);
 		
-		System.out.println(mappedSystems);
-
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(output)))
 		{
 			chunk.render(out);
