@@ -46,6 +46,7 @@ public class WeavingHuntress extends AbstractMojo
 
 	public void execute() throws MojoExecutionException
 	{
+		long start = System.currentTimeMillis();
 		if (context != null && !context.hasDelta(sourceDirectory))
 			return;
 		
@@ -54,7 +55,7 @@ public class WeavingHuntress extends AbstractMojo
 		hunter.process();
 		
 		Log log = getLog();
-		log.info(getSummary(processed));
+		log.info(getSummary(processed, start));
 		
 		String formatPattern = "\t%s:%-" + findLongestClassName(processed) + "s  Req:%d/One:%d/Any:%d/Not:%d RefSys:%d/RefMan:%d";
 		for (ArtemisConfigurationData meta : processed)
@@ -85,7 +86,7 @@ public class WeavingHuntress extends AbstractMojo
 		return longest;
 	}
 
-	private CharSequence getSummary(List<ArtemisConfigurationData> processed)
+	private CharSequence getSummary(List<ArtemisConfigurationData> processed, long start)
 	{
 		int systems = 0, managers = 0;
 		for (ArtemisConfigurationData meta : processed)
@@ -94,6 +95,7 @@ public class WeavingHuntress extends AbstractMojo
 			else if (meta.isManagerAnnotation) managers++;
 		}
 		
-		return String.format("Processed %d EntitySystems and %d Managers.", systems, managers);
+		return String.format("Processed %d EntitySystems and %d Managers in %dms.",
+			systems, managers, (System.currentTimeMillis() - start));
 	}
 }
