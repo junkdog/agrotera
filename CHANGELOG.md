@@ -1,5 +1,7 @@
 # Change Log
 
+## Version 0.2.1 - 2013-08-08
+ - Multithreaded class weaving.
  - Component Dependency Matrix (agrotera:matrix)
    - First entry system/manager was omitted.
    - Added icons for systems and managers.
