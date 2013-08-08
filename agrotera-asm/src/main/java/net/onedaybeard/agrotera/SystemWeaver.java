@@ -28,7 +28,6 @@ class SystemWeaver implements Opcodes, ClassWeaver
 	{
 		this.cr = cr;
 		this.meta = meta;
-		this.cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 	}
 
 	@Override
