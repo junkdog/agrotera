@@ -71,7 +71,7 @@ public final class MatrixStringUtil
 		public String getMaxLength(AgroteraMapping mapping, String longest)
 		{
 			return (Arrays.toString(mapping.refSystems).length() > longest.length())
-				?Arrays.toString(mapping.refSystems)
+				? Arrays.toString(mapping.refSystems)
 				: longest;
 		}
 	}

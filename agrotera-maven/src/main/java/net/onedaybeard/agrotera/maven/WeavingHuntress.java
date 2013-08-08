@@ -57,7 +57,7 @@ public class WeavingHuntress extends AbstractMojo
 		Log log = getLog();
 		log.info(getSummary(processed, start));
 		
-		String formatPattern = "\t%s:%-" + findLongestClassName(processed) + "s  Req:%d/One:%d/Any:%d/Not:%d RefSys:%d/RefMan:%d";
+		String formatPattern = "\t%s:%-" + findLongestClassName(processed) + "s  Req=%d One=%d Any=%d Not=%d RefSys=%d RefMan=%d";
 		for (ArtemisConfigurationData meta : processed)
 		{
 			log.info(String.format(formatPattern,
