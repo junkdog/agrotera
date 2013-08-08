@@ -18,20 +18,21 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-class SystemWeaver implements Opcodes, ClassWeaver
+class SystemWeaver extends ClassWeaver implements Opcodes
 {
 	private ArtemisConfigurationData meta;
 	private ClassReader cr;
 	private ClassWriter cw;
 
-	protected SystemWeaver(ClassReader cr, ArtemisConfigurationData meta)
+	protected SystemWeaver(String file, ClassReader cr, ArtemisConfigurationData meta)
 	{
+		super(file);
 		this.cr = cr;
 		this.meta = meta;
 	}
-
+	
 	@Override
-    public void process(String file) throws FileNotFoundException, IOException
+    protected void process(String file) throws FileNotFoundException, IOException
     {
 		cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 		ClassUtil.injectAnnotation(cw, WOVEN_ANNOTATION);

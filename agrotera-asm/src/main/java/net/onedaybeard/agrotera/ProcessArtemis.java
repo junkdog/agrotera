@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationResolver;
@@ -28,12 +31,13 @@ public class ProcessArtemis implements Opcodes
 	
 	public static void main(String[] args)
 	{
+		ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 		List<ArtemisConfigurationData> processed = new ArrayList<>();
 		if (args.length == 0)
 		{
 			for (File f : ClassFinder.find("."))
 			{
-				processClass(f.getAbsolutePath(), processed);
+				processClass(threadPool, f.getAbsolutePath(), processed);
 			}
 		}
 		else
@@ -41,21 +45,38 @@ public class ProcessArtemis implements Opcodes
 			for (String arg : args)
 			{
 				// eclipse sends folders along too
-				if (arg.endsWith(".class")) processClass(arg, processed);
+				if (arg.endsWith(".class")) processClass(threadPool, arg, processed);
 			}
 		}
+		
+		awaitTermination(threadPool);
 	}
 	
 	public List<ArtemisConfigurationData> process()
 	{
+		ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 		List<ArtemisConfigurationData> processed = new ArrayList<>();
 		for (File f : ClassFinder.find(root))
-			processClass(f.getAbsolutePath(), processed);
+			processClass(threadPool, f.getAbsolutePath(), processed);
 		
+		awaitTermination(threadPool);
 		return processed;
 	}
+
+	private static void awaitTermination(ExecutorService threadPool)
+	{
+		threadPool.shutdown();
+		try
+		{
+			threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
-	private static void processClass(String file, List<ArtemisConfigurationData> processed)
+	private static void processClass(ExecutorService threadPool, String file, List<ArtemisConfigurationData> processed)
 	{
 		try (FileInputStream stream = new FileInputStream(file))
 		{
@@ -68,14 +89,12 @@ public class ProcessArtemis implements Opcodes
 			
 			if (meta.isSystemAnnotation || meta.profilingEnabled)
 			{
-				ClassWeaver weaver = new SystemWeaver(cr, meta);
-				weaver.process(file);
+				threadPool.submit(new SystemWeaver(file, cr, meta));
 				processed.add(meta);
 			}
 			else if (meta.isManagerAnnotation)
 			{
-				ClassWeaver weaver = new ManagerWeaver(cr, meta);
-				weaver.process(file);
+				threadPool.submit(new ManagerWeaver(file, cr, meta));
 				processed.add(meta);
 			}
 		}
