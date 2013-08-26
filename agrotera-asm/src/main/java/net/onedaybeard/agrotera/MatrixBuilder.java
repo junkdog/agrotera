@@ -55,6 +55,8 @@ public class MatrixBuilder implements Opcodes
 	public void process()
 	{
 		List<ArtemisConfigurationData> systems = findSystems(root);
+		if (systems.size() == 0)
+			return;
 		SortedSet<Type> componentSet = findComponents(systems);
 		
 		List<AgroteraMapping> systemMappings = new ArrayList<>();
