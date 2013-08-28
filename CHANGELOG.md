@@ -1,5 +1,7 @@
 # Change Log
 
+ - IOOB exception during agrotera:matrix if no systems/managers were processed.
+
 ## Version 0.2.1 - 2013-08-08
  - Multithreaded class weaving.
  - Component Dependency Matrix (agrotera:matrix)
