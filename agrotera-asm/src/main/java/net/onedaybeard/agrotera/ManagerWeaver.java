@@ -28,13 +28,13 @@ class ManagerWeaver extends ClassWeaver implements Opcodes
 	}
 
 	@Override
-    protected void process(String file) throws FileNotFoundException, IOException
-    {
+	protected void process(String file) throws FileNotFoundException, IOException
+	{
 		cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 		ClassUtil.injectAnnotation(cw, WOVEN_ANNOTATION);
 		
 		compileClass(meta, file);
-    }
+	}
 
 	private void compileClass(ArtemisConfigurationData meta, String file)
 	{
