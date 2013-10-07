@@ -129,7 +129,7 @@ Our [fork][61] of Artemis:
 <dependency>
     <groupId>net.onedaybeard.artemis</groupId>
     <artifactId>artemis-odb</artifactId>
-    <version>0.3.4</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
