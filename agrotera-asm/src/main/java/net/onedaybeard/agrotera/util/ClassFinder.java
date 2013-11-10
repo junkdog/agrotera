@@ -18,7 +18,7 @@ public final class ClassFinder
 		if (!root.isDirectory())
 			throw new IllegalAccessError(root + " must be a folder.");
 		
-		List<File> klazzes = new ArrayList<>();
+		List<File> klazzes = new ArrayList<File>();
 		addFiles(klazzes, root);
 			
 		return klazzes;

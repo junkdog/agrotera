@@ -2,11 +2,15 @@ package net.onedaybeard.agrotera.transform;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.util.CheckClassAdapter;
 
 public final class ClassUtil implements Opcodes
 {
@@ -26,18 +30,28 @@ public final class ClassUtil implements Opcodes
 		av.visitEnd();
 	}
 	
+	public static String verifyClass(ClassWriter writer)
+	{
+		StringWriter sw = new StringWriter();
+		PrintWriter printer = new PrintWriter(sw);
+		CheckClassAdapter.verify(new ClassReader(writer.toByteArray()), false, printer);
+		return sw.toString();
+	}
+	
 	public static void writeClass(ClassWriter writer, String file)
 	{
-//		cr.accept(cw, 0);
-//    	PrintWriter printer = new PrintWriter(System.out);
-//    	CheckClassAdapter.verify(new ClassReader(writer.toByteArray()), false, printer);
-		try (FileOutputStream fos = new FileOutputStream(file))
-		{
+		FileOutputStream fos = null;
+		try	{
+			fos = new FileOutputStream(file);
 			fos.write(writer.toByteArray());
-		}
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if (fos != null) try {
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

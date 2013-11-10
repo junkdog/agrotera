@@ -47,7 +47,7 @@ public class ComponentMatrix extends AbstractMojo
 	@Parameter(property="project.name")
 	private String name;
 	
-
+	@Override
 	public void execute() throws MojoExecutionException
 	{
 		MatrixBuilder matrix = new MatrixBuilder(name, classDirectory,

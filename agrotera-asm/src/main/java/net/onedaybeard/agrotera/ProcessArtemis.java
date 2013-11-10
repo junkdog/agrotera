@@ -32,7 +32,7 @@ public class ProcessArtemis implements Opcodes
 	public static void main(String[] args)
 	{
 		ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-		List<ArtemisConfigurationData> processed = new ArrayList<>();
+		List<ArtemisConfigurationData> processed = new ArrayList<ArtemisConfigurationData>();
 		if (args.length == 0)
 		{
 			for (File f : ClassFinder.find("."))
@@ -55,7 +55,7 @@ public class ProcessArtemis implements Opcodes
 	public List<ArtemisConfigurationData> process()
 	{
 		ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-		List<ArtemisConfigurationData> processed = new ArrayList<>();
+		List<ArtemisConfigurationData> processed = new ArrayList<ArtemisConfigurationData>();
 		for (File f : ClassFinder.find(root))
 			processClass(threadPool, f.getAbsolutePath(), processed);
 		
@@ -78,8 +78,11 @@ public class ProcessArtemis implements Opcodes
 	
 	private static void processClass(ExecutorService threadPool, String file, List<ArtemisConfigurationData> processed)
 	{
-		try (FileInputStream stream = new FileInputStream(file))
+		FileInputStream stream = null;
+		try
 		{
+			stream = new FileInputStream(file);
+			
 			ClassReader cr = new ClassReader(stream);
 			ArtemisConfigurationData meta = ArtemisConfigurationResolver.scan(cr);
 			meta.current = Type.getObjectType(cr.getClassName());
@@ -105,6 +108,15 @@ public class ProcessArtemis implements Opcodes
 		catch (IOException e)
 		{
 			e.printStackTrace();
+		}
+		finally
+		{
+			if (stream != null) try {
+				stream.close();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

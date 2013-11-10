@@ -44,6 +44,7 @@ public class WeavingHuntress extends AbstractMojo
 	@Component
 	private BuildContext context;
 
+	@Override
 	public void execute() throws MojoExecutionException
 	{
 		long start = System.currentTimeMillis();
@@ -86,7 +87,7 @@ public class WeavingHuntress extends AbstractMojo
 		return longest;
 	}
 
-	private CharSequence getSummary(List<ArtemisConfigurationData> processed, long start)
+	private static CharSequence getSummary(List<ArtemisConfigurationData> processed, long start)
 	{
 		int systems = 0, managers = 0;
 		for (ArtemisConfigurationData meta : processed)

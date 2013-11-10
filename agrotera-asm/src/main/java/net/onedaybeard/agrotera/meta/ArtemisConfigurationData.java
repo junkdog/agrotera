@@ -14,12 +14,12 @@ import org.objectweb.asm.Type;
 public class ArtemisConfigurationData
 {
 	// artemis configuration annotation
-	public final List<Type> requires = new ArrayList<>();
-	public final List<Type> requiresOne = new ArrayList<>();
-	public final List<Type> optional = new ArrayList<>();
-	public final List<Type> exclude = new ArrayList<>();
-	public final List<Type> systems = new ArrayList<>();
-	public final List<Type> managers = new ArrayList<>();
+	public final List<Type> requires = new ArrayList<Type>();
+	public final List<Type> requiresOne = new ArrayList<Type>();
+	public final List<Type> optional = new ArrayList<Type>();
+	public final List<Type> exclude = new ArrayList<Type>();
+	public final List<Type> systems = new ArrayList<Type>();
+	public final List<Type> managers = new ArrayList<Type>();
 	public boolean isSystemAnnotation;
 	public boolean isManagerAnnotation;
 	

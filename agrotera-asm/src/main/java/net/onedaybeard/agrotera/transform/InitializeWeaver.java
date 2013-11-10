@@ -42,12 +42,6 @@ class InitializeWeaver extends MethodVisitor implements Opcodes
 			injectWordly(system, CLASS_OF_SYSTEM_TYPE);
 	}
 	
-//	@Override
-//	public void visitMaxs(int maxStack, int maxLocals)
-//	{
-//		mv.visitMaxs(maxStack + 3, maxLocals + 1);
-//	}
-
 	private void injectMapper(Type component)
 	{
 		String mapperField = toLowerCamelCase(component) + "Mapper";
