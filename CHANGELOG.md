@@ -1,6 +1,7 @@
 # Change Log
 
  - IOOB exception during agrotera:matrix if no systems/managers were processed.
+ - Java 1.6 support.
 
 ## Version 0.2.1 - 2013-08-08
  - Multithreaded class weaving.
