@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.onedaybeard.agrotera</groupId>
+		<artifactId>agrotera-base</artifactId>
+		<version>0.2.2-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>agrotera-test</artifactId>
+	<packaging>jar</packaging>
+	<name>agrotera-integration-test</name>
+	
+	<properties>
+		<artemis.version>0.4.0</artemis.version>
+		<agrotera.version>${project.version}</agrotera.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.onedaybeard.artemis</groupId>
+			<artifactId>artemis-odb</artifactId>
+			<version>${artemis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.peichhorn</groupId>
+			<artifactId>lombok-pg</artifactId>
+			<version>0.11.3</version>
+			<classifier>runtime</classifier>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.onedaybeard.agrotera</groupId>
+			<artifactId>agrotera-api</artifactId>
+			<version>${agrotera.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.onedaybeard.agrotera</groupId>
+			<artifactId>agrotera-lombok</artifactId>
+			<version>${agrotera.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>net.onedaybeard.agrotera</groupId>
+				<artifactId>agrotera-maven-plugin</artifactId>
+				<version>${agrotera.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>agrotera</goal>
+							<goal>matrix</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

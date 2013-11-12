@@ -87,6 +87,7 @@
 				<module>agrotera-lombok</module>
 				<module>agrotera-asm</module>
 				<module>agrotera-maven</module>
+				<module>agrotera-test</module>
 			</modules>
 		</profile>
 	</profiles>
