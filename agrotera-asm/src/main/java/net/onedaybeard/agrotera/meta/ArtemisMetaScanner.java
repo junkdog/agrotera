@@ -12,6 +12,7 @@ class ArtemisMetaScanner extends ClassVisitor
 {
 	static final String SYSTEM_ANNOTATION = "Llombok/ArtemisSystem;";
 	static final String MANAGER_ANNOTATION = "Llombok/ArtemisManager;";
+	static final String INJECTED_ANNOTATION = "Llombok/ArtemisInjected;";
 	private static final String PROFILER_ANNOTATION = "Llombok/Profile;";
 	private ArtemisConfigurationData info;
 

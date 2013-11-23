@@ -1,6 +1,13 @@
 package net.onedaybeard.agrotera.meta;
 
 
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.MANAGER;
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.POJO;
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.SYSTEM;
+import static net.onedaybeard.agrotera.meta.ArtemisMetaScanner.INJECTED_ANNOTATION;
+import static net.onedaybeard.agrotera.meta.ArtemisMetaScanner.MANAGER_ANNOTATION;
+import static net.onedaybeard.agrotera.meta.ArtemisMetaScanner.SYSTEM_ANNOTATION;
+
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -16,10 +23,12 @@ final class ArtemisAnnotationReader extends AnnotationVisitor
 		this.annotationField = name;
 		this.info = info;
 		
-		if (ArtemisMetaScanner.SYSTEM_ANNOTATION.equals(name))
-			info.isSystemAnnotation = true;
-		else if (ArtemisMetaScanner.MANAGER_ANNOTATION.equals(name))
-			info.isManagerAnnotation = true;
+		if (SYSTEM_ANNOTATION.equals(name))
+			info.annotationType = SYSTEM;
+		else if (MANAGER_ANNOTATION.equals(name))
+			info.annotationType = MANAGER;
+		else if (INJECTED_ANNOTATION.equals(name))
+			info.annotationType = POJO;
 	}
 	
 	@Override

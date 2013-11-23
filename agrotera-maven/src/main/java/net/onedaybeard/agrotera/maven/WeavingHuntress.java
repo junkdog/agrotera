@@ -16,6 +16,8 @@ package net.onedaybeard.agrotera.maven;
  * limitations under the License.
  */
 
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.MANAGER;
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.SYSTEM;
 import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_CLASSES;
 
 import java.io.File;
@@ -62,7 +64,7 @@ public class WeavingHuntress extends AbstractMojo
 		for (ArtemisConfigurationData meta : processed)
 		{
 			log.info(String.format(formatPattern,
-				(meta.isSystemAnnotation || meta.profilingEnabled) ? "S" : "M",
+				(meta.is(SYSTEM) || meta.profilingEnabled) ? "S" : "M",
 				formatClassName(meta.current.getClassName()),
 				meta.requires.size(),
 				meta.requiresOne.size(),
@@ -92,8 +94,8 @@ public class WeavingHuntress extends AbstractMojo
 		int systems = 0, managers = 0;
 		for (ArtemisConfigurationData meta : processed)
 		{
-			if (meta.isSystemAnnotation) systems++;
-			else if (meta.isManagerAnnotation) managers++;
+			if (meta.is(SYSTEM)) systems++;
+			else if (meta.is(MANAGER)) managers++;
 		}
 		
 		return String.format("Processed %d EntitySystems and %d Managers in %dms.",

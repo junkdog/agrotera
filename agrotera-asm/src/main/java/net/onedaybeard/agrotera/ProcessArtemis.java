@@ -1,5 +1,8 @@
 package net.onedaybeard.agrotera;
 
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.MANAGER;
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.SYSTEM;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationResolver;
+import net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType;
 import net.onedaybeard.agrotera.util.ClassFinder;
 
 import org.objectweb.asm.ClassReader;
@@ -90,12 +94,12 @@ public class ProcessArtemis implements Opcodes
 			if (meta.isPreviouslyProcessed)
 				return;
 			
-			if (meta.isSystemAnnotation || meta.profilingEnabled)
+			if (meta.is(SYSTEM) || meta.profilingEnabled)
 			{
 				threadPool.submit(new SystemWeaver(file, cr, meta));
 				processed.add(meta);
 			}
-			else if (meta.isManagerAnnotation)
+			else if (meta.is(MANAGER))
 			{
 				threadPool.submit(new ManagerWeaver(file, cr, meta));
 				processed.add(meta);

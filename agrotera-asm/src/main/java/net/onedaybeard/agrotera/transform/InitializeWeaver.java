@@ -1,6 +1,8 @@
 package net.onedaybeard.agrotera.transform;
 
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.MANAGER;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
+import net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType;
 
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
@@ -36,7 +38,7 @@ class InitializeWeaver extends MethodVisitor implements Opcodes
 			injectMapper(component);
 		for (Type component : info.optional)
 			injectMapper(component);
-		if (info.isManagerAnnotation) for (Type component : info.exclude)
+		if (info.is(MANAGER)) for (Type component : info.exclude)
 			injectMapper(component);
 		for (Type manager : info.managers)
 			injectWordly(manager, CLASS_OF_MANAGER_TYPE);

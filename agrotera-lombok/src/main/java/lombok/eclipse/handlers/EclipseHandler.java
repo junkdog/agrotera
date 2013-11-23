@@ -11,6 +11,11 @@ import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 
 class EclipseHandler extends AbstractArtemisHandler<TypeBinding,EclipseType,EclipseMethod>
 {
+	public EclipseHandler(EclipseType type)
+	{
+		super(type);
+	}
+
 	@Override
 	protected TypeBinding getBinding(EclipseType type, Object classLiteral)
 	{

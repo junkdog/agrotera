@@ -44,7 +44,8 @@ public class HandleArtemisSystem extends JavacAnnotationHandler<ArtemisSystem>
 			return;
 		}
 		
-		new JavacHandler(annotationNode)
-			.handle(type, mappedComponentTypes, systemTypes, managerTypes);
+		new JavacHandler(type, annotationNode)
+				.handle(mappedComponentTypes, systemTypes, managerTypes)
+				.rebuild();
 	}
 }

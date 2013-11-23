@@ -1,11 +1,13 @@
 package net.onedaybeard.agrotera;
 
 import static net.onedaybeard.agrotera.ProcessArtemis.WOVEN_ANNOTATION;
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.SYSTEM;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
+import net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType;
 import net.onedaybeard.agrotera.transform.ClassUtil;
 import net.onedaybeard.agrotera.transform.ProfileVisitor;
 import net.onedaybeard.agrotera.transform.SystemVisitor;
@@ -36,7 +38,7 @@ class SystemWeaver extends ClassWeaver implements Opcodes
 	{
 		cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 		ClassUtil.injectAnnotation(cw, WOVEN_ANNOTATION);
-		if (meta.isSystemAnnotation && !meta.foundInitialize)
+		if (meta.is(SYSTEM) && !meta.foundInitialize)
 			injectInitializeStub(meta);
 		if (meta.profilingEnabled)
 			injectProfiler(meta);
@@ -47,7 +49,7 @@ class SystemWeaver extends ClassWeaver implements Opcodes
 	private void compileClass(ArtemisConfigurationData meta, String file)
 	{
 		ClassVisitor cv = cw;
-		if (meta.isSystemAnnotation)
+		if (meta.is(SYSTEM))
 			cv = new SystemVisitor(cv, cr.getClassName(), meta);
 		if (meta.profilingEnabled)
 			cv = new ProfileVisitor(cv, meta);

@@ -1,7 +1,9 @@
 package lombok.core.handlers;
 
 import static lombok.ast.AST.Annotation;
+import static lombok.ast.AST.Arg;
 import static lombok.ast.AST.FieldDecl;
+import static lombok.ast.AST.MethodDecl;
 import static lombok.ast.AST.String;
 import static lombok.ast.AST.Type;
 import static lombok.core.util.Names.decapitalize;
@@ -14,7 +16,14 @@ import lombok.ast.IType;
 
 public abstract class AbstractArtemisHandler<COMPILER_BINDING, TYPE_TYPE extends IType<METHOD_TYPE,?,?,?,?,?>, METHOD_TYPE extends IMethod<TYPE_TYPE,?,?,?>>
 {
-	public void handle(TYPE_TYPE type, List<Object> mappedComponentTypes, List<Object> systemTypes, List<Object> managerTypes)
+	private final TYPE_TYPE type;
+	
+	public AbstractArtemisHandler(TYPE_TYPE type)
+	{
+		this.type = type;
+	}
+	
+	public AbstractArtemisHandler<COMPILER_BINDING,TYPE_TYPE,METHOD_TYPE> handle(List<Object> mappedComponentTypes, List<Object> systemTypes, List<Object> managerTypes)
 	{
 		for (Object component : mappedComponentTypes)
 			type.editor().injectField(createMapperField(getBinding(type, component)));
@@ -25,7 +34,22 @@ public abstract class AbstractArtemisHandler<COMPILER_BINDING, TYPE_TYPE extends
 		for (Object manager : managerTypes)
 			type.editor().injectField(createField(getBinding(type, manager)));
 		
+		return this;
+	}
+
+	public AbstractArtemisHandler<COMPILER_BINDING,TYPE_TYPE,METHOD_TYPE> rebuild()
+	{
 		type.editor().rebuild();
+		return this;
+	}
+
+	public AbstractArtemisHandler<COMPILER_BINDING,TYPE_TYPE,METHOD_TYPE> injectInitialize()
+	{
+		type.editor().injectMethod(MethodDecl(Type(void.class), "initialize")
+				.withArgument(Arg(Type("com.artemis.World"), "world"))
+				.makePublic());
+		
+		return this;
 	}
 
 	private FieldDecl createField(COMPILER_BINDING type)

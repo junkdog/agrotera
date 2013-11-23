@@ -13,6 +13,8 @@ import org.objectweb.asm.Type;
 @ToString
 public class ArtemisConfigurationData
 {
+	public static enum AnnotationType {SYSTEM, MANAGER, POJO}
+	
 	// artemis configuration annotation
 	public final List<Type> requires = new ArrayList<Type>();
 	public final List<Type> requiresOne = new ArrayList<Type>();
@@ -20,8 +22,7 @@ public class ArtemisConfigurationData
 	public final List<Type> exclude = new ArrayList<Type>();
 	public final List<Type> systems = new ArrayList<Type>();
 	public final List<Type> managers = new ArrayList<Type>();
-	public boolean isSystemAnnotation;
-	public boolean isManagerAnnotation;
+	public AnnotationType annotationType;
 	
 	// method search
 	public boolean foundInitialize;
@@ -38,4 +39,9 @@ public class ArtemisConfigurationData
 	public Type current;
 	
 	ArtemisConfigurationData() {}
+	
+	public boolean is(AnnotationType type)
+	{
+		return annotationType == type;
+	}
 }

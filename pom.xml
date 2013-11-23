@@ -56,12 +56,6 @@
 			</modules>
 		</profile>
 		<profile>
-			<id>test</id>
-			<modules>
-				<module>agrotera-test</module>
-			</modules>
-		</profile>
-		<profile>
 			<id>asm</id>
 			<modules>
 				<module>agrotera-api</module>
@@ -93,6 +87,7 @@
 				<module>agrotera-lombok</module>
 				<module>agrotera-asm</module>
 				<module>agrotera-maven</module>
+				<module>agrotera-test</module>
 			</modules>
 		</profile>
 	</profiles>

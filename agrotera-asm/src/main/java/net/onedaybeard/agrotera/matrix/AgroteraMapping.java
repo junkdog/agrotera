@@ -1,5 +1,7 @@
 package net.onedaybeard.agrotera.matrix;
 
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.SYSTEM;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +52,7 @@ public final class AgroteraMapping
 			refSystems[i] = shortName(system.systems.get(i));
 		}
 		
-		isSystem = system.isSystemAnnotation;
+		isSystem = system.is(SYSTEM);
 		isPackage = false;
 	}
 	

@@ -1,5 +1,7 @@
 package net.onedaybeard.agrotera;
 
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.POJO;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -203,7 +205,7 @@ public class MatrixBuilder implements Opcodes
 			ArtemisConfigurationData meta = ArtemisConfigurationResolver.scan(cr);
 			meta.current = Type.getObjectType(cr.getClassName());
 			
-			if (meta.isSystemAnnotation || meta.isManagerAnnotation)
+			if (meta.annotationType != null && meta.annotationType != POJO)
 				destination.add(meta);
 		}
 		catch (FileNotFoundException e)
