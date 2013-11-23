@@ -44,14 +44,6 @@ public class MatrixBuilder implements Opcodes
 		this.output = output;
 	}
 	
-	public static void main(String[] args)
-	{
-		MatrixBuilder app = new MatrixBuilder("Rebel Escape",
-			new File("/home/junkdog/opt/dev/git/rebelescape/rebelescape/target/classes"),
-			new File("target/matrix.html"));
-		app.process();
-	}
-	
 	public void process()
 	{
 		List<ArtemisConfigurationData> systems = findSystems(root);
