@@ -6,9 +6,9 @@ import com.artemis.Entity;
 import com.artemis.systems.EntityProcessingSystem;
 
 @ArtemisSystem
-public class BasicEntitySystem extends EntityProcessingSystem {
+public class AllSystem extends EntityProcessingSystem {
 
-	public BasicEntitySystem() {
+	public AllSystem() {
 		super(null);
 	}
 

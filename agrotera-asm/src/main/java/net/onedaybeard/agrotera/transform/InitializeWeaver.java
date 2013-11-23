@@ -32,6 +32,8 @@ class InitializeWeaver extends MethodVisitor implements Opcodes
 		mv.visitCode();
 		for (Type component : info.requires)
 			injectMapper(component);
+		for (Type component : info.requiresOne)
+			injectMapper(component);
 		for (Type component : info.optional)
 			injectMapper(component);
 		if (info.isManagerAnnotation) for (Type component : info.exclude)

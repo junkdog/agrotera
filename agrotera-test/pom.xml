@@ -12,7 +12,7 @@
 	<name>agrotera-integration-test</name>
 	
 	<properties>
-		<artemis.version>0.4.0</artemis.version>
+		<artemis.version>0.4.1-SNAPSHOT</artemis.version>
 		<agrotera.version>${project.version}</agrotera.version>
 	</properties>
 
@@ -21,6 +21,12 @@
 			<groupId>net.onedaybeard.artemis</groupId>
 			<artifactId>artemis-odb</artifactId>
 			<version>${artemis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.peichhorn</groupId>
+			<artifactId>lombok-pg</artifactId>
+			<version>0.11.3</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.peichhorn</groupId>
@@ -39,6 +45,11 @@
 			<artifactId>agrotera-lombok</artifactId>
 			<version>${agrotera.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
 		</dependency>
 	</dependencies>
 
