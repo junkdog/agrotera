@@ -3,7 +3,7 @@ package lombok.javac.handlers;
 
 import java.util.List;
 
-import lombok.ArtemisManager;
+import lombok.ArtemisInjected;
 import lombok.ast.Annotation;
 import lombok.core.AnnotationValues;
 import lombok.javac.JavacAnnotationHandler;
@@ -15,10 +15,10 @@ import org.kohsuke.MetaInfServices;
 import com.sun.tools.javac.tree.JCTree.JCAnnotation;
 
 @MetaInfServices(JavacAnnotationHandler.class)
-public class HandleArtemisInjected extends JavacAnnotationHandler<ArtemisManager>
+public class HandleArtemisInjected extends JavacAnnotationHandler<ArtemisInjected>
 {
 	@Override
-	public void handle(final AnnotationValues<ArtemisManager> annotation, final JCAnnotation source, final JavacNode annotationNode)
+	public void handle(final AnnotationValues<ArtemisInjected> annotation, final JCAnnotation source, final JavacNode annotationNode)
 	{
 		JavacType type = JavacType.typeOf(annotationNode, source);
 		for (Annotation a : type.annotations())
@@ -28,9 +28,7 @@ public class HandleArtemisInjected extends JavacAnnotationHandler<ArtemisManager
 				return;
 		}
 		
-		List<Object> mappedComponentTypes = annotation.getActualExpressions("requires");
-		mappedComponentTypes.addAll(annotation.getActualExpressions("optional"));
-		mappedComponentTypes.addAll(annotation.getActualExpressions("excludes"));
+		List<Object> mappedComponentTypes = annotation.getActualExpressions("mappers");
 		List<Object> systemTypes = annotation.getActualExpressions("systems");
 		List<Object> managerTypes = annotation.getActualExpressions("managers");
 		

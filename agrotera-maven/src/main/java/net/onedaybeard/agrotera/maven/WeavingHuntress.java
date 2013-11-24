@@ -17,6 +17,7 @@ package net.onedaybeard.agrotera.maven;
  */
 
 import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.MANAGER;
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.POJO;
 import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.SYSTEM;
 import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_CLASSES;
 
@@ -64,7 +65,7 @@ public class WeavingHuntress extends AbstractMojo
 		for (ArtemisConfigurationData meta : processed)
 		{
 			log.info(String.format(formatPattern,
-				(meta.is(SYSTEM) || meta.profilingEnabled) ? "S" : "M",
+				typeCharacter(meta),
 				formatClassName(meta.current.getClassName()),
 				meta.requires.size(),
 				meta.requiresOne.size(),
@@ -72,6 +73,20 @@ public class WeavingHuntress extends AbstractMojo
 				meta.exclude.size(),
 				meta.systems.size(),
 				meta.managers.size()));
+		}
+	}
+
+	private static String typeCharacter(ArtemisConfigurationData meta)
+	{
+		switch (meta.annotationType) {
+			case MANAGER:
+				return "M";
+			case POJO:
+				return "I";
+			case SYSTEM:
+				return "S";
+			default:
+				return "S"; // profiled system
 		}
 	}
 
@@ -91,14 +106,21 @@ public class WeavingHuntress extends AbstractMojo
 
 	private static CharSequence getSummary(List<ArtemisConfigurationData> processed, long start)
 	{
-		int systems = 0, managers = 0;
+		int systems = 0, managers = 0, injected = 0;
 		for (ArtemisConfigurationData meta : processed)
 		{
-			if (meta.is(SYSTEM)) systems++;
-			else if (meta.is(MANAGER)) managers++;
+			if (meta.is(SYSTEM) || meta.profilingEnabled)
+				systems++;
+			else if (meta.is(MANAGER))
+				managers++;
+			else if (meta.is(POJO))
+				injected++;
 		}
 		
-		return String.format("Processed %d EntitySystems and %d Managers in %dms.",
-			systems, managers, (System.currentTimeMillis() - start));
+		return String.format("Processed %d EntitySystem%s, %d Manager%s and %d Injected types in %dms.",
+			systems, (systems == 1 ? "" : "s"),
+			managers, (managers == 1 ? "" : "s"),
+			injected,
+			(System.currentTimeMillis() - start));
 	}
 }

@@ -34,7 +34,7 @@ final class ArtemisAnnotationReader extends AnnotationVisitor
 	@Override
 	public void visit(String ignore, Object value)
 	{
-		if ("requires".equals(annotationField))
+		if ("requires".equals(annotationField) || "mappers".equals(annotationField))
 			info.requires.add((Type)value);
 		else if ("requiresOne".equals(annotationField))
 			info.requiresOne.add((Type)value);

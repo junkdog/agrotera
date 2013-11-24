@@ -42,15 +42,11 @@ public final class AgroteraMapping
 		
 		refManagers = new String[system.managers.size()];
 		for (int i = 0; system.managers.size() > i; i++)
-		{
 			refManagers[i] = shortName(system.managers.get(i));
-		}
 		
 		refSystems = new String[system.systems.size()];
 		for (int i = 0; system.systems.size() > i; i++)
-		{
 			refSystems[i] = shortName(system.systems.get(i));
-		}
 		
 		isSystem = system.is(SYSTEM);
 		isPackage = false;

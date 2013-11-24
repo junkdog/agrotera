@@ -40,6 +40,7 @@ public abstract class AbstractArtemisHandler<COMPILER_BINDING, TYPE_TYPE extends
 	public AbstractArtemisHandler<COMPILER_BINDING,TYPE_TYPE,METHOD_TYPE> rebuild()
 	{
 		type.editor().rebuild();
+		
 		return this;
 	}
 

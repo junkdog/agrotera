@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
-import net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType;
 import net.onedaybeard.agrotera.transform.ClassUtil;
 import net.onedaybeard.agrotera.transform.ProfileVisitor;
 import net.onedaybeard.agrotera.transform.SystemVisitor;

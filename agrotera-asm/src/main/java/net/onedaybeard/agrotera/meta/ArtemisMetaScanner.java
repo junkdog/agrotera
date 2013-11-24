@@ -37,6 +37,8 @@ class ArtemisMetaScanner extends ClassVisitor
 			return new ProfileAnnotationReader(desc, info);
 		else if (MANAGER_ANNOTATION.equals(desc))
 			return new ArtemisAnnotationReader(desc, info);
+		else if (INJECTED_ANNOTATION.equals(desc))
+			return new ArtemisAnnotationReader(desc, info);
 		else if (WOVEN_ANNOTATION.equals(desc))
 			info.isPreviouslyProcessed = true;
 			

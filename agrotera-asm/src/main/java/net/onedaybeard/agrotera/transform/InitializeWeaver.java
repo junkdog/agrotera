@@ -1,6 +1,7 @@
 package net.onedaybeard.agrotera.transform;
 
 import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.MANAGER;
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.POJO;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType;
 
@@ -70,8 +71,12 @@ class InitializeWeaver extends MethodVisitor implements Opcodes
 	{
 		mv.visitLabel(new Label());
 		mv.visitVarInsn(ALOAD, 0);
-		mv.visitVarInsn(ALOAD, 0);
-		mv.visitFieldInsn(GETFIELD, className, "world", WORLD_TYPE);
+		if (info.is(POJO)) {
+			mv.visitVarInsn(ALOAD, 1);
+		} else {
+			mv.visitVarInsn(ALOAD, 0);
+			mv.visitFieldInsn(GETFIELD, className, "world", WORLD_TYPE);
+		}
 		mv.visitLdcInsn(injectedType);
 	}
 	
