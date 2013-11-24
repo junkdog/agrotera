@@ -1,5 +1,6 @@
 # Change Log
 
+## Version 0.3.0 - 2013-11-24
  - IOOB exception during agrotera:matrix if no systems/managers were processed.
  - Java 1.6 support.
  - `@ArtemisInjected` annotation for injecting artemis systems, managers and mappers into arbitrary classes.
