@@ -13,7 +13,6 @@
 	
 	<properties>
 		<artemis.version>0.4.0</artemis.version>
-		<agrotera.version>${project.version}</agrotera.version>
 	</properties>
 
 	<dependencies>
@@ -38,12 +37,12 @@
 		<dependency>
 			<groupId>net.onedaybeard.agrotera</groupId>
 			<artifactId>agrotera-api</artifactId>
-			<version>${agrotera.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.onedaybeard.agrotera</groupId>
 			<artifactId>agrotera-lombok</artifactId>
-			<version>${agrotera.version}</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -58,7 +57,7 @@
 			<plugin>
 				<groupId>net.onedaybeard.agrotera</groupId>
 				<artifactId>agrotera-maven-plugin</artifactId>
-				<version>${agrotera.version}</version>
+				<version>${project.version}</version>
 				<executions>
 					<execution>
 						<goals>
