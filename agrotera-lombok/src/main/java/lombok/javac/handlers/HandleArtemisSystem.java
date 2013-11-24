@@ -3,14 +3,14 @@ package lombok.javac.handlers;
 
 import java.util.List;
 
-import org.kohsuke.MetaInfServices;
-
 import lombok.ArtemisSystem;
 import lombok.ast.Annotation;
 import lombok.core.AnnotationValues;
 import lombok.javac.JavacAnnotationHandler;
 import lombok.javac.JavacNode;
 import lombok.javac.handlers.ast.JavacType;
+
+import org.kohsuke.MetaInfServices;
 
 import com.sun.tools.javac.tree.JCTree.JCAnnotation;
 

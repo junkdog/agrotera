@@ -7,8 +7,8 @@ import lombok.javac.JavacNode;
 import lombok.javac.handlers.ast.JavacMethod;
 import lombok.javac.handlers.ast.JavacType;
 
-import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.code.Symbol.TypeSymbol;
+import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.JCTree.JCFieldAccess;
 
 class JavacHandler extends AbstractArtemisHandler<TypeSymbol,JavacType,JavacMethod>

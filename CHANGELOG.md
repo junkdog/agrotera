@@ -3,6 +3,7 @@
  - IOOB exception during agrotera:matrix if no systems/managers were processed.
  - Java 1.6 support.
  - `@ArtemisInjected` annotation for injecting artemis systems, managers and mappers into arbitrary classes.
+ - Maven goal `annotation-cleaner` removes agrotera annotations from compiled classes.
  - **Fix**: requiresOne mappers weren't injected.
 
 ## Version 0.2.1 - 2013-08-08
