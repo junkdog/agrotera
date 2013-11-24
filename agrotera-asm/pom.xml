@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>net.onedaybeard.agrotera</groupId>
 		<artifactId>agrotera-base</artifactId>
-		<version>0.3.0</version>
+		<version>0.3.1-SNAPSHOT</version>
 	</parent>
 	
 	<artifactId>agrotera-asm</artifactId>
