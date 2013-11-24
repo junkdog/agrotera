@@ -14,6 +14,8 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework][
 - [@Profile][13] EntitySystems
   - Injects conditional profiler call at start of `begin()` and before any exit point in `end()`.
   - User-specified profiler class - adhering to [ArtemisProfiler][15].
+- (`0.3.0`) Inject abitrary classes with [@ArtemisInjected][16].
+  - Creates an `initialize(World)` method on the annotated class.
 
 
 ## Installation
@@ -142,6 +144,7 @@ junkdog at onedaybeard dot net - twitter: [@junkdogAP](http://twitter.com/junkdo
  [13]: https://github.com/junkdog/agrotera/wiki/@Profile
  [14]: http://htmlpreview.github.com/?https://raw.github.com/wiki/junkdog/agrotera/html/matrix.html
  [15]: https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java
+ [16]: https://github.com/junkdog/agrotera/wiki/@ArtemisInjected
  [41]: https://github.com/peichhorn/lombok-pg
  [42]: http://projectlombok.org/
  [61]: https://github.com/junkdog/artemis-odb
