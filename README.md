@@ -14,7 +14,7 @@ Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework][
 - [@Profile][13] EntitySystems
   - Injects conditional profiler call at start of `begin()` and before any exit point in `end()`.
   - User-specified profiler class - adhering to [ArtemisProfiler][15].
-- (`0.3.0`) Inject abitrary classes with [@ArtemisInjected][16].
+- Inject abitrary classes with [@ArtemisInjected][16].
   - Creates an `initialize(World)` method on the annotated class.
 
 
