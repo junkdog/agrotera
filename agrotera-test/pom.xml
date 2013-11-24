@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.onedaybeard.agrotera</groupId>
 		<artifactId>agrotera-base</artifactId>
-		<version>0.2.2-SNAPSHOT</version>
+		<version>0.3.0</version>
 	</parent>
 
 	<artifactId>agrotera-test</artifactId>
