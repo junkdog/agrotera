@@ -12,4 +12,5 @@ import com.artemis.Manager;
 	systems=BasicSystem.class,
 	managers=SomeManager.class)
 public class SomeManager extends Manager {
+	@Override public void initialize() {}
 }
