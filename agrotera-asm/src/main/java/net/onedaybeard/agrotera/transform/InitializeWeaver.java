@@ -3,7 +3,6 @@ package net.onedaybeard.agrotera.transform;
 import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.MANAGER;
 import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.POJO;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
-import net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType;
 
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;

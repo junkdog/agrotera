@@ -62,8 +62,14 @@
 				<executions>
 					<execution>
 						<goals>
+							<!-- injects classes -->
 							<goal>agrotera</goal>
+							
+							<!-- produces matrix.html under target/ -->
 							<goal>matrix</goal>
+							
+							<!-- removes agrotera-related annotations, must run last -->
+							<goal>annotation-cleaner</goal>
 						</goals>
 					</execution>
 				</executions>

@@ -3,7 +3,6 @@ package lombok.eclipse.handlers;
 import static lombok.core.util.ErrorMessages.canBeUsedOnClassOnly;
 import static lombok.eclipse.handlers.EclipseUtil.filterInvalid;
 
-import java.util.Iterator;
 import java.util.List;
 
 import lombok.ArtemisSystem;
@@ -15,9 +14,7 @@ import lombok.eclipse.EclipseNode;
 import lombok.eclipse.handlers.ast.EclipseType;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
-import org.eclipse.jdt.internal.compiler.ast.ClassLiteralAccess;
 import org.kohsuke.MetaInfServices;
-import org.omg.CORBA.REBIND;
 
 /**
  * Handles the {@link ListenerSupport} annotation for eclipse using the {@link PatchListenerSupport}.

@@ -6,6 +6,7 @@
 				<goals>
 					<goal>agrotera</goal>
 					<goal>matrix</goal>
+					<goal>annotation-cleaner</goal>
 				</goals>
 			</pluginExecutionFilter>
 			<action>
