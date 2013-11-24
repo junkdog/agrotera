@@ -1,6 +1,8 @@
 package net.onedaybeard.agrotera;
 
-import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.POJO;
+import static net.onedaybeard.agrotera.matrix.MatrixStringUtil.findLongestClassName;
+import static net.onedaybeard.agrotera.matrix.MatrixStringUtil.findLongestManagerList;
+import static net.onedaybeard.agrotera.matrix.MatrixStringUtil.findLongestSystemList;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,7 +23,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import net.onedaybeard.agrotera.matrix.AgroteraMapping;
-import net.onedaybeard.agrotera.matrix.MatrixStringUtil;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationResolver;
 import net.onedaybeard.agrotera.util.ClassFinder;
@@ -90,7 +91,6 @@ public class MatrixBuilder implements Opcodes
 			map.get(packageName).add(system);
 		}
 		
-		
 		return map;
 	}
 	
@@ -146,7 +146,6 @@ public class MatrixBuilder implements Opcodes
 		Theme theme = new Theme();
 		Chunk chunk = theme.makeChunk("matrix");
 		
-		
 		List<AgroteraMapping> mapping = new ArrayList<AgroteraMapping>();
 		for (Entry<String,List<AgroteraMapping>> entry : mappedSystems.entrySet())
 		{
@@ -154,9 +153,9 @@ public class MatrixBuilder implements Opcodes
 			mapping.addAll(entry.getValue());
 		}
 		
-		chunk.set("longestName", MatrixStringUtil.findLongestClassName(mappedSystems).replaceAll(".", "_") + "______");
-		chunk.set("longestManagers", MatrixStringUtil.findLongestManagerList(mappedSystems).replaceAll(".", "_"));
-		chunk.set("longestSystems", MatrixStringUtil.findLongestSystemList(mappedSystems).replaceAll(".", "_"));
+		chunk.set("longestName", findLongestClassName(mappedSystems).replaceAll(".", "_") + "______");
+		chunk.set("longestManagers", findLongestManagerList(mappedSystems).replaceAll(".", "_"));
+		chunk.set("longestSystems", findLongestSystemList(mappedSystems).replaceAll(".", "_"));
 		chunk.set("systems", mapping);
 		chunk.set("headers", columns);
 		chunk.set("project", projectName);
@@ -205,7 +204,7 @@ public class MatrixBuilder implements Opcodes
 			ArtemisConfigurationData meta = ArtemisConfigurationResolver.scan(cr);
 			meta.current = Type.getObjectType(cr.getClassName());
 			
-			if (meta.annotationType != null && meta.annotationType != POJO)
+			if (meta.annotationType != null)
 				destination.add(meta);
 		}
 		catch (FileNotFoundException e)

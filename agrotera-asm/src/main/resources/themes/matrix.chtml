@@ -224,7 +224,7 @@
 				{.else}
 				<tr class="systems">
 					<th class="horizontal" style="padding-right: 5px;">{$system.name}
-						<i class="icon-{.if ($system.is_system)}gear{.else}gears{/if}"></i>
+						<i class="icon-{.if ($system.is_system)}gear{.elseif ($system.is_manager)}gears{.else}coffee{/if}"></i>
 					</th>
 					{.loop in $system.component_indices as $component}
 					<td class="{$component.symbol}"></td>

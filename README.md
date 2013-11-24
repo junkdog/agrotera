@@ -142,7 +142,7 @@ junkdog at onedaybeard dot net - twitter: [@junkdogAP](http://twitter.com/junkdo
  [11]: https://github.com/junkdog/agrotera/wiki/@ArtemisSystem
  [12]: https://github.com/junkdog/agrotera/wiki/@ArtemisManager
  [13]: https://github.com/junkdog/agrotera/wiki/@Profile
- [14]: http://htmlpreview.github.com/?https://raw.github.com/wiki/junkdog/agrotera/html/matrix.html
+ [14]: https://raw.github.com/wiki/junkdog/agrotera/images/matrix.png
  [15]: https://github.com/junkdog/agrotera/blob/master/agrotera-api/src/main/java/net/onedaybeard/agrotera/ArtemisProfiler.java
  [16]: https://github.com/junkdog/agrotera/wiki/@ArtemisInjected
  [41]: https://github.com/peichhorn/lombok-pg

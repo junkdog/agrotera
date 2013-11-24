@@ -1,5 +1,6 @@
 package net.onedaybeard.agrotera.matrix;
 
+import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.MANAGER;
 import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationType.SYSTEM;
 
 import java.util.Arrays;
@@ -14,6 +15,7 @@ public final class AgroteraMapping
 {
 	public final Type system;
 	public final boolean isSystem;
+	public final boolean isManager;
 	public final ComponentReference[] componentIndices;
 	public final String name;
 	public final String[] refSystems;
@@ -31,6 +33,7 @@ public final class AgroteraMapping
 		
 		isPackage = true;
 		isSystem = false;
+		isManager = false;
 	}
 
 	private AgroteraMapping(ArtemisConfigurationData system, ComponentReference[] componentIndices)
@@ -49,6 +52,7 @@ public final class AgroteraMapping
 			refSystems[i] = shortName(system.systems.get(i));
 		
 		isSystem = system.is(SYSTEM);
+		isManager = system.is(MANAGER);
 		isPackage = false;
 	}
 	
