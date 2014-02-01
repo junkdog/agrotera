@@ -49,7 +49,6 @@
 			<groupId>net.onedaybeard.agrotera</groupId>
 			<artifactId>agrotera-api</artifactId>
 			<version>${project.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.kohsuke.metainf-services</groupId>

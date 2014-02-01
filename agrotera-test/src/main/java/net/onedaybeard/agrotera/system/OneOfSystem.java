@@ -1,7 +1,7 @@
 package net.onedaybeard.agrotera.system;
 
 import static org.junit.Assert.assertNotNull;
-import lombok.ArtemisSystem;
+import net.onedaybeard.agrotera.annotations.ArtemisSystem;
 import net.onedaybeard.agrotera.component.ComponentA;
 import net.onedaybeard.agrotera.component.ComponentB;
 import net.onedaybeard.agrotera.component.ComponentC;

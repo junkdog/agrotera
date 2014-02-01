@@ -4,13 +4,13 @@ import static lombok.eclipse.handlers.EclipseUtil.filterInvalid;
 
 import java.util.List;
 
-import lombok.ArtemisInjected;
 import lombok.ListenerSupport;
 import lombok.core.AnnotationValues;
 import lombok.eclipse.DeferUntilBuildFieldsAndMethods;
 import lombok.eclipse.EclipseAnnotationHandler;
 import lombok.eclipse.EclipseNode;
 import lombok.eclipse.handlers.ast.EclipseType;
+import net.onedaybeard.agrotera.annotations.ArtemisInjected;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.kohsuke.MetaInfServices;
@@ -26,7 +26,7 @@ public class HandleArtemisInjected extends EclipseAnnotationHandler<ArtemisInjec
 	public void handle(final AnnotationValues<ArtemisInjected> annotation, final Annotation source, final EclipseNode annotationNode) {
 		EclipseType type = EclipseType.typeOf(annotationNode, source);
 		
-		for (lombok.ast.Annotation a : type.annotations())
+		for (lombok.ast.pg.Annotation a : type.annotations())
 		{
 			// because all else is null... 
 			if (a.toString().startsWith("@WovenByTheHuntress"))

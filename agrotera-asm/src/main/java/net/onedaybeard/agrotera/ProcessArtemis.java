@@ -24,7 +24,7 @@ import org.objectweb.asm.Type;
 
 public class ProcessArtemis implements Opcodes 
 {
-	public static final String WOVEN_ANNOTATION = "Lnet/onedaybeard/agrotera/internal/WovenByTheHuntress;";
+	public static final String WOVEN_ANNOTATION = 		"Lnet/onedaybeard/agrotera/annotations/internal/WovenByTheHuntress;";
 	
 	private File root;
 	

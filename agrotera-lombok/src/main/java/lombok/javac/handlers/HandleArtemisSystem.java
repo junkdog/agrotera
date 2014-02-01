@@ -3,12 +3,12 @@ package lombok.javac.handlers;
 
 import java.util.List;
 
-import lombok.ArtemisSystem;
-import lombok.ast.Annotation;
+import lombok.ast.pg.Annotation;
 import lombok.core.AnnotationValues;
 import lombok.javac.JavacAnnotationHandler;
 import lombok.javac.JavacNode;
 import lombok.javac.handlers.ast.JavacType;
+import net.onedaybeard.agrotera.annotations.ArtemisSystem;
 
 import org.kohsuke.MetaInfServices;
 
