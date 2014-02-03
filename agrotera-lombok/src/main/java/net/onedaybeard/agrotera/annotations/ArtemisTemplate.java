@@ -14,16 +14,10 @@ import com.artemis.Component;
  */
 public @interface ArtemisTemplate {
 	
-	String name() default "Artemis Template";
-
 	/**
 	 * The description of this Template
 	 * @return
 	 */
 	String description() default "No description given";
 
-	/**
-	 * Maps to {@link Aspect#all}.
-	 */
-	Class<? extends Component>[] components() default {};
 }
