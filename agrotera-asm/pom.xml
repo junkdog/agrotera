@@ -14,7 +14,6 @@
 	<properties>
 		<junit.version>4.11</junit.version>
 		<asm.version>4.1</asm.version>
-		<artemis.lombok.version>1.12.5</artemis.lombok.version>
 		<mainClass>net.onedaybeard.agrotera.ProcessArtemis</mainClass>
 	</properties>
 
@@ -52,7 +51,7 @@
 		<dependency>
 			<groupId>com.github.peichhorn</groupId>
 			<artifactId>lombok-pg</artifactId>
-			<version>1.12.5</version>
+			<version>${lombok.version}</version>
 		</dependency>
 
 	</dependencies>

@@ -49,9 +49,10 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>net.codepoke.lib</groupId>
-			<artifactId>lib-artemis</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<groupId>net.onedaybeard.artemis</groupId>
+			<artifactId>artemis-odb</artifactId>
+			<version>${artemis.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.sonatype.plexus</groupId>
