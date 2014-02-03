@@ -17,7 +17,7 @@
 	<properties>
 		<github.global.server>github</github.global.server>
 		<lombok.version>1.12.5</lombok.version>
-		<artemis.version>0.4.0</artemis.version>
+		<artemis.version>0.5.1-SNAPSHOT</artemis.version>
 	</properties>
 	
 	<scm>
