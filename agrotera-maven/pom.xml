@@ -52,7 +52,6 @@
 			<groupId>net.onedaybeard.artemis</groupId>
 			<artifactId>artemis-odb</artifactId>
 			<version>${artemis.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.sonatype.plexus</groupId>
