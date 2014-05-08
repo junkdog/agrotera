@@ -2,6 +2,12 @@
 
 Zero-overhead anti-boilerplate strategies for [Artemis Entity System Framework][01].
 
+# Nota Bene: RIP agrotera
+
+Agrotera probably won't see much future development; a lot of the functionality provided by
+agrotera is now present in [artemis-odb](https://github.com/junkdog/artemis-odb). Refer to
+[this post](https://groups.google.com/forum/#!topic/artemis-odb/ESuG3hDAVsY) for more details.
+
 
 ## Features
 - Compile-time class engineering: no reflection overhead, no extra classes, no additional
