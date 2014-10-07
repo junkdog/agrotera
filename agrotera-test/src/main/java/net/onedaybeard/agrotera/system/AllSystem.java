@@ -1,6 +1,6 @@
 package net.onedaybeard.agrotera.system;
 
-import lombok.ArtemisSystem;
+import net.onedaybeard.agrotera.annotations.ArtemisSystem;
 
 import com.artemis.Entity;
 import com.artemis.systems.EntityProcessingSystem;

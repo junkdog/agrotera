@@ -1,4 +1,4 @@
-package lombok;
+package net.onedaybeard.agrotera.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -9,15 +9,16 @@ import java.lang.annotation.Target;
 import com.artemis.Aspect;
 import com.artemis.Component;
 import com.artemis.ComponentMapper;
+import com.artemis.EntityObserver;
 import com.artemis.EntitySystem;
 import com.artemis.Manager;
 
 /**
- * Configures an artemis {@link EntitySystem} by injecting
- * code during the compilation phase.<p/>
+ * Configures an artemis {@link Manager} by injecting code during
+ * the compilation phase.<p/>
  * 
- * The Aspect is automatically passed along in the <code>super()</code> call
- * if the Aspect argument is <code>null</code><p/>
+ * Simulates {@link Aspect}s by prepending if-checks before any methods defined
+ * in {@link EntityObserver}.<p/>
  * 
  * Fields for {@link ComponentMapper}s, <code>EntitySystem</code>s and
  * <code>Manger</code>s are wired in the <code>initialize</code> method, prior
@@ -30,27 +31,15 @@ import com.artemis.Manager;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ArtemisSystem
+public @interface ArtemisManager
 {
-	/**
-	 * Maps to {@link Aspect#all}.
-	 */
 	Class<? extends Component>[] requires() default {};
 	
 	/**
-	 * Maps to {@link Aspect#one}.
-	 */
-	Class<? extends Component>[] requiresOne() default {};
-	
-	/**
-	 * Only mappers are created for optional components, no bearing on
-	 * the system's aspect.
+	 * Only mappers are created for optional components.
 	 */
 	Class<? extends Component>[] optional() default {};
 	
-	/**
-	 * Only affects the system's aspect, no mapper is created.
-	 */
 	Class<? extends Component>[] excludes() default {};
 	
 	/**

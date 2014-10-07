@@ -9,5 +9,14 @@
 	<artifactId>agrotera-api</artifactId>
 	<packaging>jar</packaging>
 	<name>agrotera-api</name>
+	
+	<dependencies>	
+		<dependency>
+			<groupId>net.onedaybeard.artemis</groupId>
+			<artifactId>artemis-odb</artifactId>
+			<version>${artemis.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 </project>

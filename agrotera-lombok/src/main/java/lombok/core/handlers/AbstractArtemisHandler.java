@@ -1,18 +1,13 @@
 package lombok.core.handlers;
 
-import static lombok.ast.AST.Annotation;
-import static lombok.ast.AST.Arg;
-import static lombok.ast.AST.FieldDecl;
-import static lombok.ast.AST.MethodDecl;
-import static lombok.ast.AST.String;
-import static lombok.ast.AST.Type;
+import static lombok.ast.pg.AST.*;
 import static lombok.core.util.Names.decapitalize;
 
 import java.util.List;
 
-import lombok.ast.FieldDecl;
-import lombok.ast.IMethod;
-import lombok.ast.IType;
+import lombok.ast.pg.FieldDecl;
+import lombok.ast.pg.IMethod;
+import lombok.ast.pg.IType;
 
 public abstract class AbstractArtemisHandler<COMPILER_BINDING, TYPE_TYPE extends IType<METHOD_TYPE,?,?,?,?,?>, METHOD_TYPE extends IMethod<TYPE_TYPE,?,?,?>>
 {

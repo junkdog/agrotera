@@ -62,19 +62,37 @@
 		});
 	</script>
 	<script>
+		// Deals with highlighting rows
 		// source: http://stackoverflow.com/a/11828637/431535
 		$(document).ready(function() {
 			$('td').hover(function() {
+				// Make the current TD highlighted
 				var t = parseInt($(this).index()) + 1;
 				$('td:nth-child(' + t + ')').addClass('highlighted');
+				
+				var rows = $(this).parent().attr('target').split(',');
+				
+				for (var i = 0; i < rows.length; i++) {
+					var target = parseInt(rows[i]) + 1;
+					$('tr:nth-child(' + target + ')').addClass('targetted');
+				}
+				
 			},
 			function() {
 				var t = parseInt($(this).index()) + 1;
 				$('td:nth-child(' + t + ')').removeClass('highlighted');
+				
+				var rows = $(this).parent().attr('target').split(',');
+				
+				for (var i = 0; i < rows.length; i++) {
+					var target = parseInt(rows[i]) + 1;
+					$('tr:nth-child(' + target + ')').removeClass('targetted');
+				}
 			})
 		});
 	</script>
 	<script type="text/javascript">
+		// Keeps the headers of the table visible during scrolling
 		// source: http://stackoverflow.com/a/1041566/431535
 		function updateTableHeaders() {
 			$("div.divTableWithFloatingHeader").each(function() {
@@ -162,7 +180,11 @@
 		tr.systems:hover, .highlighted  {
 			background-color: #ffffdd;
 		}
-
+		
+		tr.systems.targetted  {
+			background-color: rgba(16, 124, 16, 0.5);
+		}
+		
 		th {
 			background: none repeat scroll 0 0 #eeeeee;
 			vertical-align: bottom;
@@ -216,10 +238,13 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr class="systems">
+					<th style="padding-top: 50px; padding-right: 100px; font-size: 16px; font-weight: bold; text-align: right;">Systems</th>
+				</tr>
 				{.loop in $systems as $system}
 				{.if ($system.is_package)}
 				<tr class="systems">
-					<th style="padding-left: 5px; font-weight: bold; text-align: left;">{$system.name}	</th>
+					<th style="padding-top: 10px; padding-right: 50px; font-weight: bold; text-align: right;">{$system.name}	</th>
 				</tr>
 				{.else}
 				<tr class="systems">
@@ -242,22 +267,41 @@
 				</tr>
 				{/if}
 				{/loop}
+				<tr class="systems">
+					<th style="padding-top: 50px; padding-right: 100px; font-size: 16px; font-weight: bold; text-align: right;">Templates</th>
+				</tr>
+				{.loop in $templates as $template}
+					{.if ($template.is_package)}
+					<tr class="systems">
+						<th style="padding-top: 10px; padding-right: 50px; font-weight: bold; text-align: right;">{$system.name}</th>
+					</tr>
+					{.else}
+					<tr class="systems" target="{$template.used_systems}">
+						<th class="horizontal" style="padding-right: 5px;">{$template.name}
+							<i class="icon-{.if ($system.is_system)}gear{.elseif ($system.is_manager)}gears{.else}coffee{/if}"></i>
+						</th>
+						{.loop in $template.component_indices as $component}
+							<td class="{$component.symbol}"></td>
+						{/loop}
+					</tr>
+					{/if}
+				{.onEmpty}{/loop}
 			<tbody>
 		</table>
 		<table border="0" class="matrix" style="padding: 5px">
-			<tr class="systems">
+			<tr>
 				<th class="horizontal" style="padding-right: 10px;">Required</th>
 				<td class="R" style="width: 50px"></td>
 			</tr>
-			<tr class="systems">
+			<tr>
 				<th class="horizontal" style="padding-right: 10px;">Match one</th>
 				<td class="A"></td>
 			</tr>
-			<tr class="systems">
+			<tr>
 				<th class="horizontal" style="padding-right: 10px;">Optional</th>
 				<td class="O"></td>
 			</tr>
-			<tr class="systems">
+			<tr>
 				<th class="horizontal" style="padding-right: 10px;">Excluded</th>
 				<td class="X"></td>
 			</tr>

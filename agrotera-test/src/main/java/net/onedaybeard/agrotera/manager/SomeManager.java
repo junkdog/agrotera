@@ -1,6 +1,6 @@
 package net.onedaybeard.agrotera.manager;
 
-import lombok.ArtemisManager;
+import net.onedaybeard.agrotera.annotations.ArtemisManager;
 import net.onedaybeard.agrotera.component.ComponentA;
 import net.onedaybeard.agrotera.component.ComponentB;
 import net.onedaybeard.agrotera.system.BasicSystem;

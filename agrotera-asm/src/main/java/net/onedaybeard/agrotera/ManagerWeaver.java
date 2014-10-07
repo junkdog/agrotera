@@ -6,6 +6,7 @@ import static net.onedaybeard.agrotera.meta.ArtemisConfigurationData.AnnotationT
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import lombok.Action;
 import net.onedaybeard.agrotera.meta.ArtemisConfigurationData;
 import net.onedaybeard.agrotera.transform.ClassUtil;
 import net.onedaybeard.agrotera.transform.ManagerVisitor;
@@ -22,7 +23,7 @@ class ManagerWeaver extends ClassWeaver implements Opcodes
 	private ArtemisConfigurationData meta;
 	private ClassReader cr;
 	private ClassWriter cw;
-
+	
 	protected ManagerWeaver(String file, ClassReader cr, ArtemisConfigurationData meta)
 	{
 		super(file);

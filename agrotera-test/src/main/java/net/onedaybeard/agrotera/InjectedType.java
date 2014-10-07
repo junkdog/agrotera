@@ -1,14 +1,15 @@
 package net.onedaybeard.agrotera;
 
-import com.artemis.ComponentMapper;
-import com.artemis.Entity;
-import com.artemis.World;
-
-import lombok.ArtemisInjected;
+import net.onedaybeard.agrotera.annotations.ArtemisInjected;
+import net.onedaybeard.agrotera.annotations.internal.WovenByTheHuntress;
 import net.onedaybeard.agrotera.component.ComponentA;
 import net.onedaybeard.agrotera.component.ComponentB;
 import net.onedaybeard.agrotera.manager.SomeManager;
 import net.onedaybeard.agrotera.system.BasicSystem;
+
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.World;
 
 @ArtemisInjected(
 	mappers={ComponentA.class, ComponentB.class},

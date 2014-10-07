@@ -1,4 +1,4 @@
-package lombok;
+package net.onedaybeard.agrotera.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -9,19 +9,18 @@ import java.lang.annotation.Target;
 import com.artemis.Aspect;
 import com.artemis.Component;
 import com.artemis.ComponentMapper;
-import com.artemis.EntityObserver;
 import com.artemis.EntitySystem;
 import com.artemis.Manager;
 
 /**
- * Configures an artemis {@link Manager} by injecting code during
- * the compilation phase.<p/>
+ * Configures an artemis {@link EntitySystem} by injecting
+ * code during the compilation phase.<p/>
  * 
- * Simulates {@link Aspect}s by prepending if-checks before any methods defined
- * in {@link EntityObserver}.<p/>
+ * The Aspect is automatically passed along in the <code>super()</code> call
+ * if the Aspect argument is <code>null</code><p/>
  * 
  * Fields for {@link ComponentMapper}s, <code>EntitySystem</code>s and
- * <code>Manger</code>s are wired in the <code>initialize</code> method, prior
+ * <code>Manager</code>s are wired in the <code>initialize</code> method, prior
  * to any existing code in the <code>initialize</code> method is executed.<p/>
  * 
  * Component mappers are named according to the component type they operate on,
@@ -31,15 +30,27 @@ import com.artemis.Manager;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ArtemisManager
+public @interface ArtemisSystem
 {
+	/**
+	 * Maps to {@link Aspect#all}.
+	 */
 	Class<? extends Component>[] requires() default {};
 	
 	/**
-	 * Only mappers are created for optional components.
+	 * Maps to {@link Aspect#one}.
+	 */
+	Class<? extends Component>[] requiresOne() default {};
+	
+	/**
+	 * Only mappers are created for optional components, no bearing on
+	 * the system's aspect.
 	 */
 	Class<? extends Component>[] optional() default {};
 	
+	/**
+	 * Only affects the system's aspect, no mapper is created.
+	 */
 	Class<? extends Component>[] excludes() default {};
 	
 	/**
@@ -51,4 +62,5 @@ public @interface ArtemisManager
 	 * Managers to inject as fields.
 	 */
 	Class<? extends Manager>[] managers() default{};
+	
 }

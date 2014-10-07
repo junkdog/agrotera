@@ -1,6 +1,7 @@
 package net.onedaybeard.agrotera.transform;
 
 import static net.onedaybeard.agrotera.ProcessArtemis.WOVEN_ANNOTATION;
+import static net.onedaybeard.agrotera.meta.ArtemisMetaScanner.*;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
@@ -17,9 +18,10 @@ public class AnnotationRemoverVisitor extends ClassVisitor implements Opcodes
 	public AnnotationVisitor visitAnnotation(String desc, boolean visible)
 	{
 		if (WOVEN_ANNOTATION.equals(desc)
-			|| "Llombok/ArtemisInjected;".equals(desc)
-			|| "Llombok/ArtemisSystem;".equals(desc)
-			|| "Llombok/ArtemisManager;".equals(desc))
+			|| INJECTED_ANNOTATION.equals(desc)
+			|| SYSTEM_ANNOTATION.equals(desc)
+			|| MANAGER_ANNOTATION.equals(desc)
+			|| TEMPLATE_ANNOTATION.equals(desc))
 			
 			return null;
 		else 
